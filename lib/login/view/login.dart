@@ -28,7 +28,7 @@ class _LoginState extends StateMVC<Login> {
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
-                color: Colors.black,
+                color: Colors.blue,
                 icon: Icon(Icons.arrow_back_ios_rounded),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute<void>(
