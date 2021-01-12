@@ -85,3 +85,29 @@ class _LoginState extends StateMVC<Login> {
     );
   }
 }
+
+void _firtsLogin(context) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
+  showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
+      builder: (BuildContext bc) {
+        return Container(
+          height: height * 0.3,
+          child: new Wrap(
+            children: <Widget>[
+              new ListTile(
+                  leading: new Icon(Icons.account_circle),
+                  title: new Text('Use another account'),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute<void>(
+                        builder: (BuildContext _) =>
+                            InheritedTheme.captureAll(context, Login())));
+                  }),
+            ],
+          ),
+        );
+      });
+}

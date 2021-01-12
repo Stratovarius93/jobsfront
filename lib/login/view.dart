@@ -7,3 +7,11 @@ export 'package:jobs_front/login/view/jobs.dart';
 export 'package:jobs_front/login/view/others.dart';
 
 export 'package:jobs_front/login/view/login.dart';
+
+export 'dart:async';
+
+export 'package:device_info_plus/device_info_plus.dart';
+
+export 'dart:io';
+
+export 'package:flutter/foundation.dart';

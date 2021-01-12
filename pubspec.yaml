@@ -32,12 +32,27 @@ dependencies:
 
   hexcolor: ^1.0.6
 
-
+  device_info_plus: ^0.6.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+
+
+  geolocator: ^6.1.13
+
+
+
+    
+    
+
+
+
+  imei_plugin: ^1.2.0
+
 dev_dependencies:
+
+
   flutter_test:
     sdk: flutter
   integration_test:
@@ -58,7 +73,6 @@ flutter:
     - assets/images/1.png
     - assets/images/2.png
     - assets/images/3.png
-
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
