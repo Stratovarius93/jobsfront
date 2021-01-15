@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "409232974488",
+    "firebase_url": "https://jobs-3da3e.firebaseio.com",
+    "project_id": "jobs-3da3e",
+    "storage_bucket": "jobs-3da3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409232974488:android:e590a3b32e6c39fd5aa6ed",
+        "android_client_info": {
+          "package_name": "com.dg.jobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409232974488-6lf1lp9n36fb3rhbjmjo223uv5djp7c7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcwurOdZv73maLPlH_0VrNVJQZ9L53kKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409232974488-6lf1lp9n36fb3rhbjmjo223uv5djp7c7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

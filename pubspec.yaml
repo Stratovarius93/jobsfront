@@ -33,23 +33,27 @@ dependencies:
   hexcolor: ^1.0.6
 
   device_info_plus: ^0.6.0
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  
+  
   cupertino_icons: ^1.0.2
 
-
+  
 
   geolocator: ^6.1.13
 
 
-
+  firebase_messaging: ^7.0.3
+  
+  flutter_libphonenumber: ^0.3.11
     
-    
+  flutter_country_picker: ^0.1.6
 
 
 
-  imei_plugin: ^1.2.0
 
+
+
+  
 dev_dependencies:
 
 
