@@ -48,7 +48,7 @@ dependencies:
     
   flutter_country_picker: ^0.1.6
 
-
+  form_validator: ^0.1.7
 
 
 
