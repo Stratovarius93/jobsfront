@@ -1,3 +1,5 @@
+import 'dart:math';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -6,7 +8,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_country_picker/flutter_country_picker.dart';
 import '../controller.dart'
     show verificarAutenticador, firebaCloudMessaging_Listeners;
-import '../model.dart' show VerificarAuthResponse, VerificarNumeroResponse;
+import '../model.dart'
+    show VerificarAuthResponse, VerificarNumeroResponse, LoginPhoneNumber;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FirstLog extends StatefulWidget {
   const FirstLog({this.title, Key key}) : super(key: key);
@@ -27,13 +31,12 @@ class _FirstLogState extends StateMVC<FirstLog> {
   final _authCodeKey = GlobalKey<FormState>();
 
   final images = [
-    'assets/images/1.png',
-    'assets/images/2.png',
-    'assets/images/3.png',
+    'assets/images/5.svg',
+    'assets/images/6.svg',
+    'assets/images/7.svg',
+    'assets/images/8.svg',
   ];
 
-  Country _selected;
-  String countryCode = "1";
   @override
   void initState() {
     super.initState();
@@ -46,115 +49,54 @@ class _FirstLogState extends StateMVC<FirstLog> {
 
     return Scaffold(
         body: Container(
-      height: height,
-      width: width,
-      color: HexColor('#f5f5f5'),
-      child: SingleChildScrollView(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            color: Colors.transparent,
-            margin: EdgeInsets.symmetric(vertical: height * .15),
-            width: width * 0.8,
-            height: width * 0.8,
-            child: new Swiper(
-                itemBuilder: (BuildContext context, int index) {
-                  return ClipRRect(
-                    clipBehavior: Clip.antiAlias,
-                    borderRadius: BorderRadius.circular(35),
-                    child: Image.asset(
-                      images[index],
-                      fit: BoxFit.fill,
-                    ),
-                  );
-                },
-                itemCount: images.length,
-                scale: 0.8,
-                autoplay: true,
-                autoplayDelay: 10000,
-                duration: 500),
-          ),
-          Container(
-            width: height * 0.4,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Row(children: <Widget>[
-                    CountryPicker(
-                      showDialingCode: true,
-                      showName: false,
-                      onChanged: (Country country) {
-                        setState(() {
-                          _selected = country;
-                          countryCode = _selected.dialingCode;
-                        });
-                      },
-                      selectedCountry: _selected,
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        controller: authController,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          hintText: '(819) 740-0000',
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Please enter your number';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ]),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 50.0),
-                          child: ButtonTheme(
-                            height: 1000,
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                  minimumSize: MaterialStateProperty.all<Size>(
-                                      Size(500, 50)),
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          HexColor("#345e78"))),
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  setState(() {
-                                    _futureVerificarAuthResponse =
-                                        verificarAutenticador(
-                                            authController.text, countryCode);
-                                  });
-                                  Navigator.pushNamed(context, '/authCode',
-                                      arguments: {
-                                        'futureVerificarAuthResponse':
-                                            _futureVerificarAuthResponse,
-                                        'auth': authController.text
-                                      });
-                                }
-                              },
-                              child: Text('Login'),
-                            ),
+            height: height,
+            width: width,
+            color: HexColor('#f5f5f5'),
+            child: SingleChildScrollView(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: height * .15),
+                  width: width * 0.8,
+                  height: height * 0.5,
+                  child: new Swiper(
+                      itemBuilder: (BuildContext context, int index) {
+                        return ClipRRect(
+                          clipBehavior: Clip.antiAlias,
+                          borderRadius: BorderRadius.circular(35),
+                          child: SvgPicture.asset(
+                            images[index],
+                            fit: BoxFit.contain,
                           ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      )),
-    ));
+                        );
+                      },
+                      itemCount: images.length,
+                      scale: 0.8,
+                      autoplay: true,
+                      autoplayDelay: 10000,
+                      duration: 500),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: height * 0.10,
+                      left: width * 0.05,
+                      right: width * 0.05),
+                  child: ButtonTheme(
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          minimumSize:
+                              MaterialStateProperty.all<Size>(Size(5000, 50)),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              HexColor("#345e78"))),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/loginPhoneNumber');
+                      },
+                      child: Text(AppLocalizations.of(context).login),
+                    ),
+                  ),
+                )
+              ],
+            ))));
   }
 }

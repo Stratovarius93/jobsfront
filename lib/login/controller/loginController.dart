@@ -15,7 +15,7 @@ Future<VerificarAuthResponse> verificarAutenticador(
   final json = {"auth": "+" + countryCode + auth};
   print(json);
   final http.Response response = await http
-      .post('http://192.168.2.21:5000/verificarAutenticador', body: json);
+      .post('http://142.182.33.56:5000/verificarAutenticador', body: json);
 
   if (response.statusCode == 200) {
     return VerificarAuthResponse.fromJson(jsonDecode(response.body));
@@ -33,14 +33,14 @@ Future<VerificarNumeroResponse> verificarAuthCode(
     "authCode": code,
     "authenticationId": authenticationId,
     "deviceName": deviceInfo['deviceName'].toString(),
-    "macAddress": deviceInfo["deviceId"].toString(),
+    "deviceId": deviceInfo["deviceId"].toString(),
     "location": position.latitude.toString() + position.altitude.toString(),
     "fireBaseToken": fireBaseToken
   };
   print(json.toString());
 
   final http.Response response =
-      await http.post('http://192.168.2.21:5000/verificarNumero', body: json);
+      await http.post('http://142.182.33.56:5000/verificarNumero', body: json);
 
   if (response.statusCode == 200) {
     return VerificarNumeroResponse.fromJson(jsonDecode(response.body));
