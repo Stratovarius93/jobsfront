@@ -9,8 +9,11 @@
     "description" :"next"
   },
 
-  "enterPhoneNumber" : "Please enter your mobile number",
+  "enterPhoneNumber" : "Enter your mobile number",
   "@enterPhoneNumber": {
     "description" : "phone number"
-  }
+  },
+  "pleaseEnterPhoneNumber" : "Please enter your mobile number"
+
+  
 }

@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../view.dart' show StateMVC;
+import '../view.dart' show StateMVC, App;
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_country_picker/flutter_country_picker.dart';
 import '../controller.dart'

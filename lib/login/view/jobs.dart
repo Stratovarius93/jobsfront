@@ -6,6 +6,7 @@ import 'package:mvc_application/controller.dart';
 import 'package:mvc_application/view.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class JobsApp extends AppStatefulWidget {
   JobsApp({Key key, this.rootKey}) : super(key: key);
@@ -28,9 +29,11 @@ class Jobs extends AppState {
               const Locale('fr', 'CA'),
             ],
             theme: ThemeData(
+              bottomAppBarColor: Colors.red,
+              backgroundColor: Colors.red,
               primaryColor: Colors.blue,
               accentColor: Colors.green,
-              textTheme: TextTheme(bodyText2: TextStyle(color: Colors.purple)),
+              textTheme: TextTheme(bodyText2: TextStyle(color: Colors.black)),
             ),
             key: key,
             con: Controller(),

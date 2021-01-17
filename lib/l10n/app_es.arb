@@ -3,7 +3,7 @@
 
   "next": "Siguente",
 
-  "enterPhoneNumber" : "Por favor, introduzca su número de móvil"
+  "enterPhoneNumber" : "Introduzca su número de móvil",
 
-
+  "pleaseEnterPhoneNumber" : "Please enter your mobile number"
 }

@@ -3,5 +3,7 @@
   
     "next": "suivant",
 
-    "enterPhoneNumber": "Entrez s'il vous plaît votre numéro de téléphone"
+    "enterPhoneNumber": "Entrez votre numéro de téléphone",
+
+    "pleaseEnterPhoneNumber" : "Entrez s'il vous plaît votre numéro de téléphone"
   }
