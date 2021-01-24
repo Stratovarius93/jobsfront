@@ -5,5 +5,29 @@
 
     "enterPhoneNumber": "Entrez votre numéro de téléphone",
 
-    "pleaseEnterPhoneNumber" : "Entrez s'il vous plaît votre numéro de téléphone"
+    "pleaseEnterPhoneNumber" : "Entrez s'il vous plaît votre numéro de téléphone",
+    
+    "phoneNumber" : "Numéro de téléphone",
+
+    "phoneNumberVerification" : "vérification du numéro de téléphone",
+
+    "enterSentCode" :  "Entrez le code envoyé à  ",
+
+    "enterCode" :  "Entrez le code",
+
+    "name" : "Prénom",
+
+    "lastName" : "Nom de famille",
+  
+    "password" : "Mot de passe",
+  
+    "confirmPassword" : "Confirmation du mot de passe",
+
+    "pleaseEnter" : "Entrez s'il vous plaît votre ",
+
+    "doNotMatch" : "Le mot de passe et sa confirmation ne correspondent pas",
+
+    "agreeTerms" : "J'accepte les conditions d'utilisation et la politique de confidentialité",
+
+    "register": "Créez votre compte"
   }

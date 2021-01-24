@@ -6,7 +6,7 @@ import 'package:mvc_application/controller.dart';
 import 'package:mvc_application/view.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:hexcolor/hexcolor.dart';
+import '../../theme.dart' show mainTheme;
 
 class JobsApp extends AppStatefulWidget {
   JobsApp({Key key, this.rootKey}) : super(key: key);
@@ -28,13 +28,7 @@ class Jobs extends AppState {
               const Locale('es', 'ES'),
               const Locale('fr', 'CA'),
             ],
-            theme: ThemeData(
-              bottomAppBarColor: Colors.red,
-              backgroundColor: Colors.red,
-              primaryColor: Colors.blue,
-              accentColor: Colors.green,
-              textTheme: TextTheme(bodyText2: TextStyle(color: Colors.black)),
-            ),
+            theme: mainTheme(),
             key: key,
             con: Controller(),
             title: 'login',
@@ -42,6 +36,10 @@ class Jobs extends AppState {
               '/authCode': (BuildContext context) => const AuthCode(),
               '/loginPhoneNumber': (BuildContext context) =>
                   const LoginPhoneNumber(),
+              '/register': (BuildContext context) => const Register(),
+              '/passwordVerification': (BuildContext context) =>
+                  const PasswordVerification(),
+              '/home': (BuildContext context) => const Home(),
             },
             debugShowCheckedModeBanner: false,
             home: const FirstLog());

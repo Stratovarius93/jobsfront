@@ -5,25 +5,23 @@ import '../view.dart' show StateMVC, App, backArrow;
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Register extends StatefulWidget {
-  const Register({this.title, Key key}) : super(key: key);
+class PasswordVerification extends StatefulWidget {
+  const PasswordVerification({this.title, Key key}) : super(key: key);
   final String title;
 
   @override
-  State createState() => _RegistroState();
+  State createState() => _PasswordVerification();
 }
 
-class _RegistroState extends StateMVC<Register> {
-  GlobalKey<FormState> _form = GlobalKey<FormState>();
+class _PasswordVerification extends StateMVC<PasswordVerification> {
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
   }
 
-  String name, lastName, password, confirmPassword;
-
-  bool agreedTC = false;
+  String password;
 
   @override
   Widget build(BuildContext context) {
@@ -34,36 +32,7 @@ class _RegistroState extends StateMVC<Register> {
 
     final Map<String, Object> data = response['data'];
 
-    final String authId = response['authId'];
-
-    final nameField = TextFormField(
-        onSaved: (value) => name = value,
-        decoration: inputDecoration(
-          Icons.person,
-          AppLocalizations.of(context).name,
-        ),
-        validator: (value) {
-          if (value.isEmpty) {
-            return AppLocalizations.of(context).pleaseEnter +
-                AppLocalizations.of(context).name.toLowerCase();
-          }
-          return null;
-        });
-
-    final lastNameField = TextFormField(
-      onSaved: (value) => lastName = value,
-      validator: (value) {
-        if (value.isEmpty) {
-          return AppLocalizations.of(context).pleaseEnter +
-              AppLocalizations.of(context).lastName.toLowerCase();
-        }
-        return null;
-      },
-      decoration: inputDecoration(
-        Icons.person,
-        AppLocalizations.of(context).lastName,
-      ),
-    );
+    final String userId = response['userId'];
 
     final passwordField = TextFormField(
       onSaved: (value) => password = value,
@@ -81,31 +50,6 @@ class _RegistroState extends StateMVC<Register> {
       ),
     );
 
-    final confirmPasswordFeield = TextFormField(
-      onSaved: (value) => confirmPassword = value,
-      validator: (value) {
-        if (value.isEmpty) {
-          return AppLocalizations.of(context).pleaseEnter +
-              AppLocalizations.of(context).confirmPassword.toLowerCase();
-        } else if (value != password) {
-          return AppLocalizations.of(context).doNotMatch;
-        }
-        return null;
-      },
-      obscureText: true,
-      decoration: inputDecoration(
-        Icons.lock_outline,
-        AppLocalizations.of(context).confirmPassword,
-      ),
-    );
-
-    final checkBox = Row(children: [
-      Checkbox(value: agreedTC, onChanged: _setAgreedTC),
-      GestureDetector(
-          onTap: () => _setAgreedTC(!agreedTC),
-          child: Text(AppLocalizations.of(context).agreeTerms))
-    ]);
-
     return Theme(
         data: App.themeData,
         child: Scaffold(
@@ -122,7 +66,7 @@ class _RegistroState extends StateMVC<Register> {
                           margin: EdgeInsets.symmetric(vertical: height * .05),
                           width: width * .8,
                           child: Form(
-                              key: _form,
+                              key: _formKey,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -130,24 +74,15 @@ class _RegistroState extends StateMVC<Register> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 30.0, vertical: 8),
                                     child: Text(
-                                      AppLocalizations.of(context).register,
+                                      AppLocalizations.of(context).pleaseEnter +
+                                          AppLocalizations.of(context).password,
                                       style:
                                           Theme.of(context).textTheme.headline6,
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
-                                  SizedBox(height: height * 0.05),
-                                  nameField,
-                                  SizedBox(height: height * 0.05),
-                                  lastNameField,
-                                  SizedBox(height: height * 0.05),
+                                  SizedBox(height: height * 0.10),
                                   passwordField,
-                                  SizedBox(height: height * 0.05),
-                                  confirmPasswordFeield,
-                                  SizedBox(
-                                    height: height * 0.05,
-                                  ),
-                                  checkBox,
                                 ],
                               ))),
                     ]))),
@@ -161,9 +96,10 @@ class _RegistroState extends StateMVC<Register> {
                 child: ElevatedButton(
                   style: loginButton(),
                   onPressed: () {
-                    _form.currentState.save();
-                    if (_form.currentState.validate() && agreedTC == true) {
-                      register(context, name, lastName, password, data);
+                    _formKey.currentState.save();
+                    print(' password $password ');
+                    if (_formKey.currentState.validate()) {
+                      passwordVerification(context, userId, password, data);
                     }
                   },
                   child: Row(
@@ -178,11 +114,5 @@ class _RegistroState extends StateMVC<Register> {
                 ),
               ),
             )));
-  }
-
-  void _setAgreedTC(bool newValue) {
-    setState(() {
-      agreedTC = newValue;
-    });
   }
 }

@@ -5,5 +5,30 @@
 
   "enterPhoneNumber" : "Introduzca su número de móvil",
 
-  "pleaseEnterPhoneNumber" : "Please enter your mobile number"
+  "pleaseEnterPhoneNumber" : "Por favor, introduzca su número de móvil",
+
+  "phoneNumber" : "Número de móvil",
+
+  "phoneNumberVerification" : "Verificación del número de teléfono",
+  
+  "enterSentCode" :  "Ingrese el código enviado a  ",
+
+  "enterCode" :  "Ingrese el código",
+
+  "name" : "Nombre",
+
+  "lastName" : "Apellido",
+
+  "password" : "Contraseña",
+
+  "confirmPassword" : "confirmación de contraseña",
+
+  "pleaseEnter" : "Por favor, introduzca su ",
+  
+  "doNotMatch" : "La contraseña y su confirmación no coinciden",
+
+  "agreeTerms" : "Acepto los Términos de servicio y la Política de privacidad.",
+
+  "register": "Crea tu cuenta"
+
 }

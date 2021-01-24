@@ -8,6 +8,8 @@ export 'package:jobs_front/login/view/auth.dart';
 
 export 'package:jobs_front/login/view/login.dart';
 
+export 'package:jobs_front/login/view/passwordVerification.dart';
+
 export 'dart:async';
 
 export 'package:device_info_plus/device_info_plus.dart';
@@ -16,4 +18,8 @@ export 'dart:io';
 
 export 'package:flutter/foundation.dart';
 
-export 'package:jobs_front/login/view/loginPhoneNumber.dart';
+export '../login/view/loginPhoneNumber.dart';
+
+export 'view/helpers.dart';
+
+export '../home/home.dart';

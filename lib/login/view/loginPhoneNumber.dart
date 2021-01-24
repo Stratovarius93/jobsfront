@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../view.dart' show StateMVC, App;
-import 'package:hexcolor/hexcolor.dart';
-import 'package:flutter_country_picker/flutter_country_picker.dart';
+
 import '../controller.dart' show verificarAutenticador;
-import '../model.dart' show VerificarAuthResponse, VerificarNumeroResponse;
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../theme/mainTheme.dart' show loginButton;
 
 class LoginPhoneNumber extends StatefulWidget {
   const LoginPhoneNumber({this.title, Key key}) : super(key: key);
@@ -15,19 +16,15 @@ class LoginPhoneNumber extends StatefulWidget {
   State createState() => _LoginPhoneNumber();
 }
 
+String mobileNumber = "";
+PhoneNumber number = PhoneNumber(isoCode: 'CA');
+
 class _LoginPhoneNumber extends StateMVC<LoginPhoneNumber> {
   TextEditingController authController = new TextEditingController();
-
-  Future<VerificarAuthResponse> _futureVerificarAuthResponse;
-
-  Future<VerificarNumeroResponse> _futureVerificarNumeroResponse;
+  TextEditingController auth2Controller = new TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
-  final _authCodeKey = GlobalKey<FormState>();
-
-  Country _selected;
-  String countryCode = "1";
   @override
   void initState() {
     super.initState();
@@ -48,56 +45,48 @@ class _LoginPhoneNumber extends StateMVC<LoginPhoneNumber> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: height * .15),
-                  width: height * 0.4,
+                  width: width * 0.8,
                   child: Form(
                     key: _formKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Row(
-                          children: [
-                            Text(
-                              AppLocalizations.of(context)
-                                  .enterPhoneNumber
-                                  .toString(),
-                              style: Theme.of(context).textTheme.headline5,
-                            )
-                          ],
+                        SizedBox(height: height * 0.2),
+                        Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30.0, vertical: 20),
+                            child: Text(
+                                AppLocalizations.of(context)
+                                    .enterPhoneNumber
+                                    .toString(),
+                                style: Theme.of(context).textTheme.headline6,
+                                textAlign: TextAlign.center)),
+                        Padding(padding: EdgeInsets.only(top: 10)),
+                        InternationalPhoneNumberInput(
+                          onInputChanged: (PhoneNumber number) {
+                            mobileNumber = number.toString();
+                          },
+                          selectorConfig: SelectorConfig(
+                            setSelectorButtonAsPrefixIcon: true,
+                            useEmoji: true,
+                            selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                          ),
+                          errorMessage: AppLocalizations.of(context)
+                              .pleaseEnterPhoneNumber
+                              .toString(),
+                          hintText: AppLocalizations.of(context)
+                              .phoneNumber
+                              .toString(),
+                          spaceBetweenSelectorAndTextField: 0,
+                          ignoreBlank: false,
+                          autoValidateMode: AutovalidateMode.disabled,
+                          initialValue: number,
+                          textFieldController: authController,
+                          formatInput: true,
+                          keyboardType: TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
+                          onSaved: (PhoneNumber number) {},
                         ),
-                        Row(children: <Widget>[
-                          CountryPicker(
-                            showDialingCode: true,
-                            showName: false,
-                            onChanged: (Country country) {
-                              setState(() {
-                                _selected = country;
-                                countryCode = _selected.dialingCode;
-                              });
-                            },
-                            selectedCountry: _selected,
-                          ),
-                          Expanded(
-                            child: TextFormField(
-                              controller: authController,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly,
-                              ],
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                hintText: '(819) 740-0000',
-                              ),
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return AppLocalizations.of(context)
-                                      .pleaseEnterPhoneNumber
-                                      .toString();
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ]),
                       ],
                     ),
                   ),
@@ -108,27 +97,24 @@ class _LoginPhoneNumber extends StateMVC<LoginPhoneNumber> {
           bottomNavigationBar: Padding(
             padding: EdgeInsets.only(
                 bottom: height * 0.05, left: width * 0.05, right: width * 0.05),
-            child: ButtonTheme(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    minimumSize: MaterialStateProperty.all<Size>(Size(500, 50)),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(HexColor("#345e78"))),
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    setState(() {
-                      _futureVerificarAuthResponse = verificarAutenticador(
-                          authController.text, countryCode);
-                    });
-                    Navigator.pushNamed(context, '/authCode', arguments: {
-                      'futureVerificarAuthResponse':
-                          _futureVerificarAuthResponse,
-                      'auth': authController.text
-                    });
-                  }
-                },
-                child: Text(AppLocalizations.of(context).next),
-              ),
+            child: ElevatedButton(
+              style: loginButton(),
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
+
+                  verificarAutenticador(context, mobileNumber);
+                }
+              },
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.only(left: 10.0)),
+                    Text(
+                      AppLocalizations.of(context).next,
+                    ),
+                    Icon(Icons.arrow_forward_ios_outlined)
+                  ]),
             ),
           ),
         ));

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../view.dart' show StateMVC, App, FirstLog;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import '../view.dart' show StateMVC, App;
 import 'package:hexcolor/hexcolor.dart';
 import '../controller.dart' show verificarAuthCode;
-import '../model.dart' show VerificarAuthResponse, VerificarNumeroResponse;
+
+import '../../theme/mainTheme.dart' show loginButton;
 
 class AuthCode extends StatefulWidget {
   const AuthCode({this.title, Key key}) : super(key: key);
   final String title;
-
   @override
   State createState() => _AuthCodeState();
 }
@@ -23,132 +25,149 @@ class _AuthCodeState extends StateMVC<AuthCode> {
 
   final _authCodeKey = GlobalKey<FormState>();
 
-  Future<VerificarNumeroResponse> _futureVerificarNumeroResponse;
-
+  String code = "";
   @override
   Widget build(BuildContext context) {
     final Map<String, Object> response =
         ModalRoute.of(context).settings.arguments;
 
-    final Future<VerificarAuthResponse> futureVerificarAuthResponse =
-        response['futureVerificarAuthResponse'];
-
     final String auth = response['auth'];
+
+    final String authId = response['authId'];
+
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Theme(
         data: App.themeData,
         child: Scaffold(
             appBar: AppBar(
-                backgroundColor: HexColor('#f5f5f5'),
+                backgroundColor: Theme.of(context).backgroundColor,
                 shadowColor: Colors.transparent,
                 leading: Builder(
                   builder: (BuildContext context) {
                     return IconButton(
-                      color: Colors.blue,
-                      icon: Icon(Icons.arrow_back_ios_rounded),
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: Theme.of(context).primaryColor,
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                       },
                     );
                   },
                 )),
+            bottomNavigationBar: Container(
+              color: Theme.of(context).backgroundColor,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    bottom: height * 0.05,
+                    left: width * 0.05,
+                    right: width * 0.05),
+                child: ElevatedButton(
+                  style: loginButton(),
+                  onPressed: () {
+                    if (_authCodeKey.currentState.validate()) {
+                      print("el numero $auth y el codigo $code");
+
+                      verificarAuthCode(
+                        context,
+                        auth,
+                        code,
+                        authId,
+                      );
+                    }
+                  },
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(padding: EdgeInsets.only(left: 10.0)),
+                        Text(
+                          AppLocalizations.of(context).next,
+                        ),
+                        Icon(Icons.arrow_forward_ios_outlined)
+                      ]),
+                ),
+              ),
+            ),
             body: Container(
                 height: height,
                 width: width,
-                color: HexColor('#f5f5f5'),
+                color: Theme.of(context).backgroundColor,
                 child: SingleChildScrollView(
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                      FutureBuilder<VerificarAuthResponse>(
-                          future: futureVerificarAuthResponse,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              if (snapshot.data.id != null) {
-                                print('chao');
-                                return Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: height * .15),
-                                    width: height * 0.3,
-                                    child: Form(
-                                        key: _authCodeKey,
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              TextFormField(
-                                                onTap: () {},
-                                                controller: authCodeController,
-                                                inputFormatters: <
-                                                    TextInputFormatter>[
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly
-                                                ],
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  hintText: '0 0 0 0',
-                                                ),
-                                                validator: (value) {
-                                                  if (value.isEmpty) {
-                                                    return 'Please enter the code';
-                                                  }
-                                                  return null;
-                                                },
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 16.0),
-                                                child: ButtonTheme(
-                                                  height: 1000,
-                                                  child: ElevatedButton(
-                                                    style: ButtonStyle(
-                                                        minimumSize:
-                                                            MaterialStateProperty
-                                                                .all<Size>(Size(
-                                                                    500, 50)),
-                                                        backgroundColor:
-                                                            MaterialStateProperty
-                                                                .all<Color>(
-                                                                    HexColor(
-                                                                        "#345e78"))),
-                                                    onPressed: () {
-                                                      if (_authCodeKey
-                                                          .currentState
-                                                          .validate()) {
-                                                        setState(() {
-                                                          _futureVerificarNumeroResponse =
-                                                              verificarAuthCode(
-                                                            auth,
-                                                            authCodeController
-                                                                .text,
-                                                            snapshot.data.id,
-                                                          );
-                                                        });
-                                                      }
-                                                    },
-                                                    child: Text('Login'),
-                                                  ),
-                                                ),
-                                              ),
-                                            ])));
-                              } else {
-                                return Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        child: Text(snapshot.data.toString()),
-                                      )
-                                    ]);
-                              }
-                            } else if (snapshot.hasError) {
-                              return Text("${snapshot.error}");
-                            }
-                            return CircularProgressIndicator();
-                          })
+                      SizedBox(height: height * 0.1),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                        child: Text(
+                          AppLocalizations.of(context).phoneNumberVerification,
+                          style: Theme.of(context).textTheme.headline6,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                        child: RichText(
+                          text: TextSpan(
+                            text: AppLocalizations.of(context).enterSentCode,
+                            children: [
+                              TextSpan(
+                                  text: auth,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ))
+                            ],
+                            style:
+                                (TextStyle(fontSize: 15, color: Colors.black)),
+                          ),
+                        ),
+                      ),
+                      Container(
+                          width: width * 0.8,
+                          margin: EdgeInsets.symmetric(vertical: height * .05),
+                          child: Form(
+                              key: _authCodeKey,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    PinCodeTextField(
+                                      pinTheme: PinTheme(
+                                          activeColor:
+                                              Theme.of(context).primaryColor,
+                                          selectedColor: HexColor('#000000'),
+                                          inactiveColor:
+                                              Theme.of(context).primaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      animationType: AnimationType.fade,
+                                      keyboardType: TextInputType.number,
+                                      backgroundColor:
+                                          Theme.of(context).backgroundColor,
+                                      cursorColor:
+                                          Theme.of(context).primaryColor,
+                                      appContext: context,
+                                      length: 6,
+                                      onChanged: (value) {
+                                        print(value);
+                                        setState(() {
+                                          code = value;
+                                        });
+                                      },
+                                      validator: (v) {
+                                        if (v.length != 6) {
+                                          return AppLocalizations.of(context)
+                                              .enterCode
+                                              .toString();
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                    )
+                                  ])))
                     ])))));
   }
 }

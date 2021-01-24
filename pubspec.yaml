@@ -57,10 +57,12 @@ dependencies:
 
   form_validator: ^0.1.7
 
-
+  intl_phone_number_input: ^0.6.0
 
   flutter_form_bloc:
 
+    
+  pin_code_fields: ^6.1.0
   
 dev_dependencies:
 

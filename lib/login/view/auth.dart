@@ -1,16 +1,12 @@
-import 'dart:math';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../view.dart' show StateMVC, App;
-import 'package:hexcolor/hexcolor.dart';
-import 'package:flutter_country_picker/flutter_country_picker.dart';
-import '../controller.dart'
-    show verificarAutenticador, firebaCloudMessaging_Listeners;
-import '../model.dart'
-    show VerificarAuthResponse, VerificarNumeroResponse, LoginPhoneNumber;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hexcolor/hexcolor.dart';
+
+import '../view.dart' show StateMVC;
+import '../controller.dart' show firebaCloudMessaging_Listeners;
+import '../../theme/mainTheme.dart' show loginButton;
 
 class FirstLog extends StatefulWidget {
   const FirstLog({this.title, Key key}) : super(key: key);
@@ -21,14 +17,6 @@ class FirstLog extends StatefulWidget {
 
 class _FirstLogState extends StateMVC<FirstLog> {
   TextEditingController authController = new TextEditingController();
-
-  Future<VerificarAuthResponse> _futureVerificarAuthResponse;
-
-  Future<VerificarNumeroResponse> _futureVerificarNumeroResponse;
-
-  final _formKey = GlobalKey<FormState>();
-
-  final _authCodeKey = GlobalKey<FormState>();
 
   final images = [
     'assets/images/5.svg',
@@ -51,13 +39,19 @@ class _FirstLogState extends StateMVC<FirstLog> {
         body: Container(
             height: height,
             width: width,
-            color: HexColor('#f5f5f5'),
+            color: HexColor('#f2f2f2'),
             child: SingleChildScrollView(
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: height * .15),
+                  margin: EdgeInsets.only(top: height * .15),
+                  child: Text(
+                    "Minch?",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                ),
+                Container(
                   width: width * 0.8,
                   height: height * 0.5,
                   child: new Swiper(
@@ -77,26 +71,26 @@ class _FirstLogState extends StateMVC<FirstLog> {
                       autoplayDelay: 10000,
                       duration: 500),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: height * 0.10,
-                      left: width * 0.05,
-                      right: width * 0.05),
-                  child: ButtonTheme(
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          minimumSize:
-                              MaterialStateProperty.all<Size>(Size(5000, 50)),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              HexColor("#345e78"))),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/loginPhoneNumber');
-                      },
-                      child: Text(AppLocalizations.of(context).login),
-                    ),
-                  ),
-                )
               ],
-            ))));
+            ))),
+        bottomNavigationBar: Container(
+          color: HexColor('#f2f2f2'),
+          child: Padding(
+            padding: EdgeInsets.only(
+                bottom: height * 0.05, left: width * 0.05, right: width * 0.05),
+            child: ElevatedButton(
+              style: loginButton(),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/loginPhoneNumber');
+              },
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(AppLocalizations.of(context).login,
+                        textAlign: TextAlign.center),
+                  ]),
+            ),
+          ),
+        ));
   }
 }
