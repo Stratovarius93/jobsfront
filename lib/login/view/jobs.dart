@@ -1,3 +1,4 @@
+import 'package:jobs_front/helpers/sharedPreference.dart';
 import 'package:jobs_front/login/view.dart';
 import 'package:jobs_front/login/controller.dart';
 import 'package:jobs_front/login/view/authCode.dart';
@@ -14,6 +15,8 @@ class JobsApp extends AppStatefulWidget {
   @override
   AppState createView() => Jobs(key: rootKey);
 }
+
+Future<String> getTokenData() => UserPreferences().getToken();
 
 class Jobs extends AppState {
   Jobs({Key key})
@@ -42,5 +45,20 @@ class Jobs extends AppState {
               '/home': (BuildContext context) => const Home(),
             },
             debugShowCheckedModeBanner: false,
-            home: const FirstLog());
+            home: FutureBuilder(
+                future: getTokenData(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return CircularProgressIndicator();
+                    default:
+                      if (snapshot.hasError)
+                        return Text('Error: ${snapshot.error}');
+                      else if (snapshot.data == null)
+                        return FirstLog();
+                      else
+                        return Home();
+                  }
+                }));
 }

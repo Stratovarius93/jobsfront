@@ -10,6 +10,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import '../view.dart' show CircularProgress;
 import '../../helpers/appUrl.dart';
+import '../../helpers/sharedPreference.dart';
 
 final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
@@ -30,7 +31,7 @@ Future<VerificarAuthResponse> verificarAutenticador(String auth) async {
 
 Future<Object> verificarAutenticador(
     BuildContext context, String mobileNumber) async {
-  final json = {"auth": ""};
+  final json = {"auth": mobileNumber};
   print(json);
   VerificarAuthResponse _futureVerificarAuthResponse;
   Navigator.push(
@@ -49,8 +50,9 @@ Future<Object> verificarAutenticador(
     }
     print(_futureVerificarAuthResponse);
     print(_futureVerificarAuthResponse.message);
-/* A changer le != */
+
     if (_futureVerificarAuthResponse.id == "") {
+      Navigator.pop(context);
     } else {
       Navigator.pop(context);
       return Navigator.pushNamed(context, '/authCode', arguments: {
@@ -115,6 +117,7 @@ Future<Object> verificarAuthCode(BuildContext context, String auth, String code,
       });
     } else if (_futureVerificarNumeroResponse.newDevice == false) {
       Navigator.pop(context);
+      UserPreferences().saveToken(_futureVerificarNumeroResponse.token);
       Navigator.pushNamed(context, '/home',
           arguments: {'token': _futureVerificarNumeroResponse.token});
     }
@@ -160,6 +163,7 @@ Future<Object> register(BuildContext context, String name, String lastName,
       Navigator.pop(context);
     } else {
       Navigator.pop(context);
+      UserPreferences().saveToken(_futureRegisterResponse.token);
       /* crear skills */
       Navigator.pushNamed(context, '/skills', arguments: {});
     }
@@ -203,6 +207,7 @@ Future<Object> passwordVerification(
     if (_futurePasswordVerificationResponse.token == null) {
       Navigator.pop(context);
     } else {
+      UserPreferences().saveToken(_futurePasswordVerificationResponse.token);
       Navigator.pop(context);
       /* crear home y arreglar lo del token y todo eso */
       Navigator.pushNamed(context, '/home', arguments: {});

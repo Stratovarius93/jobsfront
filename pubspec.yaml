@@ -61,6 +61,7 @@ dependencies:
 
   flutter_form_bloc:
 
+  shared_preferences: ^0.5.12+4
     
   pin_code_fields: ^6.1.0
   
