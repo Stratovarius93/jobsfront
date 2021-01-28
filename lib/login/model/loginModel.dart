@@ -56,6 +56,7 @@ class VerificarNumeroResponse {
 
   factory VerificarNumeroResponse.fromJson(Map<String, dynamic> json) {
     if (json.containsKey('error')) {
+      print('1');
       return VerificarNumeroResponse(
         newUser: null,
         message: json['error']['message'],
@@ -63,17 +64,22 @@ class VerificarNumeroResponse {
         internalCode: json['error']['internalCode'],
       );
     } else if (json['response']['data'].containsKey("token")) {
+      print('2');
       return VerificarNumeroResponse(
         newUser: json['response']['data']['newUser'],
         newDevice: json['response']['data']['newDevice'],
         token: json['response']['data']['token'],
       );
     } else if (json['response']['data'].containsKey('userId')) {
+      print('3');
+      print(json['response']['data']['newUser']);
+
       return VerificarNumeroResponse(
           newUser: json['response']['data']['newUser'],
           newDevice: json['response']['data']['newDevice'],
-          userId: json['response']['data']['newDevice']);
+          userId: json['response']['data']['userId']);
     } else {
+      print('4');
       return VerificarNumeroResponse(
           newUser: json['response']['data']['newUser'],
           authenticationId: json['response']['data']['authenticationId']);

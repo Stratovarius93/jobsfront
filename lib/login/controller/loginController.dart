@@ -8,7 +8,7 @@ import 'dart:io';
 import 'package:geolocator/geolocator.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import '../view.dart' show CircularProgress;
+import '../view.dart' show CircularProgress, showError;
 import '../../helpers/appUrl.dart';
 import '../../helpers/sharedPreference.dart';
 
@@ -41,11 +41,13 @@ Future<Object> verificarAutenticador(
     final http.Response response = await http
         .post(AppUrl.verificarAutenticador, body: json)
         .timeout(const Duration(seconds: 10));
+
     if (response.statusCode == 200) {
       _futureVerificarAuthResponse =
           VerificarAuthResponse.fromJson(jsonDecode(response.body));
     } else {
       Navigator.pop(context);
+
       throw Exception('Failed to verify your number');
     }
     print(_futureVerificarAuthResponse);
@@ -53,6 +55,7 @@ Future<Object> verificarAutenticador(
 
     if (_futureVerificarAuthResponse.id == "") {
       Navigator.pop(context);
+      showError(context, _futureVerificarAuthResponse.message);
     } else {
       Navigator.pop(context);
       return Navigator.pushNamed(context, '/authCode', arguments: {
@@ -64,8 +67,8 @@ Future<Object> verificarAutenticador(
     print('Timeout');
     Navigator.pop(context);
   } on Error catch (e) {
-    print('Error $e');
     Navigator.pop(context);
+    print('Error $e');
   }
 }
 
@@ -91,32 +94,35 @@ Future<Object> verificarAuthCode(BuildContext context, String auth, String code,
     final http.Response response = await http
         .post(AppUrl.verificarNumero, body: json)
         .timeout(const Duration(seconds: 10));
-
+    print(response.body.toString());
+    print(response.statusCode);
     if (response.statusCode == 200) {
+      print('2');
       _futureVerificarNumeroResponse =
           VerificarNumeroResponse.fromJson(jsonDecode(response.body));
+      print('3');
     } else {
       Navigator.pop(context);
 
       print(response.body.toString());
-      throw Exception('Failed to verify your number');
+      throw AlertDialog(
+          content:
+              SingleChildScrollView(child: Text(response.body.toString())));
     }
+    Navigator.pop(context);
+
     if (_futureVerificarNumeroResponse.newUser == null) {
-      Navigator.pop(context);
     } else if (_futureVerificarNumeroResponse.newUser == true) {
-      Navigator.pop(context);
       Navigator.pushNamed(context, '/register', arguments: {
         'data': json,
         'authId': _futureVerificarNumeroResponse.authenticationId,
       });
     } else if (_futureVerificarNumeroResponse.newDevice == true) {
-      Navigator.pop(context);
       Navigator.pushNamed(context, '/passwordVerification', arguments: {
         'data': json,
         'userId': _futureVerificarNumeroResponse.userId
       });
     } else if (_futureVerificarNumeroResponse.newDevice == false) {
-      Navigator.pop(context);
       UserPreferences().saveToken(_futureVerificarNumeroResponse.token);
       Navigator.pushNamed(context, '/home',
           arguments: {'token': _futureVerificarNumeroResponse.token});
@@ -194,7 +200,7 @@ Future<Object> passwordVerification(
     final http.Response response = await http
         .post(AppUrl.passwordVerification, body: json)
         .timeout(const Duration(seconds: 10));
-
+    print(response.body.toString());
     if (response.statusCode == 200) {
       _futurePasswordVerificationResponse =
           PasswordVerificationResponse.fromJson(jsonDecode(response.body));
