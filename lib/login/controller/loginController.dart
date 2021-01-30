@@ -14,21 +14,6 @@ import '../../helpers/sharedPreference.dart';
 
 final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-/*
-Future<VerificarAuthResponse> verificarAutenticador(String auth) async {
-  final json = {"aut": auth};
-  print(json);
-  final http.Response response = await http
-      .post('http://142.182.33.56:5000/verificarAutenticador', body: json);
-
-  if (response.statusCode == 200) {
-    return VerificarAuthResponse.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to verify your number');
-  }
-}
-*/
-
 Future<Object> verificarAutenticador(
     BuildContext context, String mobileNumber) async {
   final json = {"auth": mobileNumber};

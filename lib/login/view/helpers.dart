@@ -46,7 +46,7 @@ Object backArrow(context) {
       ));
 }
 
-showError(BuildContext context, String error) {
+AlertDialog showError(BuildContext context, String error) {
   Widget okButton =
       FlatButton(child: Text('ok'), onPressed: () => Navigator.pop(context));
 
