@@ -1,0 +1,14 @@
+{
+	"appName": "App Name",
+	"page1Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+	"page1Button": "Get Started",
+
+	"page2Title": "Select Option",
+	"page2SubTitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+	"page2User" : "User",
+	"page2Worker": "Worker",
+
+	"page3Title" : "User",
+	"page3SubTile" : "Enter your mobile number",
+	"page3Button" : "Send SMS"
+}
