@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/sizes.dart';
 import 'package:AppWork/generated/l10n.dart';
@@ -6,10 +8,27 @@ import 'package:AppWork/widgets/generics/loginPhoneinput.dart';
 import 'package:AppWork/widgets/generics/loginSubtitle.dart';
 import 'package:AppWork/widgets/generics/loginTitle.dart';
 import 'package:AppWork/widgets/generics/primaryButton.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-class LoginPage3 extends StatelessWidget {
+String _phonenumber;
+String _codePhone = '+1';
+final _codeStream = StreamController<String>.broadcast();
+
+class LoginPage3 extends StatefulWidget {
+  @override
+  _LoginPage3State createState() => _LoginPage3State();
+}
+
+class _LoginPage3State extends State<LoginPage3> {
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _codeStream.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +40,7 @@ class LoginPage3 extends StatelessWidget {
             children: [
               Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 40,
+                    horizontal: 16,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,13 +63,41 @@ class LoginPage3 extends StatelessWidget {
                       SizedBox(
                         height: 32,
                       ),
-                      GenericInputPhone(),
+                      StreamBuilder(
+                        stream: _codeStream.stream,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<String> snapshot) {
+                          if (snapshot.hasData) {
+                            _codePhone = snapshot.data;
+                            return GenericInputPhone(
+                              onchanged1: () {
+                                _selectCountry(context);
+                              },
+                              code: '+ ${snapshot.data}',
+                              onchanged2: (value) {
+                                _phonenumber = value;
+                              },
+                            );
+                          } else {
+                            return GenericInputPhone(
+                              onchanged1: () {
+                                _selectCountry(context);
+                              },
+                              code: _codePhone,
+                              onchanged2: (value) {
+                                print(value);
+                              },
+                            );
+                          }
+                        },
+                      ),
                       SizedBox(
                         height: 32,
                       ),
                       GenericPrimaryButton(
                         title: S.current.page3Button,
                         onPressed: () {
+                          print('+ $_codePhone $_phonenumber');
                           Navigator.pushReplacementNamed(context, 'loginPage4');
                         },
                       )
@@ -71,4 +118,15 @@ class LoginPage3 extends StatelessWidget {
       backgroundColor: backgroundColor,
     );
   }
+}
+
+void _selectCountry(BuildContext context) {
+  showCountryPicker(
+    context: context,
+    showPhoneCode: true, // optional. Shows phone code before the country name.
+    onSelect: (Country country) {
+      //print('Select country: ${country.displayName}');
+      _codeStream.sink.add(country.phoneCode);
+    },
+  );
 }

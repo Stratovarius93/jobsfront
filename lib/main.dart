@@ -1,3 +1,4 @@
+import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/generated/l10n.dart';
 import 'package:AppWork/widgets/pages/login/page1.dart';
 import 'package:AppWork/widgets/pages/login/page2.dart';
@@ -6,13 +7,28 @@ import 'package:AppWork/widgets/pages/login/page4.dart';
 import 'package:AppWork/widgets/pages/login/page5.dart';
 import 'package:AppWork/widgets/pages/login/page6.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: backgroundColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent
+      //statusBarBrightness: Brightness.dark
+      ));
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
       localizationsDelegates: [
         S.delegate,

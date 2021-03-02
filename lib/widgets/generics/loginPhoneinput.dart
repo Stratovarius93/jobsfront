@@ -1,67 +1,77 @@
 import 'package:AppWork/constants/colors.dart';
-import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
 import 'package:AppWork/utils/input.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:ionicons/ionicons.dart';
 
 class GenericInputPhone extends StatefulWidget {
+  final VoidCallback onchanged1;
+  final Function(String) onchanged2;
+  final String code;
+
+  const GenericInputPhone(
+      {Key key, this.onchanged2, this.code, this.onchanged1})
+      : super(key: key);
   @override
   _GenericInputPhoneState createState() => _GenericInputPhoneState();
 }
 
 class _GenericInputPhoneState extends State<GenericInputPhone> {
-  String _selectedCountryCode;
-  List<String> _countryCodes = ['+91', '+23'];
-
   @override
   Widget build(BuildContext context) {
-    var countryDropDown = Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16), bottomLeft: Radius.circular(16))),
-      height: 45.0,
-      margin: EdgeInsets.all(3.0),
-      //width: 300.0,
-      child: DropdownButtonHideUnderline(
-        child: ButtonTheme(
-          alignedDropdown: true,
-          child: DropdownButton(
-            value: _selectedCountryCode,
-            items: _countryCodes.map((String value) {
-              return DropdownMenuItem(
-                  value: value,
-                  child: Text(value,
-                      style: utilsLoginInputTextStyle(
-                          screenWidth(context) * 0.06)));
-            }).toList(),
-            onChanged: (value) {
-              setState(() {
-                _selectedCountryCode = value;
-              });
-            },
-          ),
+    return Row(
+      children: [
+        _countryCodeText(context, widget.code, widget.onchanged1),
+        SizedBox(
+          width: 16,
         ),
-      ),
-    );
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 3.0),
-      child: TextField(
-          textAlign: TextAlign.center,
-          keyboardType: TextInputType.number,
-          decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-              border: utilsloginOutlineInputBorder2,
-              filled: true,
-              fillColor: colorFillInput,
-              prefixIcon: countryDropDown,
-              hintText: 'Phone Number',
-              hintStyle: TextStyle(color: colorTextSubTitle),
-              enabledBorder: utilsloginOutlineInputBorder),
-          onChanged: (value) {},
-          style: utilsLoginInputTextStyle(screenWidth(context) * 0.06)),
+        Expanded(child: _textFieldNumber(context, widget.onchanged2))
+      ],
     );
   }
+}
+
+Widget _countryCodeText(BuildContext context, String text, VoidCallback onTap) {
+  return InkWell(
+    onTap: onTap,
+    child: Container(
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: colorBorderInput, width: 1.5)),
+      child: Row(children: [
+        Text(
+          //'+ $_selectedCountryCode' ?? '+1',
+          text,
+          style: utilsLoginInputTextStyle(screenWidth(context) * 0.06),
+        ),
+        SizedBox(
+          width: 12,
+        ),
+        Icon(
+          Ionicons.chevron_down_outline,
+          size: 16,
+          color: colorBorderInput,
+        )
+      ]),
+    ),
+  );
+}
+
+Widget _textFieldNumber(BuildContext context, Function(String) onChanged) {
+  return TextField(
+      textAlign: TextAlign.center,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+          border: utilsloginOutlineInputBorder2,
+          filled: true,
+          fillColor: colorFillInput,
+          //prefixIcon: _countryCodeText(context),
+          hintText: 'Phone Number',
+          hintStyle: TextStyle(color: colorTextSubTitle),
+          enabledBorder: utilsloginOutlineInputBorder),
+      onChanged: onChanged,
+      style: utilsLoginInputTextStyle(screenWidth(context) * 0.06));
 }
