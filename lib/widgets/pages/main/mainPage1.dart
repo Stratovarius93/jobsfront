@@ -160,29 +160,32 @@ class MainPage3 extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    decoration: BoxDecoration(
-                        color: colorPrimaryButton.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(16)),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Ionicons.location,
-                          color: colorPrimaryButton,
-                          size: 16,
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          '2km',
-                          style: GoogleFonts.getFont(fontApp,
-                              fontSize: screenWidth(context) * 0.04,
-                              fontWeight: FontWeight.w500,
-                              color: colorPrimaryButton),
-                        )
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                      decoration: BoxDecoration(
+                          color: colorPrimaryButton.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Ionicons.location,
+                            color: colorPrimaryButton,
+                            size: 16,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            '2km',
+                            style: GoogleFonts.getFont(fontApp,
+                                fontSize: screenWidth(context) * 0.04,
+                                fontWeight: FontWeight.w500,
+                                color: colorPrimaryButton),
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
