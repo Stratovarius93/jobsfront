@@ -6,6 +6,7 @@ import 'package:AppWork/widgets/pages/login/page3.dart';
 import 'package:AppWork/widgets/pages/login/page4.dart';
 import 'package:AppWork/widgets/pages/login/page5.dart';
 import 'package:AppWork/widgets/pages/login/page6.dart';
+import 'package:AppWork/widgets/pages/main/mainIndex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Welcome to MyApp',
-      initialRoute: 'loginPage1',
+      initialRoute: 'mainIndex',
       routes: {
         //login
         'loginPage1': (BuildContext context) => LoginPage1(),
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         'loginPage4': (BuildContext context) => LoginPage4(),
         'loginPage5': (BuildContext context) => LoginPage5(),
         'loginPage6': (BuildContext context) => LoginPage6(),
+        'mainIndex': (BuildContext context) => MainIndex(),
       },
     );
   }

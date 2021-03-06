@@ -1,4 +1,5 @@
 import 'package:AppWork/constants/colors.dart';
+import 'package:AppWork/generated/l10n.dart';
 import 'package:AppWork/widgets/generics/backArrow.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
 import 'package:AppWork/widgets/generics/loginSignUpInput.dart';
@@ -24,14 +25,15 @@ class LoginPage5 extends StatelessWidget {
                         height: 40,
                       ),
                       GenericLoginTitle(
-                        title: 'Sign Up',
+                        title: S.current.page5Title,
                       ),
                       SizedBox(
                         height: 40,
                       ),
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: GenericLoginCategoryText(title: 'Name:')),
+                          child: GenericLoginCategoryText(
+                              title: '${S.current.page5Name}:')),
                       SizedBox(
                         height: 2,
                       ),
@@ -43,7 +45,8 @@ class LoginPage5 extends StatelessWidget {
                       ),
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: GenericLoginCategoryText(title: 'Lastname:')),
+                          child: GenericLoginCategoryText(
+                              title: '${S.current.page5lastName}:')),
                       SizedBox(
                         height: 2,
                       ),
@@ -55,7 +58,8 @@ class LoginPage5 extends StatelessWidget {
                       ),
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: GenericLoginCategoryText(title: 'Password:')),
+                          child: GenericLoginCategoryText(
+                              title: '${S.current.page5Pass}:')),
                       SizedBox(
                         height: 2,
                       ),
@@ -68,7 +72,7 @@ class LoginPage5 extends StatelessWidget {
                       Align(
                           alignment: Alignment.centerLeft,
                           child: GenericLoginCategoryText(
-                              title: 'Validate Password:')),
+                              title: '${S.current.page5RepeatPass}:')),
                       SizedBox(
                         height: 2,
                       ),
@@ -79,7 +83,7 @@ class LoginPage5 extends StatelessWidget {
                         height: 40,
                       ),
                       GenericPrimaryButton(
-                        title: 'Create Account',
+                        title: '${S.current.page5Button}',
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, 'loginPage6');
                         },

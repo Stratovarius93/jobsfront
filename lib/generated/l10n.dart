@@ -14,24 +14,25 @@ import 'intl/messages_all.dart';
 
 class S {
   S();
-  
-  static S current;
-  
-  static const AppLocalizationDelegate delegate =
-    AppLocalizationDelegate();
+
+  static S /*!*/ current;
+
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name); 
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       S.current = S();
-      
-      return S.current;
-    });
-  } 
 
-  static S of(BuildContext context) {
+      return S.current /*!*/;
+    });
+  }
+
+  static S /*!*/ of(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
 
@@ -105,31 +106,141 @@ class S {
     );
   }
 
-  /// `User`
-  String get page3Title {
-    return Intl.message(
-      'User',
-      name: 'page3Title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter ypur mobile number`
+  /// `Enter your mobile number`
   String get page3SubTile {
     return Intl.message(
-      'Enter ypur mobile number',
+      'Enter your mobile number',
       name: 'page3SubTile',
       desc: '',
       args: [],
     );
   }
 
-  /// `SendSMS`
+  /// `Phone number`
+  String get page3HintText {
+    return Intl.message(
+      'Phone number',
+      name: 'page3HintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send SMS`
   String get page3Button {
     return Intl.message(
-      'SendSMS',
+      'Send SMS',
       name: 'page3Button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter code`
+  String get page4Title {
+    return Intl.message(
+      'Enter code',
+      name: 'page4Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your received code:`
+  String get page4Subtitle {
+    return Intl.message(
+      'Enter your received code:',
+      name: 'page4Subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Validate`
+  String get page4Button {
+    return Intl.message(
+      'Validate',
+      name: 'page4Button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get page5Title {
+    return Intl.message(
+      'Sign Up',
+      name: 'page5Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get page5Name {
+    return Intl.message(
+      'Name',
+      name: 'page5Name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lastname`
+  String get page5lastName {
+    return Intl.message(
+      'Lastname',
+      name: 'page5lastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get page5Pass {
+    return Intl.message(
+      'Password',
+      name: 'page5Pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Validate password`
+  String get page5RepeatPass {
+    return Intl.message(
+      'Validate password',
+      name: 'page5RepeatPass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Account`
+  String get page5Button {
+    return Intl.message(
+      'Create Account',
+      name: 'page5Button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interests`
+  String get page6Title {
+    return Intl.message(
+      'Interests',
+      name: 'page6Title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get page6Button {
+    return Intl.message(
+      'Done',
+      name: 'page6Button',
       desc: '',
       args: [],
     );
@@ -153,11 +264,9 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   bool shouldReload(AppLocalizationDelegate old) => false;
 
   bool _isSupported(Locale locale) {
-    if (locale != null) {
-      for (var supportedLocale in supportedLocales) {
-        if (supportedLocale.languageCode == locale.languageCode) {
-          return true;
-        }
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode) {
+        return true;
       }
     }
     return false;

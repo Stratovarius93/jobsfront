@@ -24,7 +24,6 @@ class LoginPage3 extends StatefulWidget {
 class _LoginPage3State extends State<LoginPage3> {
   @override
   void dispose() {
-    // TODO: implement dispose
     _codeStream.close();
     super.dispose();
   }
@@ -46,7 +45,7 @@ class _LoginPage3State extends State<LoginPage3> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GenericLoginTitle(
-                        title: S.current.page3Title,
+                        title: S.current.page2User,
                       ),
                       SizedBox(
                         height: 40,

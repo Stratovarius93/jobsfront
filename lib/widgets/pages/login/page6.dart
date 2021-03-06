@@ -1,6 +1,7 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
+import 'package:AppWork/generated/l10n.dart';
 import 'package:AppWork/widgets/generics/backArrow.dart';
 import 'package:AppWork/widgets/generics/loginTitle.dart';
 import 'package:AppWork/widgets/generics/primaryButton.dart';
@@ -20,7 +21,7 @@ class LoginPage6 extends StatelessWidget {
                 height: 40,
               ),
               GenericLoginTitle(
-                title: 'Interests',
+                title: '${S.current.page6Title}',
               ),
               SizedBox(
                 height: 16,
@@ -31,7 +32,7 @@ class LoginPage6 extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: GenericPrimaryButton(
-                  title: 'Done',
+                  title: '${S.current.page6Button}',
                   onPressed: () {
                     print('Done');
                   },

@@ -27,7 +27,7 @@ class LoginPage4 extends StatelessWidget {
                         height: 40,
                       ),
                       GenericLoginTitle(
-                        title: 'Enter code',
+                        title: S.current.page4Title,
                       ),
                       SizedBox(
                         height: 40,
@@ -40,7 +40,7 @@ class LoginPage4 extends StatelessWidget {
                       SizedBox(
                         height: 40,
                       ),
-                      GenericLoginSubTitle(title: 'Enter your received code: '),
+                      GenericLoginSubTitle(title: S.current.page4Subtitle),
                       SizedBox(
                         height: 32,
                       ),
@@ -50,7 +50,7 @@ class LoginPage4 extends StatelessWidget {
                         height: 32,
                       ),
                       GenericPrimaryButton(
-                        title: 'Verificar',
+                        title: S.current.page4Button,
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, 'loginPage5');
                         },

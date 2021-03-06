@@ -28,8 +28,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "page2Title" : MessageLookupByLibrary.simpleMessage("Select Option"),
     "page2User" : MessageLookupByLibrary.simpleMessage("User"),
     "page2Worker" : MessageLookupByLibrary.simpleMessage("Worker"),
-    "page3Button" : MessageLookupByLibrary.simpleMessage("SendSMS"),
-    "page3SubTile" : MessageLookupByLibrary.simpleMessage("Enter ypur mobile number"),
-    "page3Title" : MessageLookupByLibrary.simpleMessage("User")
+    "page3Button" : MessageLookupByLibrary.simpleMessage("Send SMS"),
+    "page3HintText" : MessageLookupByLibrary.simpleMessage("Phone number"),
+    "page3SubTile" : MessageLookupByLibrary.simpleMessage("Enter your mobile number"),
+    "page4Button" : MessageLookupByLibrary.simpleMessage("Validate"),
+    "page4Subtitle" : MessageLookupByLibrary.simpleMessage("Enter your received code:"),
+    "page4Title" : MessageLookupByLibrary.simpleMessage("Enter code"),
+    "page5Button" : MessageLookupByLibrary.simpleMessage("Create Account"),
+    "page5Name" : MessageLookupByLibrary.simpleMessage("Name"),
+    "page5Pass" : MessageLookupByLibrary.simpleMessage("Password"),
+    "page5RepeatPass" : MessageLookupByLibrary.simpleMessage("Validate password"),
+    "page5Title" : MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "page5lastName" : MessageLookupByLibrary.simpleMessage("Lastname"),
+    "page6Button" : MessageLookupByLibrary.simpleMessage("Done"),
+    "page6Title" : MessageLookupByLibrary.simpleMessage("Interests")
   };
 }
