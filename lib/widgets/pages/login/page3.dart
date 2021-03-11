@@ -14,7 +14,8 @@ import 'package:ionicons/ionicons.dart';
 
 String _phonenumber;
 String _codePhone = '+1';
-final _codeStream = StreamController<String>.broadcast();
+//final _codeStream = StreamController<String>.broadcast();
+var _codeStream;
 
 class LoginPage3 extends StatefulWidget {
   @override
@@ -23,8 +24,14 @@ class LoginPage3 extends StatefulWidget {
 
 class _LoginPage3State extends State<LoginPage3> {
   @override
+  void initState() {
+    super.initState();
+    _codeStream = StreamController<String>.broadcast();
+  }
+
+  @override
   void dispose() {
-    _codeStream.close();
+    _codeStream?.close();
     super.dispose();
   }
 
@@ -110,6 +117,8 @@ class _LoginPage3State extends State<LoginPage3> {
           child: BackArrow(
             onPressed: () {
               Navigator.pushReplacementNamed(context, 'loginPage2');
+              //Navigator.pop(context);
+              _codeStream.close();
             },
           ),
         ),

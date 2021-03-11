@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/sizes.dart';
+import 'package:AppWork/widgets/pages/main/curved_navigation_bar.dart';
 import 'package:AppWork/widgets/pages/main/mainPage1.dart';
 import 'package:AppWork/widgets/pages/main/mainPage2.dart';
 import 'package:AppWork/widgets/pages/main/mainPage3.dart';
 import 'package:AppWork/widgets/pages/main/mainPage4.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+//import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -20,10 +21,10 @@ class _MainIndexState extends State<MainIndex> {
   double _iconSize = 24;
   final tabs = [
     MainPage1(),
-    MainPage2(),
+    SafeArea(child: MainPage2()),
     MainPage3(),
-    MainPage4(),
-    MainPage5(),
+    SafeArea(child: MainPage4()),
+    SafeArea(child: MainPage5()),
   ];
   List<ElementItemIcon> _elementItemIconList = [
     ElementItemIcon(Ionicons.person, Ionicons.person_outline),
@@ -46,6 +47,7 @@ class _MainIndexState extends State<MainIndex> {
   Widget build(BuildContext context) {
     _iconSize = screenWidth(context) * 0.08;
     return Scaffold(
+        extendBody: true,
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           index: 2,
@@ -66,9 +68,9 @@ class _MainIndexState extends State<MainIndex> {
           //color bottom navigator bar
           color: Colors.white,
           buttonBackgroundColor: colorPrimaryButton,
-          backgroundColor: backgroundColor,
+          //backgroundColor: Colors.transparent,
           animationCurve: Curves.easeInOut,
-          animationDuration: Duration(milliseconds: 600),
+          animationDuration: Duration(milliseconds: 500),
           onTap: (index) {
             _currentIndex.sink.add(index);
             setState(() {
