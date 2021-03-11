@@ -37,7 +37,7 @@ Widget _countryCodeText(BuildContext context, String text, VoidCallback onTap) {
     child: Container(
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: colorFillInput,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: colorBorderInput, width: 1.5)),
       child: Row(children: [
@@ -70,7 +70,7 @@ Widget _textFieldNumber(BuildContext context, Function(String) onChanged) {
           fillColor: colorFillInput,
           //prefixIcon: _countryCodeText(context),
           hintText: 'Phone Number',
-          hintStyle: TextStyle(color: colorTextSubTitle),
+          hintStyle: TextStyle(color: colorHintTextInput),
           enabledBorder: utilsloginOutlineInputBorder),
       onChanged: onChanged,
       style: utilsLoginInputTextStyle(screenWidth(context) * 0.06));

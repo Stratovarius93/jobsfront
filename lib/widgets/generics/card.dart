@@ -12,10 +12,10 @@ class GenericLoginCard extends StatelessWidget {
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
-          color: Colors.white,
+          color: colorBackgroundCard,
           boxShadow: [
             BoxShadow(
-                color: colorTextSubTitle.withOpacity(0.2),
+                color: colorShadowCard,
                 blurRadius: 16,
                 offset: Offset(0.0, 0.0))
           ]),

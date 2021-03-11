@@ -1,14 +1,12 @@
 import 'dart:async';
-
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/sizes.dart';
-import 'package:AppWork/widgets/pages/main/curved_navigation_bar.dart';
+import 'package:AppWork/widgets/generics/bottomNavigationBar/curved_navigation_bar.dart';
 import 'package:AppWork/widgets/pages/main/mainPage1.dart';
 import 'package:AppWork/widgets/pages/main/mainPage2.dart';
 import 'package:AppWork/widgets/pages/main/mainPage3.dart';
 import 'package:AppWork/widgets/pages/main/mainPage4.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5.dart';
-//import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -20,9 +18,9 @@ class MainIndex extends StatefulWidget {
 class _MainIndexState extends State<MainIndex> {
   double _iconSize = 24;
   final tabs = [
-    MainPage1(),
+    SafeArea(child: MainPage1()),
     SafeArea(child: MainPage2()),
-    MainPage3(),
+    SafeArea(child: MainPage3()),
     SafeArea(child: MainPage4()),
     SafeArea(child: MainPage5()),
   ];
@@ -60,13 +58,11 @@ class _MainIndexState extends State<MainIndex> {
             return Icon(
               iconData,
               size: _iconSize,
-              color: (iconColor)
-                  ? Colors.white
-                  : colorPrimaryButton.withOpacity(0.4),
+              color: (iconColor) ? colorIconButtonNavBar : colorIconsNavBar,
             );
           }).toList(),
           //color bottom navigator bar
-          color: Colors.white,
+          color: colorBackgroundNavBar,
           buttonBackgroundColor: colorPrimaryButton,
           //backgroundColor: Colors.transparent,
           animationCurve: Curves.easeInOut,

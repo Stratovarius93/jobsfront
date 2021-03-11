@@ -18,7 +18,7 @@ class MainPage3 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
+            padding: const EdgeInsets.only(top: 0, left: 16, right: 16),
             child: GenericLoginTitle(
               title: 'Username',
             ),
@@ -40,9 +40,30 @@ class MainPage3 extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 16),
                 child: Row(
                   children: [
-                    _card(context),
-                    _card(context),
-                    _card(context),
+                    _card(
+                        context,
+                        'https://thumbs.dreamstime.com/b/beautiful-woman-taking-selfie-times-square-young-her-smartphone-new-york-56955944.jpg',
+                        'Ana Mena',
+                        true,
+                        2.75,
+                        2,
+                        ['Carpinteria', 'Quito nieve', 'Corto el pasto']),
+                    _card(
+                        context,
+                        'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+                        'John Lennon',
+                        false,
+                        4,
+                        2,
+                        ['Carpinteria', 'Quito nieve', 'Corto el pasto']),
+                    _card(
+                        context,
+                        'https://img.srgcdn.com/e//VzBIRmxCTTJHc2tOUndTa0xnbEsucG5n.jpg',
+                        'Alex Daddario',
+                        true,
+                        2.75,
+                        2,
+                        ['Carpinteria', 'Quito nieve', 'Corto el pasto']),
                   ],
                 ),
               )),
@@ -53,14 +74,40 @@ class MainPage3 extends StatelessWidget {
             ),
           ),
           Expanded(
-            //height: double.infinity,
             child: ListView(
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
+              padding: EdgeInsets.only(top: 0),
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16, bottom: 32),
-                  child: _notificationsList(context),
+                  padding:
+                      EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 0),
+                  child: _notificationsList([
+                    _notificationsItem(
+                        context,
+                        Ionicons.chatbubble,
+                        colorPrimaryButton,
+                        'Mensajes',
+                        'Trabajador x te envio un men..'),
+                    _notificationsItem(
+                        context,
+                        Ionicons.chatbubble,
+                        colorPrimaryButton,
+                        'Mensajes',
+                        'Trabajador x te envio un men..'),
+                    _notificationsItem(
+                        context,
+                        Ionicons.chatbubble,
+                        colorPrimaryButton,
+                        'Mensajes',
+                        'Trabajador x te envio un men..'),
+                    _notificationsItem(
+                        context,
+                        Ionicons.chatbubble,
+                        colorPrimaryButton,
+                        'Mensajes',
+                        'Trabajador x te envio un men..'),
+                  ]),
                 )
               ],
             ),
@@ -75,7 +122,7 @@ class MainPage3 extends StatelessWidget {
       children: [
         Icon(
           Ionicons.checkmark_circle,
-          color: Colors.grey.withOpacity(0.5),
+          color: colorText3,
           size: 16,
         ),
         SizedBox(
@@ -84,14 +131,15 @@ class MainPage3 extends StatelessWidget {
         Text(text,
             style: GoogleFonts.getFont(fontApp,
                 textStyle: TextStyle(
-                  color: Colors.grey,
+                  color: colorText2,
                   fontSize: screenWidth(context) * 0.05,
                 )))
       ],
     );
   }
 
-  _card(BuildContext context) {
+  _card(BuildContext context, String image, String title, bool verified,
+      double rating, double distance, List<String> jobs) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 0),
       child: GenericLoginCard(
@@ -103,14 +151,14 @@ class MainPage3 extends StatelessWidget {
                 CircleAvatar(
                   radius: screenWidth(context) * 0.065,
                   backgroundImage: NetworkImage(
-                    'https://thumbs.dreamstime.com/b/beautiful-woman-taking-selfie-times-square-young-her-smartphone-new-york-56955944.jpg',
+                    image,
                   ),
                 ),
                 SizedBox(
                   width: 16,
                 ),
                 Text(
-                  'Ana Mena',
+                  title,
                   style: GoogleFonts.getFont(fontApp,
                       textStyle: TextStyle(
                           color: colorTextTitle,
@@ -120,10 +168,12 @@ class MainPage3 extends StatelessWidget {
                 SizedBox(
                   width: 4,
                 ),
-                Icon(
-                  Ionicons.checkmark_circle,
-                  color: Colors.lightGreen,
-                ),
+                (verified)
+                    ? Icon(
+                        Ionicons.checkmark_circle,
+                        color: Colors.lightGreen,
+                      )
+                    : Container(),
               ],
             ),
             SizedBox(
@@ -133,11 +183,7 @@ class MainPage3 extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _listItems(context, 'Carpinteria'),
-                  _listItems(context, 'Quito nieve'),
-                  _listItems(context, 'Corto el pasto'),
-                ],
+                children: jobs.map((e) => _listItems(context, e)).toList(),
               ),
             ),
             SizedBox(
@@ -151,10 +197,10 @@ class MainPage3 extends StatelessWidget {
                   Row(
                     children: [
                       RatingBarIndicator(
-                        rating: 2.75,
+                        rating: rating,
                         itemBuilder: (context, index) => Icon(
                           Icons.star,
-                          color: Colors.amber,
+                          color: colorIconRatings,
                         ),
                         itemCount: 5,
                         itemSize: 25,
@@ -164,7 +210,7 @@ class MainPage3 extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        '(2.75)',
+                        '($rating)',
                         style: GoogleFonts.getFont(fontApp,
                             fontSize: screenWidth(context) * 0.04,
                             color: colorTextSubTitle,
@@ -190,7 +236,7 @@ class MainPage3 extends StatelessWidget {
                             width: 4,
                           ),
                           Text(
-                            '2km',
+                            '$distance km',
                             style: GoogleFonts.getFont(fontApp,
                                 fontSize: screenWidth(context) * 0.04,
                                 fontWeight: FontWeight.w500,
@@ -209,34 +255,31 @@ class MainPage3 extends StatelessWidget {
     );
   }
 
-  _notificationsList(BuildContext context) {
+  _notificationsList(List<Widget> list) {
     return Column(
-      children: [
-        _notificationsItem(context),
-        _notificationsItem(context),
-        _notificationsItem(context),
-        _notificationsItem(context),
-      ],
+      children: list,
     );
   }
 
-  _notificationsItem(BuildContext context) {
+  _notificationsItem(BuildContext context, IconData iconData, Color color,
+      String title, String description) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 1.5),
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            color: colorBackgroundNotification,
+            borderRadius: BorderRadius.circular(16)),
         child: Row(
           children: [
             Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-                  color: colorPrimaryButton.withOpacity(0.2),
+                  color: color.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12)),
               child: Icon(
-                Ionicons.chatbubble,
-                color: colorPrimaryButton,
+                iconData,
+                color: color,
                 size: screenWidth(context) * 0.08,
               ),
             ),
@@ -246,13 +289,13 @@ class MainPage3 extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Mensajes',
+                Text(title,
                     style: GoogleFonts.getFont(fontApp,
                         fontSize: screenWidth(context) * 0.04,
                         fontWeight: FontWeight.w700,
-                        color: colorPrimaryButton)),
+                        color: color)),
                 Text(
-                  'Trabajador x te envio un me...',
+                  description,
                   style: GoogleFonts.getFont(fontApp,
                       fontSize: screenWidth(context) * 0.045,
                       fontWeight: FontWeight.w300,

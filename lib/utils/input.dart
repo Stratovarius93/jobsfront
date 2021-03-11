@@ -13,6 +13,6 @@ OutlineInputBorder utilsloginOutlineInputBorder2 = OutlineInputBorder(
 TextStyle utilsLoginInputTextStyle(double fontWeight) =>
     GoogleFonts.getFont(fontApp,
         textStyle: TextStyle(
-            color: colorTextTitle.withOpacity(0.7),
+            color: colorTextInput,
             fontSize: fontWeight,
             fontWeight: FontWeight.w500));

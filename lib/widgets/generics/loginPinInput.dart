@@ -35,13 +35,13 @@ class GenericPinInputState extends State<GenericPinInput> {
       focusNode: _pinPutFocusNode,
       controller: _pinPutController,
       submittedFieldDecoration: _pinPutDecoration.copyWith(
-          borderRadius: BorderRadius.circular(20.0), color: Colors.white),
+          borderRadius: BorderRadius.circular(20.0), color: colorFillInput),
       selectedFieldDecoration: _pinPutDecoration,
       followingFieldDecoration: _pinPutDecoration.copyWith(
         borderRadius: BorderRadius.circular(5.0),
-        color: Colors.white,
+        color: colorFillInput,
         border: Border.all(
-          color: colorTextSubTitle,
+          color: colorBorderInput,
         ),
       ),
     );

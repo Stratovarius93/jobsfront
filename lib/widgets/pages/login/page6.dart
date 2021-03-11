@@ -35,6 +35,7 @@ class LoginPage6 extends StatelessWidget {
                   title: '${S.current.page6Button}',
                   onPressed: () {
                     print('Done');
+                    Navigator.pushReplacementNamed(context, 'mainIndex');
                   },
                 ),
               ),
@@ -97,10 +98,10 @@ Widget _card(BuildContext context, Widget child) {
     child: child,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        color: Colors.white,
+        color: colorBackgroundCard,
         boxShadow: [
           BoxShadow(
-              color: colorTextSubTitle.withOpacity(0.2),
+              color: colorShadowCard.withOpacity(0.2),
               blurRadius: 16,
               offset: Offset(0.0, 0.0))
         ]),

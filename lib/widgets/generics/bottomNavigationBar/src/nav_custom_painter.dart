@@ -97,7 +97,7 @@ class NavCustomPainter2 extends CustomPainter {
       ..lineTo(0, size.height)
       ..close();
 
-    canvas.drawShadow(path, colorPrimaryButton.withOpacity(0.6), 4.0, true);
+    canvas.drawShadow(path, colorShadowNavBar, 4.0, true);
   }
 
   @override

@@ -139,7 +139,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
             bottom: 0 - (75.0 - widget.height),
             child: CustomPaint(
               painter: NavCustomPainter2(
-                  _pos, _length, Colors.white, Directionality.of(context)),
+                  _pos, _length, widget.color, Directionality.of(context)),
               child: Container(
                 height: 85.0,
               ),
@@ -151,7 +151,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
             bottom: 0 - (75.0 - widget.height),
             child: CustomPaint(
               painter: NavCustomPainter(
-                  _pos, _length, Colors.white, Directionality.of(context)),
+                  _pos, _length, widget.color, Directionality.of(context)),
               child: Container(
                 height: 75.0,
               ),

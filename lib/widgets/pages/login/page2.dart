@@ -56,7 +56,7 @@ class LoginPage2 extends StatelessWidget {
                                 S.current.page2User,
                                 style: GoogleFonts.getFont(fontApp,
                                     textStyle: TextStyle(
-                                        color: colorTextTitle.withOpacity(0.6),
+                                        color: colorText1,
                                         fontSize:
                                             screenWidth(context) * 0.045)),
                               ),
@@ -80,7 +80,7 @@ class LoginPage2 extends StatelessWidget {
                                 S.current.page2Worker,
                                 style: GoogleFonts.getFont(fontApp,
                                     textStyle: TextStyle(
-                                        color: colorTextTitle.withOpacity(0.6),
+                                        color: colorText1,
                                         fontSize:
                                             screenWidth(context) * 0.045)),
                               )
