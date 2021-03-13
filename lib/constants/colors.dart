@@ -41,6 +41,9 @@ Color colorTextSubTitle = Color(0xFF37384d).withOpacity(0.4);
 Color colorText1 = colorTextTitle.withOpacity(0.6);
 Color colorText2 = Colors.grey;
 Color colorText3 = Colors.grey.withOpacity(0.5);
+Color colorText4 = colorPrimaryButton;
+Color colorText5 = colorArrowBack;
 
 //info
 Color colorIconRatings = Colors.amber;
+Color colorCheckmarkIcon = Colors.lightGreen;

@@ -2,8 +2,11 @@ import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
 import 'package:AppWork/widgets/generics/card.dart';
+import 'package:AppWork/widgets/generics/largeButton.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
 import 'package:AppWork/widgets/generics/loginTitle.dart';
+import 'package:AppWork/widgets/generics/modalBottomSheet.dart';
+import 'package:AppWork/widgets/generics/primaryButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -142,114 +145,121 @@ class MainPage3 extends StatelessWidget {
       double rating, double distance, List<String> jobs) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 0),
-      child: GenericLoginCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: screenWidth(context) * 0.065,
-                  backgroundImage: NetworkImage(
-                    image,
-                  ),
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  title,
-                  style: GoogleFonts.getFont(fontApp,
-                      textStyle: TextStyle(
-                          color: colorTextTitle,
-                          fontSize: screenWidth(context) * 0.058,
-                          fontWeight: FontWeight.w600)),
-                ),
-                SizedBox(
-                  width: 4,
-                ),
-                (verified)
-                    ? Icon(
-                        Ionicons.checkmark_circle,
-                        color: Colors.lightGreen,
-                      )
-                    : Container(),
-              ],
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: jobs.map((e) => _listItems(context, e)).toList(),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: InkWell(
+        onTap: () {
+          showModalBottom(context,
+              _modalBottom(context, image, title, verified, rating, distance));
+        },
+        child: GenericLoginCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      RatingBarIndicator(
-                        rating: rating,
-                        itemBuilder: (context, index) => Icon(
-                          Icons.star,
-                          color: colorIconRatings,
-                        ),
-                        itemCount: 5,
-                        itemSize: 25,
-                        direction: Axis.horizontal,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        '($rating)',
-                        style: GoogleFonts.getFont(fontApp,
-                            fontSize: screenWidth(context) * 0.04,
-                            color: colorTextSubTitle,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      decoration: BoxDecoration(
-                          color: colorPrimaryButton.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(16)),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Ionicons.location,
-                            color: colorPrimaryButton,
-                            size: 16,
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            '$distance km',
-                            style: GoogleFonts.getFont(fontApp,
-                                fontSize: screenWidth(context) * 0.04,
-                                fontWeight: FontWeight.w500,
-                                color: colorPrimaryButton),
-                          )
-                        ],
-                      ),
+                  CircleAvatar(
+                    radius: screenWidth(context) * 0.065,
+                    backgroundImage: NetworkImage(
+                      image,
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Text(
+                    title,
+                    style: GoogleFonts.getFont(fontApp,
+                        textStyle: TextStyle(
+                            color: colorTextTitle,
+                            fontSize: screenWidth(context) * 0.058,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  (verified)
+                      ? Icon(
+                          Ionicons.checkmark_circle,
+                          color: colorCheckmarkIcon,
+                        )
+                      : Container(),
                 ],
               ),
-            ),
-          ],
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: jobs.map((e) => _listItems(context, e)).toList(),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        RatingBarIndicator(
+                          rating: rating,
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: colorIconRatings,
+                          ),
+                          itemCount: 5,
+                          itemSize: 25,
+                          direction: Axis.horizontal,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          '($rating)',
+                          style: GoogleFonts.getFont(fontApp,
+                              fontSize: screenWidth(context) * 0.04,
+                              color: colorTextSubTitle,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        decoration: BoxDecoration(
+                            color: colorPrimaryButton.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(16)),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Ionicons.location,
+                              color: colorPrimaryButton,
+                              size: 16,
+                            ),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              '$distance km',
+                              style: GoogleFonts.getFont(fontApp,
+                                  fontSize: screenWidth(context) * 0.04,
+                                  fontWeight: FontWeight.w500,
+                                  color: colorPrimaryButton),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -305,6 +315,224 @@ class MainPage3 extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _modalBottom(BuildContext context, String image, String title,
+      bool verified, double rating, double distance) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircleAvatar(
+            radius: screenWidth(context) * 0.15,
+            backgroundImage: NetworkImage(
+              image,
+            ),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text(
+              title,
+              style: GoogleFonts.getFont(fontApp,
+                  textStyle: TextStyle(
+                      color: colorTextTitle,
+                      fontSize: screenWidth(context) * 0.058,
+                      fontWeight: FontWeight.w600)),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Icon(
+              Ionicons.checkmark_circle,
+              color: colorCheckmarkIcon,
+              size: 24,
+            )
+          ]),
+          SizedBox(
+            height: 2,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RatingBarIndicator(
+                rating: rating,
+                itemBuilder: (context, index) => Icon(
+                  Icons.star,
+                  color: colorIconRatings,
+                ),
+                itemCount: 5,
+                itemSize: 25,
+                direction: Axis.horizontal,
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                '($rating)',
+                style: GoogleFonts.getFont(fontApp,
+                    fontSize: screenWidth(context) * 0.04,
+                    color: colorTextSubTitle,
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Ionicons.location,
+                color: colorText4,
+                size: 16,
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                'Quito, Ecuador, $distance',
+                style: GoogleFonts.getFont(
+                  fontApp,
+                  fontSize: screenWidth(context) * 0.04,
+                  color: colorText4,
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Ionicons.logo_usd,
+                color: colorText2,
+                size: 20,
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Text(
+                'Salario minimo',
+                style: GoogleFonts.getFont(
+                  fontApp,
+                  fontSize: screenWidth(context) * 0.045,
+                  color: colorText2,
+                ),
+              )
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 4,
+                      backgroundColor: colorText5,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: 'Tipo de trabajo ',
+                        style: GoogleFonts.getFont(fontApp,
+                            fontWeight: FontWeight.w700,
+                            color: colorText5,
+                            fontSize: screenWidth(context) * 0.045),
+                        children: [
+                          TextSpan(
+                              text: ' de la persona',
+                              style: GoogleFonts.getFont(fontApp,
+                                  color: colorText5,
+                                  fontWeight: FontWeight.w400)),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 4,
+                      backgroundColor: colorText5,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: '112',
+                        style: GoogleFonts.getFont(fontApp,
+                            fontWeight: FontWeight.w700,
+                            color: colorText5,
+                            fontSize: screenWidth(context) * 0.045),
+                        children: [
+                          TextSpan(
+                              text: ' clientes',
+                              style: GoogleFonts.getFont(fontApp,
+                                  color: colorText5,
+                                  fontWeight: FontWeight.w400)),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 4,
+                      backgroundColor: colorText5,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: 'Se unió hace ',
+                        style: GoogleFonts.getFont(fontApp,
+                            fontWeight: FontWeight.w400,
+                            color: colorText5,
+                            fontSize: screenWidth(context) * 0.045),
+                        children: [
+                          TextSpan(
+                              text: ' 3 meses',
+                              style: GoogleFonts.getFont(fontApp,
+                                  color: colorText5,
+                                  fontWeight: FontWeight.w700)),
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          LargeButton(
+            text: 'Ver más acerca de Ana',
+            onTap: () {},
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          LargeButton(
+            text: 'Contactar',
+            onTap: () {
+              Navigator.pop(context);
+            },
+            color: colorPrimaryButtonText,
+            backgroundColor: colorPrimaryButton,
+            elevation: 10,
+            shadow: colorPrimaryButton.withOpacity(0.4),
+          ),
+        ],
       ),
     );
   }
