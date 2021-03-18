@@ -6,7 +6,7 @@ import 'package:AppWork/widgets/generics/largeButton.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
 import 'package:AppWork/widgets/generics/loginTitle.dart';
 import 'package:AppWork/widgets/generics/modalBottomSheet.dart';
-import 'package:AppWork/widgets/generics/primaryButton.dart';
+import 'package:AppWork/widgets/pages/main/mainPage3/moreAboutPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -84,7 +84,7 @@ class MainPage3 extends StatelessWidget {
               children: [
                 Padding(
                   padding:
-                      EdgeInsets.only(left: 16, right: 16, bottom: 32, top: 0),
+                      EdgeInsets.only(left: 16, right: 16, bottom: 0, top: 0),
                   child: _notificationsList([
                     _notificationsItem(
                         context,
@@ -110,11 +110,14 @@ class MainPage3 extends StatelessWidget {
                         colorPrimaryButton,
                         'Mensajes',
                         'Trabajador x te envio un men..'),
+                    SizedBox(
+                      height: 96,
+                    )
                   ]),
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -517,7 +520,27 @@ class MainPage3 extends StatelessWidget {
           ),
           LargeButton(
             text: 'Ver más acerca de Ana',
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              //Navigator.pushNamed(context, 'moreAboutPage');
+              showGeneralDialog(
+                barrierLabel: "Label",
+                barrierDismissible: false,
+                barrierColor: Colors.black.withOpacity(0.5),
+                transitionDuration: Duration(milliseconds: 400),
+                context: context,
+                pageBuilder: (context, anim1, anim2) {
+                  return MoreAboutPage();
+                },
+                transitionBuilder: (context, anim1, anim2, child) {
+                  return SlideTransition(
+                    position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
+                        .animate(anim1),
+                    child: child,
+                  );
+                },
+              );
+            },
           ),
           SizedBox(
             height: 16,

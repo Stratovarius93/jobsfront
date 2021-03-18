@@ -47,3 +47,8 @@ Color colorText5 = colorArrowBack;
 //info
 Color colorIconRatings = Colors.amber;
 Color colorCheckmarkIcon = Colors.lightGreen;
+
+//Colors Items
+List<Color> colorListItems = [
+  colorPrimaryButton,
+];

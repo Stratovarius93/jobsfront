@@ -20,7 +20,7 @@ class _MainIndexState extends State<MainIndex> {
   final tabs = [
     SafeArea(child: MainPage1()),
     SafeArea(child: MainPage2()),
-    SafeArea(child: MainPage3()),
+    SafeArea(bottom: false, child: MainPage3()),
     SafeArea(child: MainPage4()),
     SafeArea(child: MainPage5()),
   ];
