@@ -51,4 +51,7 @@ Color colorCheckmarkIcon = Colors.lightGreen;
 //Colors Items
 List<Color> colorListItems = [
   colorPrimaryButton,
+  Colors.redAccent,
+  Colors.orangeAccent,
+  Colors.greenAccent,
 ];

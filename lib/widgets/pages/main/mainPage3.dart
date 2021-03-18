@@ -560,3 +560,18 @@ class MainPage3 extends StatelessWidget {
     );
   }
 }
+//class WorkerList{
+//final String name;
+//final String lastName;
+//final String urlPhoto;
+//final bool verified;
+//final double rating;
+//final String address;
+//final double distance;
+//final double minSalary;
+//final List<String> listJobs;
+//final String typeJob;
+//final int clients;
+//final String joinedTime;
+//final List<String, String> jobs;
+//}

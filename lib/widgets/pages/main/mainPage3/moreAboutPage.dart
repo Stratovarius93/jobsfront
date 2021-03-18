@@ -205,11 +205,8 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                       physics: BouncingScrollPhysics(),
                       children: [
                         _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
+                        _item1(Icons.tv, 'Reparacion de eletrodomesticos Oster',
+                            '5 años'),
                         _item1(Icons.tv, 'Peluquera', '5 años'),
                         _item1(Icons.tv, 'Peluquera', '5 años'),
                       ],
@@ -218,18 +215,19 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                       padding: EdgeInsets.only(top: 0),
                       physics: BouncingScrollPhysics(),
                       children: [
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
+                        _item2(Icons.school, 'Colegio', 'Colegio Pepito'),
+                        _item2(Icons.school, 'Universidad',
+                            'Universidad de las Americas'),
                       ],
                     ),
                     ListView(
                       padding: EdgeInsets.only(top: 0),
                       physics: BouncingScrollPhysics(),
                       children: [
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
-                        _item1(Icons.tv, 'Peluquera', '5 años'),
+                        _item3(colorListItems[0], 'Organizado'),
+                        _item3(colorListItems[1], 'Puntual'),
+                        _item3(colorListItems[2], 'Creativo'),
+                        _item3(colorListItems[3], 'Respetuoso'),
                       ],
                     ),
                   ],
@@ -285,31 +283,130 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
           SizedBox(
             width: 16,
           ),
-          Column(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: GoogleFonts.getFont(fontApp,
+                      textStyle: TextStyle(
+                          color: colorListItems[0],
+                          fontSize: screenWidth(context) * 0.042,
+                          fontWeight: FontWeight.w600)),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  subtitle,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: GoogleFonts.getFont(fontApp,
+                      color: colorText1,
+                      fontSize: screenWidth(context) * 0.04,
+                      fontWeight: FontWeight.w400),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _item2(IconData icon, String title, String subtitle) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 3, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      decoration: BoxDecoration(
+          color: colorListItems[0].withOpacity(0.1),
+          borderRadius: BorderRadius.circular(16)),
+      child: Row(children: [
+        Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              icon,
+              size: screenWidth(context) * 0.1,
+              color: colorListItems[0],
+            )),
+        SizedBox(
+          width: 16,
+        ),
+        Expanded(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
+                overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.getFont(fontApp,
                     textStyle: TextStyle(
-                        color: colorListItems[0],
-                        fontSize: screenWidth(context) * 0.042,
-                        fontWeight: FontWeight.w600)),
-              ),
-              SizedBox(
-                height: 4,
+                        fontSize: screenWidth(context) * 0.045,
+                        fontWeight: FontWeight.w500)),
               ),
               Text(
                 subtitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
                 style: GoogleFonts.getFont(fontApp,
-                    color: colorText1,
-                    fontSize: screenWidth(context) * 0.04,
-                    fontWeight: FontWeight.w400),
-              ),
+                    textStyle: TextStyle(
+                        fontSize: screenWidth(context) * 0.045,
+                        fontWeight: FontWeight.w300)),
+              )
             ],
-          )
-        ],
-      ),
+          ),
+        )
+      ]),
+    );
+  }
+
+  Widget _item3(
+    Color color,
+    String title,
+  ) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 3, horizontal: 16),
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(16)),
+      child: Row(children: [
+        Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              Ionicons.happy_outline,
+              size: screenWidth(context) * 0.1,
+              color: color,
+            )),
+        SizedBox(
+          width: 16,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.getFont(fontApp,
+                  textStyle: TextStyle(
+                      fontSize: screenWidth(context) * 0.045,
+                      fontWeight: FontWeight.w500)),
+            ),
+          ],
+        )
+      ]),
     );
   }
 }
