@@ -43,6 +43,7 @@ Color colorText2 = Colors.grey;
 Color colorText3 = Colors.grey.withOpacity(0.5);
 Color colorText4 = colorPrimaryButton;
 Color colorText5 = colorArrowBack;
+Color colorText6 = Colors.black;
 
 //info
 Color colorIconRatings = Colors.amber;
