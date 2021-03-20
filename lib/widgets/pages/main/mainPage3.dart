@@ -299,22 +299,26 @@ class MainPage3 extends StatelessWidget {
             SizedBox(
               width: 16,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.getFont(fontApp,
+                          fontSize: screenWidth(context) * 0.04,
+                          fontWeight: FontWeight.w700,
+                          color: color)),
+                  Text(
+                    description,
+                    overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.getFont(fontApp,
-                        fontSize: screenWidth(context) * 0.04,
-                        fontWeight: FontWeight.w700,
-                        color: color)),
-                Text(
-                  description,
-                  style: GoogleFonts.getFont(fontApp,
-                      fontSize: screenWidth(context) * 0.045,
-                      fontWeight: FontWeight.w300,
-                      color: colorTextSubTitle),
-                )
-              ],
+                        fontSize: screenWidth(context) * 0.045,
+                        fontWeight: FontWeight.w300,
+                        color: colorTextSubTitle),
+                  )
+                ],
+              ),
             )
           ],
         ),

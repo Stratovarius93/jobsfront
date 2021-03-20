@@ -9,7 +9,7 @@ showModalBottom(BuildContext context, Widget child) {
             topLeft: Radius.circular(16), topRight: Radius.circular(16))),
     context: context,
     builder: (_) {
-      return child;
+      return SafeArea(child: child);
     },
   );
 }

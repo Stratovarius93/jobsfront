@@ -46,41 +46,43 @@ class _MainIndexState extends State<MainIndex> {
     _iconSize = screenWidth(context) * 0.08;
     return Scaffold(
         extendBody: true,
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: 2,
-          height: 50.0,
-          items: _elementItemIconList.map((val) {
-            var subIndex = _elementItemIconList.indexOf(val);
-            var iconColor = _selected[subIndex] ? true : false;
-            var iconData =
-                _selected[subIndex] ? val.iconData : val.iconDataOutline;
-            return Icon(
-              iconData,
-              size: _iconSize,
-              color: (iconColor) ? colorIconButtonNavBar : colorIconsNavBar,
-            );
-          }).toList(),
-          //color bottom navigator bar
-          color: colorBackgroundNavBar,
-          buttonBackgroundColor: colorPrimaryButton,
-          //backgroundColor: Colors.transparent,
-          animationCurve: Curves.easeInOut,
-          animationDuration: Duration(milliseconds: 500),
-          onTap: (index) {
-            _currentIndex.sink.add(index);
-            setState(() {
-              for (int buttonIndex = 0;
-                  buttonIndex < _selected.length;
-                  buttonIndex++) {
-                if (buttonIndex == index) {
-                  _selected[buttonIndex] = true;
-                } else {
-                  _selected[buttonIndex] = false;
+        bottomNavigationBar: SafeArea(
+          child: CurvedNavigationBar(
+            key: _bottomNavigationKey,
+            index: 2,
+            height: 40,
+            items: _elementItemIconList.map((val) {
+              var subIndex = _elementItemIconList.indexOf(val);
+              var iconColor = _selected[subIndex] ? true : false;
+              var iconData =
+                  _selected[subIndex] ? val.iconData : val.iconDataOutline;
+              return Icon(
+                iconData,
+                size: _iconSize,
+                color: (iconColor) ? colorIconButtonNavBar : colorIconsNavBar,
+              );
+            }).toList(),
+            //color bottom navigator bar
+            color: colorBackgroundNavBar,
+            buttonBackgroundColor: colorPrimaryButton,
+            //backgroundColor: Colors.transparent,
+            animationCurve: Curves.easeInOut,
+            animationDuration: Duration(milliseconds: 500),
+            onTap: (index) {
+              _currentIndex.sink.add(index);
+              setState(() {
+                for (int buttonIndex = 0;
+                    buttonIndex < _selected.length;
+                    buttonIndex++) {
+                  if (buttonIndex == index) {
+                    _selected[buttonIndex] = true;
+                  } else {
+                    _selected[buttonIndex] = false;
+                  }
                 }
-              }
-            });
-          },
+              });
+            },
+          ),
         ),
         backgroundColor: backgroundColor,
         body: StreamBuilder(
