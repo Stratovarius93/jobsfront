@@ -9,6 +9,7 @@ import 'package:AppWork/widgets/pages/main/mainPage4.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 
 class MainIndex extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _MainIndexState extends State<MainIndex> {
     SafeArea(child: MainPage2()),
     SafeArea(bottom: false, child: MainPage3()),
     SafeArea(child: MainPage4()),
-    SafeArea(child: MainPage5()),
+    SafeArea(bottom: false, child: MainPage5()),
   ];
   List<ElementItemIcon> _elementItemIconList = [
     ElementItemIcon(Ionicons.person, Ionicons.person_outline),
@@ -50,7 +51,8 @@ class _MainIndexState extends State<MainIndex> {
           child: CurvedNavigationBar(
             key: _bottomNavigationKey,
             index: 2,
-            height: 75 - (screenWidth(context) * 0.08),
+            //height: 75 - (screenWidth(context) * 0.079),
+            height: (Device.get().isIphoneX) ? 40 : 50,
             items: _elementItemIconList.map((val) {
               var subIndex = _elementItemIconList.indexOf(val);
               var iconColor = _selected[subIndex] ? true : false;

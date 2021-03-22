@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // background
 Color backgroundColor = Color(0xFFf0f4f7);
+Color backgroundColor2 = Colors.white;
 
 //===================
 // App

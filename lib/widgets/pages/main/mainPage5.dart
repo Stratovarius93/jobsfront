@@ -2,65 +2,72 @@ import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainPage5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Chat',
-          style: GoogleFonts.getFont(fontApp,
-              textStyle: TextStyle(
-                  color: colorTextTitle, fontWeight: FontWeight.w600)),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: colorTextTitle,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(statusBarColor: Colors.white),
+      child: Scaffold(
+        backgroundColor: backgroundColor2,
+        //appBar: AppBar(
+        //backwardsCompatibility: false,
+        //systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.white),
+        //title: Text(
+        //'Chat',
+        //style: GoogleFonts.getFont(fontApp,
+        //textStyle: TextStyle(
+        //color: colorTextTitle, fontWeight: FontWeight.w600)),
+        //),
+        //actions: [
+        //IconButton(
+        //icon: Icon(
+        //Icons.search,
+        //color: colorTextTitle,
+        //),
+        //onPressed: () {},
+        //),
+        //],
+        //backgroundColor: Colors.white,
+        //),
+        body: ListView(
+          children: [
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+              unReadMessages: 3,
             ),
-            onPressed: () {},
-          ),
-        ],
-        backgroundColor: Colors.white,
-      ),
-      body: ListView(
-        children: [
-          _Item(
-            title: 'Jhon Lennon Plomero',
-            subtitle: 'Ultimo mensaje',
-            urlPhoto:
-                'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-            unReadMessages: 3,
-          ),
-          _Item(
-            title: 'Jhon Lennon Plomero',
-            subtitle: 'Ultimo mensaje',
-            urlPhoto:
-                'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-          ),
-          _Item(
-            title: 'Jhon Lennon Plomero',
-            subtitle: 'Ultimo mensaje',
-            urlPhoto:
-                'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-            unReadMessages: 2,
-          ),
-          _Item(
-            title: 'Jhon Lennon Plomero',
-            subtitle: 'Ultimo mensaje',
-            urlPhoto:
-                'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-          ),
-          _Item(
-            title: 'Jhon Lennon Plomero',
-            subtitle: 'Ultimo mensaje',
-            urlPhoto:
-                'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-          ),
-        ],
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+            ),
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+              unReadMessages: 2,
+            ),
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+            ),
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -144,7 +151,10 @@ class __ItemState extends State<_Item> {
               ? CircleAvatar(
                   radius: screenWidth(context) * 0.03,
                   backgroundColor: colorListItems[1],
-                  child: Text(widget.unReadMessages.toString()),
+                  child: Text(
+                    widget.unReadMessages.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
                 )
               : null,
         ),

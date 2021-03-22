@@ -14,10 +14,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: backgroundColor,
+      systemNavigationBarColor: backgroundColor2,
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
-      statusBarColor: Colors.transparent
+      statusBarColor: Colors.white
       //statusBarBrightness: Brightness.dark
       ));
   runApp(MyApp());
