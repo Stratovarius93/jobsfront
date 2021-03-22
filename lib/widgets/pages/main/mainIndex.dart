@@ -50,7 +50,7 @@ class _MainIndexState extends State<MainIndex> {
           child: CurvedNavigationBar(
             key: _bottomNavigationKey,
             index: 2,
-            height: 40,
+            height: 75 - (screenWidth(context) * 0.08),
             items: _elementItemIconList.map((val) {
               var subIndex = _elementItemIconList.indexOf(val);
               var iconColor = _selected[subIndex] ? true : false;

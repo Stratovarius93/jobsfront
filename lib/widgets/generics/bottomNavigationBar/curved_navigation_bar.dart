@@ -5,8 +5,6 @@ import 'package:meta/meta.dart';
 import 'src/nav_button.dart';
 import 'src/nav_custom_painter.dart';
 
-const double defaultHeight = 75;
-
 typedef _LetIndexPage = bool Function(int value);
 
 class CurvedNavigationBar extends StatefulWidget {
@@ -32,12 +30,12 @@ class CurvedNavigationBar extends StatefulWidget {
     _LetIndexPage letIndexChange,
     this.animationCurve = Curves.easeOut,
     this.animationDuration = const Duration(milliseconds: 600),
-    this.height = defaultHeight,
+    this.height = 75,
   })  : letIndexChange = letIndexChange ?? ((_) => true),
         assert(items != null),
         assert(items.length >= 1),
         assert(0 <= index && index < items.length),
-        assert(0 <= height && height <= defaultHeight),
+        assert(0 <= height && height <= 75),
         super(key: key);
 
   @override
@@ -105,7 +103,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Positioned(
-            bottom: -40 - (defaultHeight - widget.height),
+            bottom: -40 - (75 - widget.height),
             left: Directionality.of(context) == TextDirection.rtl
                 ? null
                 : _pos * size.width,
@@ -138,7 +136,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0 - (defaultHeight - widget.height),
+            bottom: 0 - (75 - widget.height),
             child: CustomPaint(
               painter: NavCustomPainter2(
                   _pos, _length, widget.color, Directionality.of(context)),
@@ -150,19 +148,19 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0 - (defaultHeight - widget.height),
+            bottom: 0 - (75 - widget.height),
             child: CustomPaint(
               painter: NavCustomPainter(
                   _pos, _length, widget.color, Directionality.of(context)),
               child: Container(
-                height: defaultHeight,
+                height: 75,
               ),
             ),
           ),
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0 - (defaultHeight - widget.height),
+            bottom: 0 - (75 - widget.height),
             child: SizedBox(
                 height: 100.0,
                 child: Row(
