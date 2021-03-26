@@ -24,6 +24,7 @@ class MainPage3 extends StatelessWidget {
             padding: const EdgeInsets.only(top: 0, left: 16, right: 16),
             child: GenericLoginTitle(
               title: 'Username',
+              size: screenWidth(context) * 0.09,
             ),
           ),
           SizedBox(
@@ -138,7 +139,7 @@ class MainPage3 extends StatelessWidget {
             style: GoogleFonts.getFont(fontApp,
                 textStyle: TextStyle(
                   color: colorText2,
-                  fontSize: screenWidth(context) * 0.05,
+                  fontSize: screenWidth(context) * 0.043,
                 )))
       ],
     );
@@ -154,6 +155,7 @@ class MainPage3 extends StatelessWidget {
               _modalBottom(context, image, title, verified, rating, distance));
         },
         child: GenericLoginCard(
+          padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -214,7 +216,7 @@ class MainPage3 extends StatelessWidget {
                             color: colorIconRatings,
                           ),
                           itemCount: 5,
-                          itemSize: 25,
+                          itemSize: 20,
                           direction: Axis.horizontal,
                         ),
                         SizedBox(
@@ -233,7 +235,7 @@ class MainPage3 extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 16),
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                            EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                         decoration: BoxDecoration(
                             color: colorPrimaryButton.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(16)),
@@ -250,7 +252,7 @@ class MainPage3 extends StatelessWidget {
                             Text(
                               '$distance km',
                               style: GoogleFonts.getFont(fontApp,
-                                  fontSize: screenWidth(context) * 0.04,
+                                  fontSize: screenWidth(context) * 0.035,
                                   fontWeight: FontWeight.w500,
                                   color: colorPrimaryButton),
                             )

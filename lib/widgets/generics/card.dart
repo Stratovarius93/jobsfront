@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 
 class GenericLoginCard extends StatelessWidget {
   final Widget child;
+  final EdgeInsetsGeometry padding;
 
-  const GenericLoginCard({Key key, this.child}) : super(key: key);
+  const GenericLoginCard(
+      {Key key, this.child, this.padding = const EdgeInsets.all(16)})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       child: child,
-      padding: EdgeInsets.all(16),
+      padding: padding,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(16),
           color: colorBackgroundCard,
           boxShadow: [
             BoxShadow(

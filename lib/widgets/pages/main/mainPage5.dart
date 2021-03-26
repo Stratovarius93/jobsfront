@@ -1,6 +1,7 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,32 +9,52 @@ import 'package:google_fonts/google_fonts.dart';
 class MainPage5 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(statusBarColor: Colors.white),
-      child: Scaffold(
-        backgroundColor: backgroundColor2,
-        //appBar: AppBar(
-        //backwardsCompatibility: false,
-        //systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.white),
-        //title: Text(
-        //'Chat',
-        //style: GoogleFonts.getFont(fontApp,
-        //textStyle: TextStyle(
-        //color: colorTextTitle, fontWeight: FontWeight.w600)),
-        //),
-        //actions: [
-        //IconButton(
-        //icon: Icon(
-        //Icons.search,
-        //color: colorTextTitle,
-        //),
-        //onPressed: () {},
-        //),
-        //],
-        //backgroundColor: Colors.white,
-        //),
-        body: ListView(
-          children: [
+    return CupertinoPageScaffold(
+        child: CustomScrollView(
+      physics: BouncingScrollPhysics(),
+      slivers: [
+        CupertinoSliverNavigationBar(
+          backgroundColor: backgroundColor2,
+          largeTitle: Text(
+            'Chat',
+            style: GoogleFonts.getFont(fontApp,
+                textStyle: TextStyle(color: colorTextTitle)),
+          ),
+        ),
+        SliverAppBar(
+          backgroundColor: backgroundColor2,
+          flexibleSpace: FlexibleSpaceBar(
+            //titlePadding: EdgeInsets.only(left: 0),
+            titlePadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            title: Container(
+              margin: EdgeInsets.only(left: 0),
+              padding: EdgeInsets.only(left: 0),
+              height: 36,
+              width: double.infinity,
+              child: CupertinoTextField(
+                keyboardType: TextInputType.text,
+                placeholder: 'Buscar',
+                placeholderStyle: GoogleFonts.getFont(fontApp,
+                    textStyle: TextStyle(
+                        color: Color(0xffC4C6CC),
+                        fontSize: screenWidth(context) * 0.045)),
+                prefix: Padding(
+                  padding: const EdgeInsets.fromLTRB(9.0, 6.0, 9.0, 6.0),
+                  child: Icon(
+                    Icons.search,
+                    color: Color(0xffC4C6CC),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: Color(0xffF0F1F5),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate([
             _Item(
               title: 'Jhon Lennon Plomero',
               subtitle: 'Ultimo mensaje',
@@ -66,10 +87,45 @@ class MainPage5 extends StatelessWidget {
               urlPhoto:
                   'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
             ),
-          ],
-        ),
-      ),
-    );
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+              unReadMessages: 3,
+            ),
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+            ),
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+              unReadMessages: 2,
+            ),
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+            ),
+            _Item(
+              title: 'Jhon Lennon Plomero',
+              subtitle: 'Ultimo mensaje',
+              urlPhoto:
+                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+            ),
+            SizedBox(
+              height: 60,
+            )
+          ]),
+        )
+      ],
+    ));
   }
 }
 
@@ -121,6 +177,9 @@ class __ItemState extends State<_Item> {
       child: Container(
         decoration: BoxDecoration(color: Colors.white),
         child: ListTile(
+          onTap: () {
+            Navigator.pushNamed(context, 'chatPage');
+          },
           key: UniqueKey(),
           leading: CircleAvatar(
             radius: screenWidth(context) * 0.065,
@@ -150,7 +209,7 @@ class __ItemState extends State<_Item> {
           trailing: (widget.unReadMessages > 0)
               ? CircleAvatar(
                   radius: screenWidth(context) * 0.03,
-                  backgroundColor: colorListItems[1],
+                  backgroundColor: colorPrimaryButton,
                   child: Text(
                     widget.unReadMessages.toString(),
                     style: TextStyle(color: Colors.white),

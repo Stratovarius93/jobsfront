@@ -8,6 +8,7 @@ import 'package:AppWork/widgets/pages/login/page5.dart';
 import 'package:AppWork/widgets/pages/login/page6.dart';
 import 'package:AppWork/widgets/pages/main/mainIndex.dart';
 import 'package:AppWork/widgets/pages/main/mainPage3/moreAboutPage.dart';
+import 'package:AppWork/widgets/pages/main/mainPage5/chatPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -17,7 +18,7 @@ void main() {
       systemNavigationBarColor: backgroundColor2,
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
-      statusBarColor: Colors.white
+      statusBarColor: Colors.transparent
       //statusBarBrightness: Brightness.dark
       ));
   runApp(MyApp());
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         'loginPage6': (BuildContext context) => LoginPage6(),
         'mainIndex': (BuildContext context) => MainIndex(),
         'moreAboutPage': (BuildContext context) => MoreAboutPage(),
+        'chatPage': (BuildContext context) => ChatPage(),
       },
     );
   }
