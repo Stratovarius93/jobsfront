@@ -32,7 +32,7 @@ class ChatPage extends StatelessWidget {
                     color: colorPrimaryButton,
                     borderRadius: BorderRadius.circular(16)),
                 child: Text(
-                  'Contactar',
+                  'Contratar',
                   style: GoogleFonts.getFont(fontApp,
                       textStyle: TextStyle(color: colorPrimaryButtonText)),
                 )),
