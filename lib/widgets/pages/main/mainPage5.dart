@@ -1,10 +1,64 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
+import 'package:AppWork/widgets/pages/main/mainPage5/modalSearch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+List<_ItemElement> _listItems = [
+  _ItemElement(
+    'Jhon Lennon Plomero',
+    'Ultimo mensaje',
+    'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+    3,
+  ),
+  _ItemElement(
+      'Ana Mena',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      0),
+  _ItemElement(
+      'Luis Sanchez',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      2),
+  _ItemElement(
+      'Pedro Picapiedras',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      0),
+  _ItemElement(
+      'Pablo Morsa',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      4),
+  _ItemElement(
+      'Maria Jose',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      0),
+  _ItemElement(
+      'Daniela Rae',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      0),
+  _ItemElement(
+      'Carly Jepsen',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      0),
+  _ItemElement(
+      'Jackie Chan',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      0),
+  _ItemElement(
+      'Carlos Perez',
+      'Ultimo mensaje',
+      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+      0),
+];
 
 class MainPage5 extends StatelessWidget {
   @override
@@ -24,100 +78,97 @@ class MainPage5 extends StatelessWidget {
         SliverAppBar(
           backgroundColor: backgroundColor2,
           flexibleSpace: FlexibleSpaceBar(
-            //titlePadding: EdgeInsets.only(left: 0),
-            titlePadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            title: Container(
-              margin: EdgeInsets.only(left: 0),
-              padding: EdgeInsets.only(left: 0),
-              height: 36,
-              width: double.infinity,
-              child: CupertinoTextField(
-                keyboardType: TextInputType.text,
-                placeholder: 'Buscar',
-                placeholderStyle: GoogleFonts.getFont(fontApp,
-                    textStyle: TextStyle(
-                        color: Color(0xffC4C6CC),
-                        fontSize: screenWidth(context) * 0.045)),
-                prefix: Padding(
-                  padding: const EdgeInsets.fromLTRB(9.0, 6.0, 9.0, 6.0),
-                  child: Icon(
-                    Icons.search,
-                    color: Color(0xffC4C6CC),
+              //titlePadding: EdgeInsets.only(left: 0),
+              titlePadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              title: GestureDetector(
+                onTap: () {
+                  showGeneralDialog(
+                    barrierLabel: "Label",
+                    barrierDismissible: false,
+                    barrierColor: Colors.black.withOpacity(0.5),
+                    transitionDuration: Duration(milliseconds: 400),
+                    context: context,
+                    pageBuilder: (context, anim1, anim2) {
+                      return ModalSearch();
+                    },
+                    transitionBuilder: (context, anim1, anim2, child) {
+                      return SlideTransition(
+                        position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
+                            .animate(anim1),
+                        child: child,
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 0),
+                  padding: EdgeInsets.only(left: 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: Color(0xffF0F1F5),
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(9.0, 6.0, 9.0, 6.0),
+                          child: Icon(
+                            Icons.search,
+                            color: Color(0xffC4C6CC),
+                          ),
+                        ),
+                        Text(
+                          'Buscar',
+                          style: GoogleFonts.getFont(fontApp,
+                              textStyle: TextStyle(
+                                  color: Color(0xffC4C6CC),
+                                  fontSize: screenWidth(context) * 0.045)),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Color(0xffF0F1F5),
-                ),
+              )
+              //Container(
+              //margin: EdgeInsets.only(left: 0),
+              //padding: EdgeInsets.only(left: 0),
+              //height: 36,
+              //width: double.infinity,
+              //child: CupertinoTextField(
+              //keyboardType: TextInputType.text,
+              //placeholder: 'Buscar',
+              //placeholderStyle: GoogleFonts.getFont(fontApp,
+              //textStyle: TextStyle(
+              //color: Color(0xffC4C6CC),
+              //fontSize: screenWidth(context) * 0.045)),
+              //prefix: Padding(
+              //padding: const EdgeInsets.fromLTRB(9.0, 6.0, 9.0, 6.0),
+              //child: Icon(
+              //Icons.search,
+              //color: Color(0xffC4C6CC),
+              //),
+              //),
+              //decoration: BoxDecoration(
+              //borderRadius: BorderRadius.circular(8.0),
+              //color: Color(0xffF0F1F5),
+              //),
+              //),
+              //),
+
               ),
-            ),
-          ),
         ),
         SliverList(
           delegate: SliverChildListDelegate([
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-              unReadMessages: 3,
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-              unReadMessages: 2,
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-              unReadMessages: 3,
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-              unReadMessages: 2,
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-            ),
-            _Item(
-              title: 'Jhon Lennon Plomero',
-              subtitle: 'Ultimo mensaje',
-              urlPhoto:
-                  'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
+            Column(
+              children: _listItems
+                  .map((item) => _Item(
+                        title: item.name,
+                        subtitle: item.lastMessage,
+                        urlPhoto: item.urlPhoto,
+                        unReadMessages: item.unReadMessages,
+                      ))
+                  .toList(),
             ),
             SizedBox(
               height: 60,
@@ -220,4 +271,13 @@ class __ItemState extends State<_Item> {
       ),
     );
   }
+}
+
+class _ItemElement {
+  final String name;
+  final String lastMessage;
+  final String urlPhoto;
+  final int unReadMessages;
+
+  _ItemElement(this.name, this.lastMessage, this.urlPhoto, this.unReadMessages);
 }
