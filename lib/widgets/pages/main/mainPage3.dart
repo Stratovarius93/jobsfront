@@ -533,7 +533,7 @@ class MainPage3 extends StatelessWidget {
                 barrierLabel: "Label",
                 barrierDismissible: false,
                 barrierColor: Colors.black.withOpacity(0.5),
-                transitionDuration: Duration(milliseconds: 400),
+                transitionDuration: Duration(milliseconds: 300),
                 context: context,
                 pageBuilder: (context, anim1, anim2) {
                   return MoreAboutPage();
