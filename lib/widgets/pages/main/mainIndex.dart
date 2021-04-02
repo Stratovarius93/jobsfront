@@ -10,6 +10,7 @@ import 'package:AppWork/widgets/pages/main/mainPage5.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter_device_type/flutter_device_type.dart';
+import 'package:colorful_safe_area/colorful_safe_area.dart';
 
 class MainIndex extends StatefulWidget {
   @override
@@ -23,7 +24,8 @@ class _MainIndexState extends State<MainIndex> {
     SafeArea(child: MainPage2()),
     SafeArea(bottom: false, child: MainPage3()),
     SafeArea(child: MainPage4()),
-    SafeArea(bottom: false, child: MainPage5()),
+    ColorfulSafeArea(
+        color: backgroundColor2, bottom: false, child: MainPage5()),
   ];
   List<ElementItemIcon> _elementItemIconList = [
     ElementItemIcon(Ionicons.person, Ionicons.person_outline),

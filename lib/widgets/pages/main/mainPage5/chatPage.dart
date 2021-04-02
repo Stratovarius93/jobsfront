@@ -103,10 +103,10 @@ class ChatPage extends StatelessWidget {
                   Expanded(
                     child: CupertinoTextField(
                       onTap: () {
-                        Timer(
-                            Duration(milliseconds: 300),
-                            () => _controller
-                                .jumpTo(_controller.position.maxScrollExtent));
+                        //Timer(
+                        //Duration(milliseconds: 300),
+                        //() => _controller
+                        //.jumpTo(_controller.position.maxScrollExtent));
                       },
                       scrollPhysics: BouncingScrollPhysics(),
                       minLines: 1,
@@ -128,10 +128,10 @@ class ChatPage extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () {
-                      Timer(
-                          Duration(milliseconds: 300),
-                          () => _controller
-                              .jumpTo(_controller.position.maxScrollExtent));
+                      //Timer(
+                      //Duration(milliseconds: 300),
+                      //() => _controller
+                      //.jumpTo(_controller.position.maxScrollExtent));
                     },
                     icon: Icon(
                       Ionicons.send,

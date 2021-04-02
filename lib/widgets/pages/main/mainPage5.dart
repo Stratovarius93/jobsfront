@@ -129,46 +129,21 @@ class MainPage5 extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
-              //Container(
-              //margin: EdgeInsets.only(left: 0),
-              //padding: EdgeInsets.only(left: 0),
-              //height: 36,
-              //width: double.infinity,
-              //child: CupertinoTextField(
-              //keyboardType: TextInputType.text,
-              //placeholder: 'Buscar',
-              //placeholderStyle: GoogleFonts.getFont(fontApp,
-              //textStyle: TextStyle(
-              //color: Color(0xffC4C6CC),
-              //fontSize: screenWidth(context) * 0.045)),
-              //prefix: Padding(
-              //padding: const EdgeInsets.fromLTRB(9.0, 6.0, 9.0, 6.0),
-              //child: Icon(
-              //Icons.search,
-              //color: Color(0xffC4C6CC),
-              //),
-              //),
-              //decoration: BoxDecoration(
-              //borderRadius: BorderRadius.circular(8.0),
-              //color: Color(0xffF0F1F5),
-              //),
-              //),
-              //),
-
-              ),
+              )),
         ),
         SliverList(
           delegate: SliverChildListDelegate([
             Column(
-              children: _listItems
-                  .map((item) => _Item(
-                        title: item.name,
-                        subtitle: item.lastMessage,
-                        urlPhoto: item.urlPhoto,
-                        unReadMessages: item.unReadMessages,
-                      ))
-                  .toList(),
+              children: _listItems.map((item) {
+                var index = _listItems.indexOf(item);
+                return _Item(
+                  title: item.name,
+                  subtitle: item.lastMessage,
+                  urlPhoto: item.urlPhoto,
+                  unReadMessages: item.unReadMessages,
+                  index: index,
+                );
+              }).toList(),
             ),
             SizedBox(
               height: 60,
@@ -185,12 +160,14 @@ class _Item extends StatefulWidget {
   final String subtitle;
   final String urlPhoto;
   final int unReadMessages;
+  final int index;
   const _Item({
     Key key,
     @required this.title,
     this.subtitle = '',
     this.urlPhoto,
     this.unReadMessages = 0,
+    this.index,
   }) : super(key: key);
 
   @override
@@ -218,12 +195,12 @@ class __ItemState extends State<_Item> {
       ),
       key: UniqueKey(),
       onDismissed: (direction) {
-        //setState(() {
-        //items.removeAt(index);
-        //});
+        setState(() {
+          _listItems.removeAt(widget.index);
+        });
 
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Element dismissed")));
+            .showSnackBar(SnackBar(content: Text("Chat deleted")));
       },
       child: Container(
         decoration: BoxDecoration(color: Colors.white),
@@ -231,7 +208,7 @@ class __ItemState extends State<_Item> {
           onTap: () {
             Navigator.pushNamed(context, 'chatPage');
           },
-          key: UniqueKey(),
+          //key: UniqueKey(),
           leading: CircleAvatar(
             radius: screenWidth(context) * 0.065,
             backgroundImage: NetworkImage(
