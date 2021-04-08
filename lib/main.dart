@@ -9,6 +9,10 @@ import 'package:AppWork/widgets/pages/login/page6.dart';
 import 'package:AppWork/widgets/pages/main/mainIndex.dart';
 import 'package:AppWork/widgets/pages/main/mainPage3/moreAboutPage.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5/chatPage.dart';
+import 'package:AppWork/widgets/pages/main/mainPage5/workerPage1.dart';
+import 'package:AppWork/widgets/pages/main/mainPage5/workerPage2.dart';
+import 'package:AppWork/widgets/pages/main/mainPage5/workerPage3.dart';
+import 'package:AppWork/widgets/pages/main/mainPage5/workerPage4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -33,6 +37,7 @@ class MyApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
+      theme: ThemeData(primaryColor: colorPrimaryButton),
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -42,7 +47,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Welcome to MyApp',
-      initialRoute: 'mainIndex',
+      initialRoute: 'workerPage4',
       routes: {
         //login
         'loginPage1': (BuildContext context) => LoginPage1(),
@@ -54,6 +59,10 @@ class MyApp extends StatelessWidget {
         'mainIndex': (BuildContext context) => MainIndex(),
         'moreAboutPage': (BuildContext context) => MoreAboutPage(),
         'chatPage': (BuildContext context) => ChatPage(),
+        'workerPage1': (BuildContext context) => WorkerPage1(),
+        'workerPage2': (BuildContext context) => WorkerPage2(),
+        'workerPage3': (BuildContext context) => WorkerPage3(),
+        'workerPage4': (BuildContext context) => WorkerPage4(),
       },
     );
   }

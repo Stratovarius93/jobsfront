@@ -15,6 +15,8 @@ Color colorArrowBack = Color(0xFF37384d);
 Color colorPrimaryButton = Color(0xFF176ced);
 Color colorPrimaryButtonText = Colors.white;
 
+Color colorSecondButton = Colors.white;
+Color colorSecondButtonText = Color(0xFF176ced);
 //card
 Color colorBackgroundCard = Colors.white;
 Color colorShadowCard = colorTextSubTitle.withOpacity(0.2);
