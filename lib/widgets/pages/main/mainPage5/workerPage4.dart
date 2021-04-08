@@ -106,7 +106,6 @@ class _WorkerPage4State extends State<WorkerPage4> {
                               width: (screenWidth(context) - 80) * 0.33,
                               child: GenericMainInput(
                                 textInputType: TextInputType.number,
-                                suffixIcon: Icon(Icons.lock),
                               ),
                             ),
                           ]),
