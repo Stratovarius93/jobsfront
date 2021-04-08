@@ -239,7 +239,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                   child: LargeButton(
                     text: 'Contactar',
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, 'chatPage');
                     },
                     color: colorPrimaryButtonText,
                     backgroundColor: colorPrimaryButton,

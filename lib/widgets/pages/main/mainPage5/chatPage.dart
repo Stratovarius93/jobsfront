@@ -24,7 +24,7 @@ class ChatPage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, 'workerPage1');
+              Navigator.pop(context);
             },
             child: Container(
                 padding: EdgeInsets.symmetric(vertical: 4, horizontal: 10),

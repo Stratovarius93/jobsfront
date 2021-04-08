@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Welcome to MyApp',
-      initialRoute: 'workerPage4',
+      initialRoute: 'mainIndex',
       routes: {
         //login
         'loginPage1': (BuildContext context) => LoginPage1(),
