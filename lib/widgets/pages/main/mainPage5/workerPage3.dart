@@ -19,6 +19,8 @@ List<String> _list = [
 
 String _dropdownValue = _list[0];
 
+bool _showWidget = false;
+
 class WorkerPage3 extends StatefulWidget {
   @override
   _WorkerPage3State createState() => _WorkerPage3State();
@@ -32,7 +34,7 @@ class _WorkerPage3State extends State<WorkerPage3> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: colorPrimaryButton,
           onPressed: () {
-            Navigator.pushNamed(context, 'workerPage4');
+            Navigator.pushNamed(context, 'workerPage5');
           },
           child: Icon(Ionicons.arrow_forward_outline),
         ),
@@ -81,7 +83,11 @@ class _WorkerPage3State extends State<WorkerPage3> {
                                   shadowPrimaryButton(colorPrimaryButton)
                                 ]),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  _showWidget = false;
+                                });
+                              },
                               child: Text(
                                 'Por Hora',
                                 style: GoogleFonts.getFont(fontApp,
@@ -99,7 +105,12 @@ class _WorkerPage3State extends State<WorkerPage3> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  //_showWidget = !_showWidget;
+                                  _showWidget = true;
+                                });
+                              },
                               child: Text(
                                 'Por contrato',
                                 style: GoogleFonts.getFont(fontApp,
@@ -115,21 +126,27 @@ class _WorkerPage3State extends State<WorkerPage3> {
                       SizedBox(
                         height: 32,
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: GenericLoginCategoryText(
-                          title: 'Frecuencia de pago',
-                        ),
-                      ),
-                      GenericMainInputDropdown(
-                        items: _list,
-                        dropdownValue: _dropdownValue,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            _dropdownValue = newValue;
-                          });
-                        },
-                      ),
+                      (_showWidget == true)
+                          ? Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: GenericLoginCategoryText(
+                                    title: 'Frecuencia de pago',
+                                  ),
+                                ),
+                                GenericMainInputDropdown(
+                                  items: _list,
+                                  dropdownValue: _dropdownValue,
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      _dropdownValue = newValue;
+                                    });
+                                  },
+                                ),
+                              ],
+                            )
+                          : Container()
                     ],
                   ),
                 ),

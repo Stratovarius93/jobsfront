@@ -13,6 +13,7 @@ import 'package:AppWork/widgets/pages/main/mainPage5/workerPage1.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5/workerPage2.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5/workerPage3.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5/workerPage4.dart';
+import 'package:AppWork/widgets/pages/main/mainPage5/workerPage5.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         'workerPage2': (BuildContext context) => WorkerPage2(),
         'workerPage3': (BuildContext context) => WorkerPage3(),
         'workerPage4': (BuildContext context) => WorkerPage4(),
+        'workerPage5': (BuildContext context) => WorkerPage5(),
       },
     );
   }
