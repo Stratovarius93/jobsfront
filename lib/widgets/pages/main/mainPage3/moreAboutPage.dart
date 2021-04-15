@@ -1,6 +1,7 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
+import 'package:AppWork/generated/l10n.dart';
 import 'package:AppWork/widgets/generics/backClose.dart';
 import 'package:AppWork/widgets/generics/largeButton.dart';
 import 'package:flutter/cupertino.dart';
@@ -169,9 +170,9 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                 ),
                 CupertinoSlidingSegmentedControl(
                     children: {
-                      0: Text('Empleos'),
-                      1: Text('Estudios'),
-                      2: Text('Competencias'),
+                      0: Text(S.current.moreAboutPage0),
+                      1: Text(S.current.moreAboutPage1),
+                      2: Text(S.current.moreAboutPage2),
                     },
                     groupValue: _sliding,
                     onValueChanged: (newValue) {
@@ -237,7 +238,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16, top: 16),
                   child: LargeButton(
-                    text: 'Contactar',
+                    text: S.current.moreAboutPage3,
                     onTap: () {
                       Navigator.pushNamed(context, 'chatPage');
                     },

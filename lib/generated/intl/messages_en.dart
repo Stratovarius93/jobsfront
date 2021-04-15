@@ -22,6 +22,18 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "appName" : MessageLookupByLibrary.simpleMessage("App Name"),
+    "chatPage0" : MessageLookupByLibrary.simpleMessage("Write message"),
+    "chatPage1" : MessageLookupByLibrary.simpleMessage("Take on"),
+    "mainPage30" : MessageLookupByLibrary.simpleMessage("Available jobs"),
+    "mainPage31" : MessageLookupByLibrary.simpleMessage("Notifications"),
+    "mainPage32" : MessageLookupByLibrary.simpleMessage("Message"),
+    "mainPage33" : MessageLookupByLibrary.simpleMessage("Contact"),
+    "mainPage34" : MessageLookupByLibrary.simpleMessage("See more about"),
+    "mainPage50" : MessageLookupByLibrary.simpleMessage("Search"),
+    "moreAboutPage0" : MessageLookupByLibrary.simpleMessage("Jobs"),
+    "moreAboutPage1" : MessageLookupByLibrary.simpleMessage("Studies"),
+    "moreAboutPage2" : MessageLookupByLibrary.simpleMessage("Skills"),
+    "moreAboutPage3" : MessageLookupByLibrary.simpleMessage("Contact"),
     "page1Button" : MessageLookupByLibrary.simpleMessage("Get Started"),
     "page1Description" : MessageLookupByLibrary.simpleMessage("Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
     "page2SubTitle" : MessageLookupByLibrary.simpleMessage("Lorem Ipsum is simply dummy text of the printing and typesetting industry."),

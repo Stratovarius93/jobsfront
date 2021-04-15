@@ -1,6 +1,7 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
+import 'package:AppWork/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +33,7 @@ class ChatPage extends StatelessWidget {
                     color: colorPrimaryButton,
                     borderRadius: BorderRadius.circular(16)),
                 child: Text(
-                  'Contratar',
+                  S.current.chatPage1,
                   style: GoogleFonts.getFont(fontApp,
                       textStyle: TextStyle(color: colorPrimaryButtonText)),
                 )),
@@ -112,7 +113,7 @@ class ChatPage extends StatelessWidget {
                       minLines: 1,
                       maxLines: 3,
                       keyboardType: TextInputType.text,
-                      placeholder: 'Write message...',
+                      placeholder: '${S.current.chatPage0}...',
                       placeholderStyle: GoogleFonts.getFont(fontApp,
                           textStyle: TextStyle(
                               color: Color(0xffC4C6CC),

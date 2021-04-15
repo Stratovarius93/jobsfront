@@ -15,7 +15,13 @@ import 'intl/messages_all.dart';
 class S {
   S();
 
-  static S /*!*/ current;
+  static S _current;
+
+  static S get current {
+    assert(_current != null,
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    return _current;
+  }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
@@ -26,13 +32,21 @@ class S {
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      S.current = S();
+      final instance = S();
+      S._current = instance;
 
-      return S.current /*!*/;
+      return instance;
     });
   }
 
-  static S /*!*/ of(BuildContext context) {
+  static S of(BuildContext context) {
+    final instance = S.maybeOf(context);
+    assert(instance != null,
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    return instance;
+  }
+
+  static S maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
 
@@ -241,6 +255,126 @@ class S {
     return Intl.message(
       'Done',
       name: 'page6Button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available jobs`
+  String get mainPage30 {
+    return Intl.message(
+      'Available jobs',
+      name: 'mainPage30',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get mainPage31 {
+    return Intl.message(
+      'Notifications',
+      name: 'mainPage31',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message`
+  String get mainPage32 {
+    return Intl.message(
+      'Message',
+      name: 'mainPage32',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact`
+  String get mainPage33 {
+    return Intl.message(
+      'Contact',
+      name: 'mainPage33',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See more about`
+  String get mainPage34 {
+    return Intl.message(
+      'See more about',
+      name: 'mainPage34',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Jobs`
+  String get moreAboutPage0 {
+    return Intl.message(
+      'Jobs',
+      name: 'moreAboutPage0',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Studies`
+  String get moreAboutPage1 {
+    return Intl.message(
+      'Studies',
+      name: 'moreAboutPage1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skills`
+  String get moreAboutPage2 {
+    return Intl.message(
+      'Skills',
+      name: 'moreAboutPage2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact`
+  String get moreAboutPage3 {
+    return Intl.message(
+      'Contact',
+      name: 'moreAboutPage3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get mainPage50 {
+    return Intl.message(
+      'Search',
+      name: 'mainPage50',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write message`
+  String get chatPage0 {
+    return Intl.message(
+      'Write message',
+      name: 'chatPage0',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take on`
+  String get chatPage1 {
+    return Intl.message(
+      'Take on',
+      name: 'chatPage1',
       desc: '',
       args: [],
     );

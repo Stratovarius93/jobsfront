@@ -1,6 +1,7 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
+import 'package:AppWork/data/mainPage3/workerList.dart';
 import 'package:AppWork/widgets/generics/card.dart';
 import 'package:AppWork/widgets/generics/largeButton.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
@@ -11,10 +12,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:AppWork/generated/l10n.dart';
+
+double _cardHeight = 0.0;
 
 class MainPage3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    _cardHeight = screenWidth(context) * 0.58;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Column(
@@ -33,48 +39,31 @@ class MainPage3 extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: GenericLoginCategoryText(
-              title: 'Trabajos disponibles',
+              title: S.current.mainPage30,
             ),
           ),
-          SingleChildScrollView(
-              //shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Row(
-                  children: [
-                    _card(
-                        context,
-                        'https://thumbs.dreamstime.com/b/beautiful-woman-taking-selfie-times-square-young-her-smartphone-new-york-56955944.jpg',
-                        'Ana Mena',
-                        true,
-                        2.75,
-                        2,
-                        ['Carpinteria', 'Quito nieve', 'Corto el pasto']),
-                    _card(
-                        context,
-                        'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-                        'John Lennon',
-                        false,
-                        4,
-                        2,
-                        ['Carpinteria', 'Quito nieve', 'Corto el pasto']),
-                    _card(
-                        context,
-                        'https://img.srgcdn.com/e//VzBIRmxCTTJHc2tOUndTa0xnbEsucG5n.jpg',
-                        'Alex Daddario',
-                        true,
-                        2.75,
-                        2,
-                        ['Carpinteria', 'Quito nieve', 'Corto el pasto']),
-                  ],
-                ),
-              )),
+          Container(
+            height: _cardHeight,
+            child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: workerList.length,
+                itemBuilder: (context, index) {
+                  return _card(
+                      context,
+                      workerList[index].urlPhoto,
+                      workerList[index].name,
+                      workerList[index].lastName,
+                      workerList[index].verified,
+                      workerList[index].rating,
+                      workerList[index].distance,
+                      workerList[index].listJobs);
+                }),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: GenericLoginCategoryText(
-              title: 'Notificaciones',
+              title: S.current.mainPage31,
             ),
           ),
           Expanded(
@@ -91,25 +80,25 @@ class MainPage3 extends StatelessWidget {
                         context,
                         Ionicons.chatbubble,
                         colorPrimaryButton,
-                        'Mensajes',
+                        S.current.mainPage32,
                         'Trabajador x te envio un men..'),
                     _notificationsItem(
                         context,
                         Ionicons.chatbubble,
                         colorPrimaryButton,
-                        'Mensajes',
+                        S.current.mainPage32,
                         'Trabajador x te envio un men..'),
                     _notificationsItem(
                         context,
                         Ionicons.chatbubble,
                         colorPrimaryButton,
-                        'Mensajes',
+                        S.current.mainPage32,
                         'Trabajador x te envio un men..'),
                     _notificationsItem(
                         context,
                         Ionicons.chatbubble,
                         colorPrimaryButton,
-                        'Mensajes',
+                        S.current.mainPage32,
                         'Trabajador x te envio un men..'),
                     SizedBox(
                       height: 96,
@@ -124,7 +113,7 @@ class MainPage3 extends StatelessWidget {
     );
   }
 
-  Widget _listItems(BuildContext context, String text) {
+  Widget _listItems(BuildContext context, String text, double fontSize) {
     return Row(
       children: [
         Icon(
@@ -135,18 +124,21 @@ class MainPage3 extends StatelessWidget {
         SizedBox(
           width: 8,
         ),
-        Text(text,
-            style: GoogleFonts.getFont(fontApp,
-                textStyle: TextStyle(
-                  color: colorText2,
-                  fontSize: screenWidth(context) * 0.043,
-                )))
+        Expanded(
+          child: Text(text,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.getFont(fontApp,
+                  textStyle: TextStyle(
+                    color: colorText2,
+                    fontSize: fontSize,
+                  ))),
+        )
       ],
     );
   }
 
-  _card(BuildContext context, String image, String title, bool verified,
-      double rating, double distance, List<String> jobs) {
+  _card(BuildContext context, String image, String title, String title2,
+      bool verified, double rating, double distance, List<String> jobs) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 0),
       child: InkWell(
@@ -155,6 +147,7 @@ class MainPage3 extends StatelessWidget {
               _modalBottom(context, image, title, verified, rating, distance));
         },
         child: GenericLoginCard(
+          width: screenWidth(context) * 0.7,
           padding: EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,48 +155,90 @@ class MainPage3 extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    radius: screenWidth(context) * 0.065,
+                    radius: _cardHeight * 0.102,
                     backgroundImage: NetworkImage(
                       image,
                     ),
                   ),
                   SizedBox(
-                    width: 16,
+                    width: 10,
                   ),
-                  Text(
-                    title,
-                    style: GoogleFonts.getFont(fontApp,
-                        textStyle: TextStyle(
-                            color: colorTextTitle,
-                            fontSize: screenWidth(context) * 0.058,
-                            fontWeight: FontWeight.w600)),
+                  //Expanded(
+                  //child: Text(
+                  //'$title $title2',
+                  //maxLines: 2,
+                  //style: GoogleFonts.getFont(fontApp,
+                  //textStyle: TextStyle(
+                  //height: 1,
+                  //color: colorTextTitle,
+                  //fontSize: _cardHeight * 0.082,
+                  //fontWeight: FontWeight.w600)),
+                  //),
+                  //),
+                  Expanded(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '$title',
+                            style: GoogleFonts.getFont(fontApp,
+                                textStyle: TextStyle(
+                                    height: 1,
+                                    color: colorTextTitle,
+                                    fontSize: _cardHeight * 0.08,
+                                    fontWeight: FontWeight.w600)),
+                          ),
+                          RichText(
+                            text: TextSpan(children: [
+                              TextSpan(
+                                text: '$title2 ',
+                                style: GoogleFonts.getFont(fontApp,
+                                    textStyle: TextStyle(
+                                        height: 1,
+                                        color: colorTextTitle,
+                                        fontSize: _cardHeight * 0.08,
+                                        fontWeight: FontWeight.w600)),
+                              ),
+                              WidgetSpan(
+                                child: (verified)
+                                    ? Icon(
+                                        Ionicons.checkmark_circle,
+                                        color: colorCheckmarkIcon,
+                                      )
+                                    : Container(),
+                              )
+                            ]),
+                          ),
+                        ]),
                   ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  (verified)
-                      ? Icon(
-                          Ionicons.checkmark_circle,
-                          color: colorCheckmarkIcon,
-                        )
-                      : Container(),
+                  //SizedBox(
+                  //width: 4,
+                  //),
+                  //(verified)
+                  //? Icon(
+                  //Ionicons.checkmark_circle,
+                  //color: colorCheckmarkIcon,
+                  //)
+                  //: Container(),
                 ],
               ),
               SizedBox(
-                height: 16,
+                height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: jobs.map((e) => _listItems(context, e)).toList(),
+                  children: jobs
+                      .map((e) => _listItems(context, e, _cardHeight * 0.07))
+                      .toList(),
                 ),
               ),
               SizedBox(
-                height: 16,
+                height: 8,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -216,7 +251,7 @@ class MainPage3 extends StatelessWidget {
                             color: colorIconRatings,
                           ),
                           itemCount: 5,
-                          itemSize: 20,
+                          itemSize: _cardHeight * 0.08,
                           direction: Axis.horizontal,
                         ),
                         SizedBox(
@@ -225,7 +260,7 @@ class MainPage3 extends StatelessWidget {
                         Text(
                           '($rating)',
                           style: GoogleFonts.getFont(fontApp,
-                              fontSize: screenWidth(context) * 0.04,
+                              fontSize: _cardHeight * 0.06,
                               color: colorTextSubTitle,
                               fontWeight: FontWeight.w600),
                         ),
@@ -252,7 +287,7 @@ class MainPage3 extends StatelessWidget {
                             Text(
                               '$distance km',
                               style: GoogleFonts.getFont(fontApp,
-                                  fontSize: screenWidth(context) * 0.035,
+                                  fontSize: _cardHeight * 0.06,
                                   fontWeight: FontWeight.w500,
                                   color: colorPrimaryButton),
                             )
@@ -525,7 +560,7 @@ class MainPage3 extends StatelessWidget {
             ),
           ),
           LargeButton(
-            text: 'Ver más acerca de Ana',
+            text: '${S.current.mainPage34} $title',
             onTap: () {
               Navigator.pop(context);
               //Navigator.pushNamed(context, 'moreAboutPage');
@@ -552,7 +587,7 @@ class MainPage3 extends StatelessWidget {
             height: 16,
           ),
           LargeButton(
-            text: 'Contactar',
+            text: S.current.mainPage33,
             onTap: () {
               Navigator.pushNamed(context, 'chatPage');
             },
@@ -566,18 +601,3 @@ class MainPage3 extends StatelessWidget {
     );
   }
 }
-//class WorkerList{
-//final String name;
-//final String lastName;
-//final String urlPhoto;
-//final bool verified;
-//final double rating;
-//final String address;
-//final double distance;
-//final double minSalary;
-//final List<String> listJobs;
-//final String typeJob;
-//final int clients;
-//final String joinedTime;
-//final List<String, String> jobs;
-//}

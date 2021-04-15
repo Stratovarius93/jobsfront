@@ -24,5 +24,22 @@
 	"page5Button" : "Create Account",
 	
 	"page6Title" : "Interests",
-	"page6Button" : "Done"
+	"page6Button" : "Done",
+
+  "mainPage30" : "Available jobs",
+	"mainPage31" : "Notifications",
+	"mainPage32" : "Message",
+
+  "mainPage33" : "Contact",
+	"mainPage34" : "See more about",
+
+	"moreAboutPage0" : "Jobs",
+	"moreAboutPage1" : "Studies",
+	"moreAboutPage2" : "Skills",
+	"moreAboutPage3" : "Contact",
+
+	"mainPage50" : "Search",
+	
+	"chatPage0" : "Write message",
+	"chatPage1" : "Take on"
 }

@@ -1,64 +1,12 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
+import 'package:AppWork/data/mainPage5/chatList.dart';
+import 'package:AppWork/generated/l10n.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5/modalSearch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-List<_ItemElement> _listItems = [
-  _ItemElement(
-    'Jhon Lennon Plomero',
-    'Ultimo mensaje',
-    'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-    3,
-  ),
-  _ItemElement(
-      'Ana Mena',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      0),
-  _ItemElement(
-      'Luis Sanchez',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      2),
-  _ItemElement(
-      'Pedro Picapiedras',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      0),
-  _ItemElement(
-      'Pablo Morsa',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      4),
-  _ItemElement(
-      'Maria Jose',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      0),
-  _ItemElement(
-      'Daniela Rae',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      0),
-  _ItemElement(
-      'Carly Jepsen',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      0),
-  _ItemElement(
-      'Jackie Chan',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      0),
-  _ItemElement(
-      'Carlos Perez',
-      'Ultimo mensaje',
-      'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
-      0),
-];
 
 class MainPage5 extends StatelessWidget {
   @override
@@ -86,7 +34,7 @@ class MainPage5 extends StatelessWidget {
                     barrierLabel: "Label",
                     barrierDismissible: false,
                     barrierColor: Colors.black.withOpacity(0.5),
-                    transitionDuration: Duration(milliseconds: 400),
+                    transitionDuration: Duration(milliseconds: 100),
                     context: context,
                     pageBuilder: (context, anim1, anim2) {
                       return ModalSearch();
@@ -119,7 +67,7 @@ class MainPage5 extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Buscar',
+                          S.current.mainPage50,
                           style: GoogleFonts.getFont(fontApp,
                               textStyle: TextStyle(
                                   color: Color(0xffC4C6CC),
@@ -134,8 +82,8 @@ class MainPage5 extends StatelessWidget {
         SliverList(
           delegate: SliverChildListDelegate([
             Column(
-              children: _listItems.map((item) {
-                var index = _listItems.indexOf(item);
+              children: chatList.map((item) {
+                var index = chatList.indexOf(item);
                 return _Item(
                   title: item.name,
                   subtitle: item.lastMessage,
@@ -196,7 +144,7 @@ class __ItemState extends State<_Item> {
       key: UniqueKey(),
       onDismissed: (direction) {
         setState(() {
-          _listItems.removeAt(widget.index);
+          chatList.removeAt(widget.index);
         });
 
         ScaffoldMessenger.of(context)
@@ -248,13 +196,4 @@ class __ItemState extends State<_Item> {
       ),
     );
   }
-}
-
-class _ItemElement {
-  final String name;
-  final String lastMessage;
-  final String urlPhoto;
-  final int unReadMessages;
-
-  _ItemElement(this.name, this.lastMessage, this.urlPhoto, this.unReadMessages);
 }
