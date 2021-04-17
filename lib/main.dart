@@ -1,3 +1,4 @@
+import 'package:AppWork/bloc/local/chatSelectedBloc/chatSelected_bloc.dart';
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/generated/l10n.dart';
 import 'package:AppWork/widgets/pages/login/page1.dart';
@@ -16,7 +17,10 @@ import 'package:AppWork/widgets/pages/main/mainPage5/workerPage4.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5/workerPage5.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'bloc/local/workerSelectedBloc/workerSelected_bloc.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -26,7 +30,21 @@ void main() {
       statusBarColor: Colors.transparent
       //statusBarBrightness: Brightness.dark
       ));
-  runApp(MyApp());
+  runApp(AppState());
+}
+
+class AppState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(providers: [
+      BlocProvider<WorkerSelectedBloc>(
+        create: (_) => WorkerSelectedBloc(),
+      ),
+      BlocProvider<ChatSelectedBloc>(
+        create: (_) => ChatSelectedBloc(),
+      )
+    ], child: MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {

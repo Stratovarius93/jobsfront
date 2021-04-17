@@ -2,6 +2,7 @@ import 'package:AppWork/models/mainPage3/workerModel.dart';
 
 List<WorkerModel> workerList = [
   WorkerModel(
+      '001',
       'Ana',
       'Montenegro',
       'https://thumbs.dreamstime.com/b/beautiful-woman-taking-selfie-times-square-young-her-smartphone-new-york-56955944.jpg',
@@ -26,6 +27,7 @@ List<WorkerModel> workerList = [
       ],
       ['Organizado', 'Puntual', 'Creativo', 'Respetuoso']),
   WorkerModel(
+      '002',
       'fernando',
       'Cardenas',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
@@ -50,6 +52,7 @@ List<WorkerModel> workerList = [
       ],
       ['Organizado', 'Puntual', 'Creativo', 'Respetuoso']),
   WorkerModel(
+      '003',
       'Alex',
       'Daddario',
       'https://img.srgcdn.com/e//VzBIRmxCTTJHc2tOUndTa0xnbEsucG5n.jpg',

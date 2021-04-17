@@ -1,3 +1,4 @@
+import 'package:AppWork/bloc/local/chatSelectedBloc/chatSelected_bloc.dart';
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
@@ -6,6 +7,7 @@ import 'package:AppWork/generated/l10n.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5/modalSearch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainPage5 extends StatelessWidget {
@@ -154,6 +156,8 @@ class __ItemState extends State<_Item> {
         decoration: BoxDecoration(color: Colors.white),
         child: ListTile(
           onTap: () {
+            BlocProvider.of<ChatSelectedBloc>(context)
+                .add(SelectChat(chatList[widget.index].idWorker));
             Navigator.pushNamed(context, 'chatPage');
           },
           //key: UniqueKey(),

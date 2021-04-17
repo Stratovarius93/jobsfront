@@ -1,3 +1,5 @@
+import 'package:AppWork/bloc/local/chatSelectedBloc/chatSelected_bloc.dart';
+import 'package:AppWork/bloc/local/workerSelectedBloc/workerSelected_bloc.dart';
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
@@ -9,6 +11,7 @@ import 'package:AppWork/widgets/generics/loginTitle.dart';
 import 'package:AppWork/widgets/generics/modalBottomSheet.dart';
 import 'package:AppWork/widgets/pages/main/mainPage3/moreAboutPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -51,6 +54,7 @@ class MainPage3 extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return _card(
                       context,
+                      workerList[index].idWorker,
                       workerList[index].urlPhoto,
                       workerList[index].name,
                       workerList[index].lastName,
@@ -137,14 +141,30 @@ class MainPage3 extends StatelessWidget {
     );
   }
 
-  _card(BuildContext context, String image, String title, String title2,
-      bool verified, double rating, double distance, List<String> jobs) {
+  _card(
+      BuildContext context,
+      String idWorker,
+      String image,
+      String title,
+      String title2,
+      bool verified,
+      double rating,
+      double distance,
+      List<String> jobs) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16, right: 0),
       child: InkWell(
         onTap: () {
-          showModalBottom(context,
-              _modalBottom(context, image, title, verified, rating, distance));
+          showModalBottom(
+              context,
+              _ModalBottom(
+                idWorker: idWorker,
+                image: image,
+                title: title,
+                verified: verified,
+                rating: rating,
+                distance: distance,
+              ));
         },
         child: GenericLoginCard(
           width: screenWidth(context) * 0.7,
@@ -362,242 +382,267 @@ class MainPage3 extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _modalBottom(BuildContext context, String image, String title,
-      bool verified, double rating, double distance) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CircleAvatar(
-            radius: screenWidth(context) * 0.15,
-            backgroundImage: NetworkImage(
-              image,
-            ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(
-              title,
-              style: GoogleFonts.getFont(fontApp,
-                  textStyle: TextStyle(
-                      color: colorTextTitle,
-                      fontSize: screenWidth(context) * 0.058,
-                      fontWeight: FontWeight.w600)),
+class _ModalBottom extends StatelessWidget {
+  final String idWorker;
+  final String image;
+  final String title;
+  final bool verified;
+  final double rating;
+  final double distance;
+
+  const _ModalBottom(
+      {Key key,
+      this.idWorker,
+      this.image,
+      this.title,
+      this.verified,
+      this.rating,
+      this.distance})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<WorkerSelectedBloc, WorkerSelectedState>(
+        builder: (BuildContext context, state) {
+      return Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircleAvatar(
+              radius: screenWidth(context) * 0.15,
+              backgroundImage: NetworkImage(
+                image,
+              ),
             ),
             SizedBox(
-              width: 8,
+              height: 16,
             ),
-            Icon(
-              Ionicons.checkmark_circle,
-              color: colorCheckmarkIcon,
-              size: 24,
-            )
-          ]),
-          SizedBox(
-            height: 2,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RatingBarIndicator(
-                rating: rating,
-                itemBuilder: (context, index) => Icon(
-                  Icons.star,
-                  color: colorIconRatings,
-                ),
-                itemCount: 5,
-                itemSize: 25,
-                direction: Axis.horizontal,
-              ),
-              SizedBox(
-                width: 8,
-              ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
-                '($rating)',
+                title,
                 style: GoogleFonts.getFont(fontApp,
-                    fontSize: screenWidth(context) * 0.04,
-                    color: colorTextSubTitle,
-                    fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Ionicons.location,
-                color: colorText4,
-                size: 16,
+                    textStyle: TextStyle(
+                        color: colorTextTitle,
+                        fontSize: screenWidth(context) * 0.058,
+                        fontWeight: FontWeight.w600)),
               ),
               SizedBox(
                 width: 8,
               ),
-              Text(
-                'Quito, Ecuador, $distance',
-                style: GoogleFonts.getFont(
-                  fontApp,
-                  fontSize: screenWidth(context) * 0.04,
-                  color: colorText4,
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
               Icon(
-                Ionicons.logo_usd,
-                color: colorText2,
-                size: 20,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                'Salario minimo',
-                style: GoogleFonts.getFont(
-                  fontApp,
-                  fontSize: screenWidth(context) * 0.045,
-                  color: colorText2,
-                ),
+                Ionicons.checkmark_circle,
+                color: colorCheckmarkIcon,
+                size: 24,
               )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
+            ]),
+            SizedBox(
+              height: 2,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 4,
-                      backgroundColor: colorText5,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: 'Tipo de trabajo ',
-                        style: GoogleFonts.getFont(fontApp,
-                            fontWeight: FontWeight.w700,
-                            color: colorText5,
-                            fontSize: screenWidth(context) * 0.045),
-                        children: [
-                          TextSpan(
-                              text: ' de la persona',
-                              style: GoogleFonts.getFont(fontApp,
-                                  color: colorText5,
-                                  fontWeight: FontWeight.w400)),
-                        ],
-                      ),
-                    )
-                  ],
+                RatingBarIndicator(
+                  rating: rating,
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star,
+                    color: colorIconRatings,
+                  ),
+                  itemCount: 5,
+                  itemSize: 25,
+                  direction: Axis.horizontal,
                 ),
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 4,
-                      backgroundColor: colorText5,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: '112',
-                        style: GoogleFonts.getFont(fontApp,
-                            fontWeight: FontWeight.w700,
-                            color: colorText5,
-                            fontSize: screenWidth(context) * 0.045),
-                        children: [
-                          TextSpan(
-                              text: ' clientes',
-                              style: GoogleFonts.getFont(fontApp,
-                                  color: colorText5,
-                                  fontWeight: FontWeight.w400)),
-                        ],
-                      ),
-                    )
-                  ],
+                SizedBox(
+                  width: 8,
                 ),
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 4,
-                      backgroundColor: colorText5,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: 'Se unió hace ',
-                        style: GoogleFonts.getFont(fontApp,
-                            fontWeight: FontWeight.w400,
-                            color: colorText5,
-                            fontSize: screenWidth(context) * 0.045),
-                        children: [
-                          TextSpan(
-                              text: ' 3 meses',
-                              style: GoogleFonts.getFont(fontApp,
-                                  color: colorText5,
-                                  fontWeight: FontWeight.w700)),
-                        ],
-                      ),
-                    )
-                  ],
+                Text(
+                  '($rating)',
+                  style: GoogleFonts.getFont(fontApp,
+                      fontSize: screenWidth(context) * 0.04,
+                      color: colorTextSubTitle,
+                      fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Ionicons.location,
+                  color: colorText4,
+                  size: 16,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  'Quito, Ecuador, $distance',
+                  style: GoogleFonts.getFont(
+                    fontApp,
+                    fontSize: screenWidth(context) * 0.04,
+                    color: colorText4,
+                  ),
                 )
               ],
             ),
-          ),
-          LargeButton(
-            text: '${S.current.mainPage34} $title',
-            onTap: () {
-              Navigator.pop(context);
-              //Navigator.pushNamed(context, 'moreAboutPage');
-              showGeneralDialog(
-                barrierLabel: "Label",
-                barrierDismissible: false,
-                barrierColor: Colors.black.withOpacity(0.5),
-                transitionDuration: Duration(milliseconds: 300),
-                context: context,
-                pageBuilder: (context, anim1, anim2) {
-                  return MoreAboutPage();
-                },
-                transitionBuilder: (context, anim1, anim2, child) {
-                  return SlideTransition(
-                    position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
-                        .animate(anim1),
-                    child: child,
-                  );
-                },
-              );
-            },
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          LargeButton(
-            text: S.current.mainPage33,
-            onTap: () {
-              Navigator.pushNamed(context, 'chatPage');
-            },
-            color: colorPrimaryButtonText,
-            backgroundColor: colorPrimaryButton,
-            elevation: 10,
-            shadow: colorPrimaryButton.withOpacity(0.4),
-          ),
-        ],
-      ),
-    );
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Ionicons.logo_usd,
+                  color: colorText2,
+                  size: 20,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  'Salario minimo',
+                  style: GoogleFonts.getFont(
+                    fontApp,
+                    fontSize: screenWidth(context) * 0.045,
+                    color: colorText2,
+                  ),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 4,
+                        backgroundColor: colorText5,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          text: 'Tipo de trabajo ',
+                          style: GoogleFonts.getFont(fontApp,
+                              fontWeight: FontWeight.w700,
+                              color: colorText5,
+                              fontSize: screenWidth(context) * 0.045),
+                          children: [
+                            TextSpan(
+                                text: ' de la persona',
+                                style: GoogleFonts.getFont(fontApp,
+                                    color: colorText5,
+                                    fontWeight: FontWeight.w400)),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 4,
+                        backgroundColor: colorText5,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          text: '112',
+                          style: GoogleFonts.getFont(fontApp,
+                              fontWeight: FontWeight.w700,
+                              color: colorText5,
+                              fontSize: screenWidth(context) * 0.045),
+                          children: [
+                            TextSpan(
+                                text: ' clientes',
+                                style: GoogleFonts.getFont(fontApp,
+                                    color: colorText5,
+                                    fontWeight: FontWeight.w400)),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 4,
+                        backgroundColor: colorText5,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          text: 'Se unió hace ',
+                          style: GoogleFonts.getFont(fontApp,
+                              fontWeight: FontWeight.w400,
+                              color: colorText5,
+                              fontSize: screenWidth(context) * 0.045),
+                          children: [
+                            TextSpan(
+                                text: ' 3 meses',
+                                style: GoogleFonts.getFont(fontApp,
+                                    color: colorText5,
+                                    fontWeight: FontWeight.w700)),
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            LargeButton(
+              text: '${S.current.mainPage34} $title',
+              onTap: () {
+                BlocProvider.of<WorkerSelectedBloc>(context)
+                    .add(SelectWorker(idWorker));
+                Navigator.pop(context);
+                //Navigator.pushNamed(context, 'moreAboutPage');
+                showGeneralDialog(
+                  barrierLabel: "Label",
+                  barrierDismissible: false,
+                  barrierColor: Colors.black.withOpacity(0.5),
+                  transitionDuration: Duration(milliseconds: 300),
+                  context: context,
+                  pageBuilder: (context, anim1, anim2) {
+                    return MoreAboutPage();
+                  },
+                  transitionBuilder: (context, anim1, anim2, child) {
+                    return SlideTransition(
+                      position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
+                          .animate(anim1),
+                      child: child,
+                    );
+                  },
+                );
+              },
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            LargeButton(
+              text: S.current.mainPage33,
+              onTap: () {
+                BlocProvider.of<ChatSelectedBloc>(context)
+                    .add(SelectChat(idWorker));
+                Navigator.pushNamed(context, 'chatPage');
+              },
+              color: colorPrimaryButtonText,
+              backgroundColor: colorPrimaryButton,
+              elevation: 10,
+              shadow: colorPrimaryButton.withOpacity(0.4),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

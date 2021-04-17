@@ -48,8 +48,8 @@ class _ModalSearchState extends State<ModalSearch> {
     search = search.toLowerCase();
     filter(search);
     return filteredList
-        .map((item) => ItemElement(
-            item.name, item.lastMessage, item.urlPhoto, item.unReadMessages))
+        .map((item) => ItemElement(item.idWorker, item.name, item.lastName,
+            item.lastMessage, item.urlPhoto, item.unReadMessages))
         .toList();
   }
 

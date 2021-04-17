@@ -1,4 +1,5 @@
 class WorkerModel {
+  final String idWorker;
   final String name;
   final String lastName;
   final String urlPhoto;
@@ -16,21 +17,23 @@ class WorkerModel {
   final List<String> skills;
 
   WorkerModel(
-      this.name,
-      this.lastName,
-      this.urlPhoto,
-      this.verified,
-      this.rating,
-      this.address,
-      this.distance,
-      this.minSalary,
-      this.listJobs,
-      this.typeJob,
-      this.clients,
-      this.joinedTime,
-      this.jobs,
-      this.studies,
-      this.skills);
+    this.idWorker,
+    this.name,
+    this.lastName,
+    this.urlPhoto,
+    this.verified,
+    this.rating,
+    this.address,
+    this.distance,
+    this.minSalary,
+    this.listJobs,
+    this.typeJob,
+    this.clients,
+    this.joinedTime,
+    this.jobs,
+    this.studies,
+    this.skills,
+  );
 }
 
 class Job {
