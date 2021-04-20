@@ -1,7 +1,7 @@
 import 'package:AppWork/models/mainPage5/itemModel.dart';
 
-List<ItemElement> chatList = [
-  ItemElement(
+List<ItemChat> chatList = [
+  ItemChat(
     '004',
     'Jhon',
     'Lennon',
@@ -9,63 +9,63 @@ List<ItemElement> chatList = [
     'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
     3,
   ),
-  ItemElement(
+  ItemChat(
       '005',
       'Ana',
       'Mena',
       'Ultimo mensaje',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
       0),
-  ItemElement(
+  ItemChat(
       '006',
       'Luis',
       'Sanchez',
       'Ultimo mensaje',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
       2),
-  ItemElement(
+  ItemChat(
       '007',
       'Pedro',
       'Picapiedras',
       'Ultimo mensaje',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
       0),
-  ItemElement(
+  ItemChat(
       '008',
       'Pablo',
       'Morsa',
       'Ultimo mensaje',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
       4),
-  ItemElement(
+  ItemChat(
       '009',
       'Maria',
       'Jose',
       'Ultimo mensaje',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
       0),
-  ItemElement(
+  ItemChat(
       '010',
       'Daniela',
       'Rae',
       'Ultimo mensaje',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
       0),
-  ItemElement(
+  ItemChat(
       '011',
       'Carly',
       'Jepsen',
       'Ultimo mensaje',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
       0),
-  ItemElement(
+  ItemChat(
       '012',
       'Jackie',
       'Chan',
       'Ultimo mensaje',
       'https://static.toiimg.com/photo/79610635.cms?width=500&resizemode=4&imgsize=1364307',
       0),
-  ItemElement(
+  ItemChat(
       '013',
       'Carlos',
       'Perez',

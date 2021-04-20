@@ -1,9 +1,11 @@
+import 'package:AppWork/bloc/local/chatListBloc/chatList_bloc.dart';
 import 'package:AppWork/bloc/local/chatSelectedBloc/chatSelected_bloc.dart';
 import 'package:AppWork/bloc/local/workerSelectedBloc/workerSelected_bloc.dart';
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
 import 'package:AppWork/data/mainPage3/workerList.dart';
+import 'package:AppWork/models/mainPage5/itemModel.dart';
 import 'package:AppWork/widgets/generics/card.dart';
 import 'package:AppWork/widgets/generics/largeButton.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
@@ -633,6 +635,8 @@ class _ModalBottom extends StatelessWidget {
               onTap: () {
                 BlocProvider.of<ChatSelectedBloc>(context)
                     .add(SelectChat(idWorker));
+                BlocProvider.of<ChatListBloc>(context)
+                    .add(AddChatToListByID(idWorker));
                 Navigator.pushNamed(context, 'chatPage');
               },
               color: colorPrimaryButtonText,

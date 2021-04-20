@@ -43,12 +43,12 @@ class _ModalSearchState extends State<ModalSearch> {
   //});
   //}
 
-  Future<List<ItemElement>> search(String search) async {
+  Future<List<ItemChat>> search(String search) async {
     await Future.delayed(Duration(seconds: 1));
     search = search.toLowerCase();
     filter(search);
     return filteredList
-        .map((item) => ItemElement(item.idWorker, item.name, item.lastName,
+        .map((item) => ItemChat(item.idWorker, item.name, item.lastName,
             item.lastMessage, item.urlPhoto, item.unReadMessages))
         .toList();
   }
@@ -59,10 +59,10 @@ class _ModalSearchState extends State<ModalSearch> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(right: 16),
-          child: SearchBar<ItemElement>(
+          child: SearchBar<ItemChat>(
             minimumChars: -1,
             onSearch: search,
-            onItemFound: (ItemElement item, int index) {
+            onItemFound: (ItemChat item, int index) {
               return ListTile(
                 onTap: () {
                   Navigator.pop(context);

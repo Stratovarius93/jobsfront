@@ -1,3 +1,4 @@
+import 'package:AppWork/bloc/local/chatListBloc/chatList_bloc.dart';
 import 'package:AppWork/bloc/local/chatSelectedBloc/chatSelected_bloc.dart';
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
@@ -10,7 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MainPage5 extends StatelessWidget {
+class MainPage5 extends StatefulWidget {
+  @override
+  _MainPage5State createState() => _MainPage5State();
+}
+
+class _MainPage5State extends State<MainPage5> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -18,6 +24,7 @@ class MainPage5 extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       slivers: [
         CupertinoSliverNavigationBar(
+          border: Border(bottom: BorderSide.none),
           backgroundColor: backgroundColor2,
           largeTitle: Text(
             'Chat',
@@ -84,6 +91,7 @@ class MainPage5 extends StatelessWidget {
         SliverList(
           delegate: SliverChildListDelegate([
             Column(
+              verticalDirection: VerticalDirection.up,
               children: chatList.map((item) {
                 var index = chatList.indexOf(item);
                 return _Item(
@@ -92,6 +100,17 @@ class MainPage5 extends StatelessWidget {
                   urlPhoto: item.urlPhoto,
                   unReadMessages: item.unReadMessages,
                   index: index,
+                  onDismissed: (dismissed) {
+                    BlocProvider.of<ChatListBloc>(context)
+                        .add(RemoveChatFromList(item));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        duration: Duration(milliseconds: 1000),
+                        backgroundColor: colorPrimaryButton,
+                        content: Text(
+                          "Chat deleted",
+                          style: GoogleFonts.getFont(fontApp),
+                        )));
+                  },
                 );
               }).toList(),
             ),
@@ -111,6 +130,7 @@ class _Item extends StatefulWidget {
   final String urlPhoto;
   final int unReadMessages;
   final int index;
+  final Function(DismissDirection) onDismissed;
   const _Item({
     Key key,
     @required this.title,
@@ -118,6 +138,7 @@ class _Item extends StatefulWidget {
     this.urlPhoto,
     this.unReadMessages = 0,
     this.index,
+    this.onDismissed,
   }) : super(key: key);
 
   @override
@@ -145,12 +166,7 @@ class __ItemState extends State<_Item> {
       ),
       key: UniqueKey(),
       onDismissed: (direction) {
-        setState(() {
-          chatList.removeAt(widget.index);
-        });
-
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Chat deleted")));
+        widget.onDismissed(direction);
       },
       child: Container(
         decoration: BoxDecoration(color: Colors.white),
@@ -172,7 +188,8 @@ class __ItemState extends State<_Item> {
                   textStyle: TextStyle(
                       color: colorTextTitle,
                       fontSize: screenWidth(context) * 0.05,
-                      fontWeight: (widget.unReadMessages > 0)
+                      fontWeight: (widget.unReadMessages > 0 ||
+                              widget.subtitle == 'New Contact')
                           ? FontWeight.w600
                           : FontWeight.w400))),
           subtitle: Text(
@@ -182,7 +199,8 @@ class __ItemState extends State<_Item> {
                     color:
                         (widget.unReadMessages > 0) ? colorText6 : colorText2,
                     fontSize: screenWidth(context) * 0.045,
-                    fontWeight: (widget.unReadMessages > 0)
+                    fontWeight: (widget.unReadMessages > 0 ||
+                            widget.subtitle == 'New Contact')
                         ? FontWeight.w500
                         : FontWeight.w300)),
           ),

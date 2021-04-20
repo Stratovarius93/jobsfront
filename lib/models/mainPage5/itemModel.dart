@@ -1,4 +1,4 @@
-class ItemElement {
+class ItemChat {
   final String idWorker;
   final String name;
   final String lastName;
@@ -6,8 +6,12 @@ class ItemElement {
   final String urlPhoto;
   final int unReadMessages;
 
-  ItemElement(this.idWorker, this.name, this.lastName, this.lastMessage,
+  ItemChat(this.idWorker, this.name, this.lastName, this.lastMessage,
       this.urlPhoto, this.unReadMessages);
+  @override
+  String toString() {
+    return '[$idWorker]';
+  }
 }
 
 class Post {

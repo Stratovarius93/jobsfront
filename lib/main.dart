@@ -1,3 +1,4 @@
+import 'package:AppWork/bloc/local/chatListBloc/chatList_bloc.dart';
 import 'package:AppWork/bloc/local/chatSelectedBloc/chatSelected_bloc.dart';
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/generated/l10n.dart';
@@ -42,6 +43,9 @@ class AppState extends StatelessWidget {
       ),
       BlocProvider<ChatSelectedBloc>(
         create: (_) => ChatSelectedBloc(),
+      ),
+      BlocProvider<ChatListBloc>(
+        create: (_) => ChatListBloc(),
       )
     ], child: MyApp());
   }

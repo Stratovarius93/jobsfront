@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:AppWork/data/mainPage3/workerList.dart';
+import 'package:AppWork/data/mainPage5/chatList.dart';
 import 'package:AppWork/models/mainPage3/workerModel.dart';
 import 'package:AppWork/models/mainPage5/itemModel.dart';
 import 'package:bloc/bloc.dart';
@@ -24,11 +25,11 @@ class ChatSelectedBloc extends Bloc<ChatSelectedEvent, ChatSelectedState> {
 
 Stream<ChatSelectedState> _selectChat(String idWorker) async* {
   List<WorkerModel> _list = workerList;
-  ItemElement _itemElement;
+  ItemChat _itemElement;
   for (var i = 0, len = _list.length; i < len; ++i) {
     if (_list[i].idWorker == idWorker) {
-      _itemElement = ItemElement(idWorker, _list[i].name, _list[i].lastName,
-          'Last message', _list[i].urlPhoto, 1);
+      _itemElement = ItemChat(idWorker, _list[i].name, _list[i].lastName,
+          'New Contact', _list[i].urlPhoto, 1);
     }
   }
   yield ChatSelectedState(
