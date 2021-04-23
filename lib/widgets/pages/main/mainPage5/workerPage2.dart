@@ -4,6 +4,7 @@ import 'package:AppWork/widgets/generics/loginCategoryText.dart';
 import 'package:AppWork/widgets/generics/loginTitle.dart';
 import 'package:AppWork/widgets/generics/mainInput.dart';
 import 'package:AppWork/widgets/generics/mainInputDropdown.dart';
+import 'package:AppWork/widgets/generics/sliverPersistenceTitle.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -23,92 +24,95 @@ class WorkerPage2 extends StatefulWidget {
 class _WorkerPage2State extends State<WorkerPage2> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: backgroundColor,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: colorPrimaryButton,
-          onPressed: () {
-            Navigator.pushNamed(context, 'workerPage3');
-          },
-          child: Icon(Ionicons.arrow_forward_outline),
-        ),
-        body: Stack(children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: ListView(
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+          backgroundColor: backgroundColor,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: colorPrimaryButton,
+            onPressed: () {
+              Navigator.pushNamed(context, 'workerPage3');
+            },
+            child: Icon(Ionicons.arrow_forward_outline),
+          ),
+          body: SafeArea(
+            child: CustomScrollView(
               physics: BouncingScrollPhysics(),
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GenericLoginTitle(title: 'Contratar'),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Image.network(
-                          'https://album.mediaset.es/eimg/10000/2021/01/14/clipping_VNB9Tj_e4de.jpg?w=480'),
-                      SizedBox(
-                        height: 32,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: GenericLoginCategoryText(
-                          title: 'Categoria',
-                        ),
-                      ),
-                      GenericMainInputDropdown(
-                        items: _list,
-                        dropdownValue: _dropdownValue,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            _dropdownValue = newValue;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 32,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: GenericLoginCategoryText(
-                          title: 'Lugar',
-                        ),
-                      ),
-                      GenericMainInput(
-                        textInputType: TextInputType.streetAddress,
-                        suffixIcon: Icon(Ionicons.location_sharp),
-                      ),
-                      SizedBox(
-                        height: 32,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: GenericLoginCategoryText(
-                          title: 'Descripcion',
-                        ),
-                      ),
-                      GenericMainInput(
-                        suffixIcon: Icon(Icons.edit),
-                        maxLines: 3,
-                        minLines: 1,
-                        scrollPhysics: BouncingScrollPhysics(),
-                      ),
-                    ],
-                  ),
+              slivers: [
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: SliverPersistenceTitle(
+                      title: 'Contratar',
+                      enableBackArrow: true,
+                      onTap: () {
+                        Navigator.pop(context);
+                      }),
                 ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        Image.network(
+                            'https://album.mediaset.es/eimg/10000/2021/01/14/clipping_VNB9Tj_e4de.jpg?w=480'),
+                        SizedBox(
+                          height: 32,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: GenericLoginCategoryText(
+                            title: 'Categoria',
+                          ),
+                        ),
+                        GenericMainInputDropdown(
+                          items: _list,
+                          dropdownValue: _dropdownValue,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _dropdownValue = newValue;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 32,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: GenericLoginCategoryText(
+                            title: 'Lugar',
+                          ),
+                        ),
+                        GenericMainInput(
+                          textInputType: TextInputType.streetAddress,
+                          suffixIcon: Icon(Ionicons.location_sharp),
+                        ),
+                        SizedBox(
+                          height: 32,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: GenericLoginCategoryText(
+                            title: 'Descripcion',
+                          ),
+                        ),
+                        GenericMainInput(
+                          suffixIcon: Icon(Icons.edit),
+                          maxLines: 3,
+                          minLines: 1,
+                          scrollPhysics: BouncingScrollPhysics(),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16),
-            child: BackArrow(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-        ]));
+          )),
+    );
   }
 }
