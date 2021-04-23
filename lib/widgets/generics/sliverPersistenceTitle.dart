@@ -29,7 +29,6 @@ class SliverPersistenceTitle extends SliverPersistentHeaderDelegate {
     final bottomArrow = (_maxBottomArrow * (1 - percent))
         .clamp(_minBottomArrow, _maxBottomArrow);
     final blurRadius = (_minShadow + percent) * _maxShadow;
-    print(percent);
     return Container(
       decoration: BoxDecoration(color: backgroundColor, boxShadow: [
         BoxShadow(

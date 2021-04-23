@@ -1,7 +1,6 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
-import 'package:AppWork/utils/shadows.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
 import 'package:AppWork/widgets/generics/mainInput.dart';
 import 'package:AppWork/widgets/generics/mainInputDropdown.dart';
@@ -162,7 +161,10 @@ class _WorkerPage3State extends State<WorkerPage3> {
                                   ),
                                 ],
                               )
-                            : Container()
+                            : Container(),
+                        SizedBox(
+                          height: 50,
+                        )
                       ],
                     ),
                   ),

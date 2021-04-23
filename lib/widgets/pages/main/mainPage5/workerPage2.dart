@@ -1,7 +1,5 @@
 import 'package:AppWork/constants/colors.dart';
-import 'package:AppWork/widgets/generics/backArrow.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
-import 'package:AppWork/widgets/generics/loginTitle.dart';
 import 'package:AppWork/widgets/generics/mainInput.dart';
 import 'package:AppWork/widgets/generics/mainInputDropdown.dart';
 import 'package:AppWork/widgets/generics/sliverPersistenceTitle.dart';
@@ -105,6 +103,9 @@ class _WorkerPage2State extends State<WorkerPage2> {
                           maxLines: 3,
                           minLines: 1,
                           scrollPhysics: BouncingScrollPhysics(),
+                        ),
+                        SizedBox(
+                          height: 80,
                         ),
                       ],
                     ),

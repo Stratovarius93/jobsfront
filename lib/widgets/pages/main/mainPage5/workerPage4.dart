@@ -1,9 +1,7 @@
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/sizes.dart';
-import 'package:AppWork/widgets/generics/backArrow.dart';
 import 'package:AppWork/widgets/generics/largeButton.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
-import 'package:AppWork/widgets/generics/loginTitle.dart';
 import 'package:AppWork/widgets/generics/mainInput.dart';
 import 'package:AppWork/widgets/generics/mainInputDropdown.dart';
 import 'package:AppWork/widgets/generics/sliverPersistenceTitle.dart';
@@ -22,6 +20,15 @@ String _valueMonth = _listMonth[0];
 String _valueYear = _listYear[0];
 String _valueState = _listState[0];
 String _valueCountry = _listCountries[0];
+
+class CardSystem {
+  static const String VISA = 'Visa';
+  static const String MASTERCARD = 'Mastercard';
+  static const String JCB = 'JCB';
+  static const String DISCOVER = 'Discover';
+  static const String MAESTRO = 'Maestro';
+  static const String AMERICAN_EXPRESS = 'Amex';
+}
 
 class WorkerPage4 extends StatefulWidget {
   @override
