@@ -21,15 +21,6 @@ String _valueYear = _listYear[0];
 String _valueState = _listState[0];
 String _valueCountry = _listCountries[0];
 
-class CardSystem {
-  static const String VISA = 'Visa';
-  static const String MASTERCARD = 'Mastercard';
-  static const String JCB = 'JCB';
-  static const String DISCOVER = 'Discover';
-  static const String MAESTRO = 'Maestro';
-  static const String AMERICAN_EXPRESS = 'Amex';
-}
-
 class WorkerPage4 extends StatefulWidget {
   @override
   _WorkerPage4State createState() => _WorkerPage4State();
