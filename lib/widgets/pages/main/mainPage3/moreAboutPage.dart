@@ -1,3 +1,4 @@
+import 'package:AppWork/bloc/local/chatListBloc/chatList_bloc.dart';
 import 'package:AppWork/bloc/local/chatSelectedBloc/chatSelected_bloc.dart';
 import 'package:AppWork/bloc/local/workerSelectedBloc/workerSelected_bloc.dart';
 import 'package:AppWork/constants/colors.dart';
@@ -75,7 +76,10 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                                 state.name,
                                 style: GoogleFonts.getFont(fontApp,
                                     textStyle: TextStyle(
-                                        color: colorTextTitle,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            .color,
                                         fontSize: screenWidth(context) * 0.058,
                                         fontWeight: FontWeight.w600)),
                               ),
@@ -110,7 +114,10 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                                   '(2.7)',
                                   style: GoogleFonts.getFont(fontApp,
                                       fontSize: screenWidth(context) * 0.04,
-                                      color: colorTextSubTitle,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          .color,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ],
@@ -151,7 +158,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                           children: [
                             Icon(
                               Ionicons.logo_usd,
-                              color: colorText2,
+                              color: colorBodyText1,
                               size: 20,
                             ),
                             SizedBox(
@@ -162,7 +169,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                               style: GoogleFonts.getFont(
                                 fontApp,
                                 fontSize: screenWidth(context) * 0.045,
-                                color: colorText2,
+                                color: colorBodyText1,
                               ),
                             )
                           ],
@@ -174,6 +181,8 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                     height: 16,
                   ),
                   CupertinoSlidingSegmentedControl(
+                      thumbColor:
+                          Theme.of(context).toggleButtonsTheme.selectedColor,
                       children: {
                         0: Text(S.current.moreAboutPage0),
                         1: Text(S.current.moreAboutPage1),
@@ -249,6 +258,8 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                       onTap: () {
                         BlocProvider.of<ChatSelectedBloc>(context)
                             .add(SelectChat(state.idWorker));
+                        BlocProvider.of<ChatListBloc>(context)
+                            .add(AddChatToListByID(state.idWorker));
                         Navigator.pushNamed(context, 'chatPage');
                       },
                       color: colorPrimaryButtonText,
@@ -318,7 +329,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: GoogleFonts.getFont(fontApp,
-                      color: colorText1,
+                      color: Theme.of(context).textTheme.bodyText1.color,
                       fontSize: screenWidth(context) * 0.04,
                       fontWeight: FontWeight.w400),
                 ),
@@ -341,7 +352,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
         Container(
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).cardTheme.color,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
@@ -361,6 +372,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.getFont(fontApp,
                     textStyle: TextStyle(
+                        color: Theme.of(context).textTheme.headline6.color,
                         fontSize: screenWidth(context) * 0.045,
                         fontWeight: FontWeight.w500)),
               ),
@@ -371,6 +383,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
                 softWrap: false,
                 style: GoogleFonts.getFont(fontApp,
                     textStyle: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText1.color,
                         fontSize: screenWidth(context) * 0.045,
                         fontWeight: FontWeight.w300)),
               )
@@ -395,7 +408,7 @@ class _MoreAboutPageState extends State<MoreAboutPage> {
         Container(
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).cardTheme.color,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(

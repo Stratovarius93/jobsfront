@@ -5,6 +5,7 @@ import 'package:AppWork/constants/sizes.dart';
 import 'package:AppWork/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -18,12 +19,14 @@ class ChatPage extends StatelessWidget {
         builder: (BuildContext context, state) {
       return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: colorTextTitle),
+          brightness: Theme.of(context).appBarTheme.brightness,
+          iconTheme: IconThemeData(
+              color: Theme.of(context).appBarTheme.actionsIconTheme.color),
           title: Text(
             '${state.name} ${state.lastName}',
             style: GoogleFonts.getFont(fontApp,
                 textStyle: TextStyle(
-                    color: colorTextTitle,
+                    color: Theme.of(context).textTheme.headline6.color,
                     fontSize: screenWidth(context) * 0.05)),
           ),
           actions: [
@@ -43,38 +46,53 @@ class ChatPage extends StatelessWidget {
                   )),
             )
           ],
-          backgroundColor: backgroundColor2,
+          backgroundColor:
+              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         ),
         body: Stack(
           children: [
             ListView.builder(
               reverse: true,
               controller: _controller,
-              itemCount: messages.length,
+              itemCount: state.messagesList.length,
               shrinkWrap: true,
               padding: EdgeInsets.only(top: 10, bottom: 90),
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                int reverseIndex = messages.length - 1 - index;
+                int reverseIndex = state.messagesList.length - 1 - index;
                 return Container(
                   padding:
                       EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
                   child: Align(
-                    alignment: (messages[reverseIndex].messageType == "receiver"
+                    alignment: (state.messagesList[reverseIndex].messageType ==
+                            "receiver"
                         ? Alignment.topLeft
                         : Alignment.topRight),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: (messages[reverseIndex].messageType == "receiver"
-                            ? Colors.grey.shade200
+                        color: (state.messagesList[reverseIndex].messageType ==
+                                "receiver"
+                            ? Theme.of(context)
+                                .textTheme
+                                .subtitle1
+                                .color
+                                .withOpacity(0.1)
                             : Colors.blue[200]),
                       ),
                       padding: EdgeInsets.all(16),
                       child: Text(
-                        messages[reverseIndex].messageContent,
+                        state.messagesList[reverseIndex].messageContent,
                         style: GoogleFonts.getFont(fontApp,
                             textStyle: TextStyle(
+                                color: (state.messagesList[reverseIndex]
+                                            .messageType ==
+                                        "receiver"
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .headline5
+                                        .color
+                                    : Colors.black),
                                 fontSize: screenWidth(context) * 0.04)),
                         //style: TextStyle(fontSize: 15),
                       ),
@@ -86,15 +104,20 @@ class ChatPage extends StatelessWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: Container(
-                padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
+                padding: EdgeInsets.only(left: 10, bottom: 3, top: 3),
                 //height: 60,
                 width: double.infinity,
-                decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 12,
-                      offset: Offset(0.0, 0.0))
-                ]),
+                decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .bottomNavigationBarTheme
+                        .backgroundColor,
+                    boxShadow: [
+                      BoxShadow(
+                          //color: Colors.grey.withOpacity(0.5),
+                          color: Theme.of(context).cardTheme.shadowColor,
+                          blurRadius: 12,
+                          offset: Offset(0.0, 0.0))
+                    ]),
                 child: Row(
                   children: [
                     IconButton(
@@ -124,7 +147,11 @@ class ChatPage extends StatelessWidget {
                                 fontSize: screenWidth(context) * 0.045)),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: Color(0xffF0F1F5),
+                          color: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              .color
+                              .withOpacity(0.1),
                         ),
                       ),
                     ),
@@ -154,36 +181,3 @@ class ChatPage extends StatelessWidget {
     });
   }
 }
-
-class ChatMessage {
-  String messageContent;
-  String messageType;
-  ChatMessage({@required this.messageContent, @required this.messageType});
-}
-
-List<ChatMessage> messages = [
-  ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-  ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-      messageType: "sender"),
-  ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Is there any thing wrong?", messageType: "sender"),
-  ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-  ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-      messageType: "sender"),
-  ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Is there any thing wrong?", messageType: "sender"),
-  ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-  ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Hey Kriss, I am doing fine dude. wbu?",
-      messageType: "sender"),
-  ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-  ChatMessage(
-      messageContent: "Is there any thing wrong?", messageType: "sender"),
-];

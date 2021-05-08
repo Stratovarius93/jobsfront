@@ -25,15 +25,16 @@ class _MainPage5State extends State<MainPage5> {
       slivers: [
         CupertinoSliverNavigationBar(
           border: Border(bottom: BorderSide.none),
-          backgroundColor: backgroundColor2,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           largeTitle: Text(
             'Chat',
             style: GoogleFonts.getFont(fontApp,
-                textStyle: TextStyle(color: colorTextTitle)),
+                textStyle: TextStyle(
+                    color: Theme.of(context).textTheme.headline6.color)),
           ),
         ),
         SliverAppBar(
-          backgroundColor: backgroundColor2,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           flexibleSpace: FlexibleSpaceBar(
               //titlePadding: EdgeInsets.only(left: 0),
               titlePadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -62,9 +63,13 @@ class _MainPage5State extends State<MainPage5> {
                   padding: EdgeInsets.only(left: 0),
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.0),
-                      color: Color(0xffF0F1F5),
-                    ),
+                        borderRadius: BorderRadius.circular(8.0),
+                        //color: Color(0xffF0F1F5),
+                        color: Theme.of(context)
+                            .textTheme
+                            .subtitle1
+                            .color
+                            .withOpacity(0.1)),
                     child: Row(
                       children: [
                         Padding(
@@ -95,7 +100,7 @@ class _MainPage5State extends State<MainPage5> {
               children: chatList.map((item) {
                 var index = chatList.indexOf(item);
                 return _Item(
-                  title: item.name,
+                  title: '${item.name} ${item.lastName}',
                   subtitle: item.lastMessage,
                   urlPhoto: item.urlPhoto,
                   unReadMessages: item.unReadMessages,
@@ -169,7 +174,8 @@ class __ItemState extends State<_Item> {
         widget.onDismissed(direction);
       },
       child: Container(
-        decoration: BoxDecoration(color: Colors.white),
+        decoration:
+            BoxDecoration(color: Theme.of(context).scaffoldBackgroundColor),
         child: ListTile(
           onTap: () {
             BlocProvider.of<ChatSelectedBloc>(context)
@@ -186,7 +192,7 @@ class __ItemState extends State<_Item> {
           title: Text(widget.title,
               style: GoogleFonts.getFont(fontApp,
                   textStyle: TextStyle(
-                      color: colorTextTitle,
+                      color: Theme.of(context).textTheme.headline6.color,
                       fontSize: screenWidth(context) * 0.05,
                       fontWeight: (widget.unReadMessages > 0 ||
                               widget.subtitle == 'New Contact')
@@ -196,8 +202,9 @@ class __ItemState extends State<_Item> {
             widget.subtitle,
             style: GoogleFonts.getFont(fontApp,
                 textStyle: TextStyle(
-                    color:
-                        (widget.unReadMessages > 0) ? colorText6 : colorText2,
+                    color: (widget.unReadMessages > 0)
+                        ? Theme.of(context).textTheme.headline5.color
+                        : Theme.of(context).textTheme.bodyText1.color,
                     fontSize: screenWidth(context) * 0.045,
                     fontWeight: (widget.unReadMessages > 0 ||
                             widget.subtitle == 'New Contact')

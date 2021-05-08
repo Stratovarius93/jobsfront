@@ -6,52 +6,59 @@ import 'package:AppWork/widgets/generics/backArrow.dart';
 import 'package:AppWork/widgets/generics/loginTitle.dart';
 import 'package:AppWork/widgets/generics/primaryButton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage6 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 40,
-              ),
-              GenericLoginTitle(
-                title: '${S.current.page6Title}',
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Expanded(
-                child: _loginGridView(context),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: GenericPrimaryButton(
-                  title: '${S.current.page6Button}',
-                  onPressed: () {
-                    print('Done');
-                    Navigator.pushReplacementNamed(context, 'mainIndex');
-                  },
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Theme.of(context).brightness,
+          statusBarIconBrightness: Theme.of(context).brightness),
+      child: Scaffold(
+        body: Stack(children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 40,
                 ),
-              ),
-            ],
+                GenericLoginTitle(
+                  title: '${S.current.page6Title}',
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Expanded(
+                  child: _loginGridView(context),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: GenericPrimaryButton(
+                    title: '${S.current.page6Button}',
+                    onPressed: () {
+                      print('Done');
+                      Navigator.pushReplacementNamed(context, 'mainIndex');
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 16),
-          child: BackArrow(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'loginPage5');
-            },
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: BackArrow(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'loginPage5');
+              },
+            ),
           ),
-        ),
-      ]),
-      backgroundColor: backgroundColor,
+        ]),
+        backgroundColor: Theme.of(context).backgroundColor,
+      ),
     );
   }
 }
@@ -82,7 +89,7 @@ Widget _loginGridView(BuildContext context) {
                 'Item $index',
                 style: GoogleFonts.getFont(fontApp,
                     textStyle: TextStyle(
-                        color: colorTextSubTitle,
+                        color: Theme.of(context).textTheme.subtitle1.color,
                         fontSize: screenWidth(context) * 0.045)),
               )
             ],
@@ -98,7 +105,7 @@ Widget _card(BuildContext context, Widget child) {
     child: child,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        color: colorBackgroundCard,
+        color: Theme.of(context).cardTheme.color,
         boxShadow: [
           BoxShadow(
               color: colorShadowCard.withOpacity(0.2),

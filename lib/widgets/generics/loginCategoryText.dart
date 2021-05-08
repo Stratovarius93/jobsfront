@@ -1,4 +1,3 @@
-import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ class GenericLoginCategoryText extends StatelessWidget {
     return Text(title.toUpperCase(),
         style: GoogleFonts.getFont(fontApp,
             textStyle: TextStyle(
-              color: colorTextSubTitle,
+              color: Theme.of(context).textTheme.subtitle1.color,
               fontSize: screenWidth(context) * 0.045,
               fontWeight: FontWeight.w600,
             )));

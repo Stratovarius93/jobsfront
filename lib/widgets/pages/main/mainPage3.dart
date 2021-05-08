@@ -5,7 +5,6 @@ import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
 import 'package:AppWork/data/mainPage3/workerList.dart';
-import 'package:AppWork/models/mainPage5/itemModel.dart';
 import 'package:AppWork/widgets/generics/card.dart';
 import 'package:AppWork/widgets/generics/largeButton.dart';
 import 'package:AppWork/widgets/generics/loginCategoryText.dart';
@@ -26,95 +25,99 @@ class MainPage3 extends StatelessWidget {
   Widget build(BuildContext context) {
     _cardHeight = screenWidth(context) * 0.58;
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 0, left: 16, right: 16),
-            child: GenericLoginTitle(
-              title: 'Username',
-              size: screenWidth(context) * 0.09,
+    return AnimatedTheme(
+      duration: Duration(milliseconds: 500),
+      data: Theme.of(context),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 0, left: 16, right: 16),
+              child: GenericLoginTitle(
+                title: 'Username',
+                size: screenWidth(context) * 0.09,
+              ),
             ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: GenericLoginCategoryText(
-              title: S.current.mainPage30,
+            SizedBox(
+              height: 16,
             ),
-          ),
-          Container(
-            height: _cardHeight,
-            child: ListView.builder(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GenericLoginCategoryText(
+                title: S.current.mainPage30,
+              ),
+            ),
+            Container(
+              height: _cardHeight,
+              child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: workerList.length,
+                  itemBuilder: (context, index) {
+                    return _card(
+                        context,
+                        workerList[index].idWorker,
+                        workerList[index].urlPhoto,
+                        workerList[index].name,
+                        workerList[index].lastName,
+                        workerList[index].verified,
+                        workerList[index].rating,
+                        workerList[index].distance,
+                        workerList[index].listJobs);
+                  }),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GenericLoginCategoryText(
+                title: S.current.mainPage31,
+              ),
+            ),
+            Expanded(
+              child: ListView(
                 physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: workerList.length,
-                itemBuilder: (context, index) {
-                  return _card(
-                      context,
-                      workerList[index].idWorker,
-                      workerList[index].urlPhoto,
-                      workerList[index].name,
-                      workerList[index].lastName,
-                      workerList[index].verified,
-                      workerList[index].rating,
-                      workerList[index].distance,
-                      workerList[index].listJobs);
-                }),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: GenericLoginCategoryText(
-              title: S.current.mainPage31,
+                shrinkWrap: true,
+                padding: EdgeInsets.only(top: 0),
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: 16, right: 16, bottom: 0, top: 0),
+                    child: _notificationsList([
+                      _notificationsItem(
+                          context,
+                          Ionicons.chatbubble,
+                          colorPrimaryButton,
+                          S.current.mainPage32,
+                          'Trabajador x te envio un men..'),
+                      _notificationsItem(
+                          context,
+                          Ionicons.chatbubble,
+                          colorPrimaryButton,
+                          S.current.mainPage32,
+                          'Trabajador x te envio un men..'),
+                      _notificationsItem(
+                          context,
+                          Ionicons.chatbubble,
+                          colorPrimaryButton,
+                          S.current.mainPage32,
+                          'Trabajador x te envio un men..'),
+                      _notificationsItem(
+                          context,
+                          Ionicons.chatbubble,
+                          colorPrimaryButton,
+                          S.current.mainPage32,
+                          'Trabajador x te envio un men..'),
+                      SizedBox(
+                        height: 96,
+                      )
+                    ]),
+                  )
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              shrinkWrap: true,
-              padding: EdgeInsets.only(top: 0),
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.only(left: 16, right: 16, bottom: 0, top: 0),
-                  child: _notificationsList([
-                    _notificationsItem(
-                        context,
-                        Ionicons.chatbubble,
-                        colorPrimaryButton,
-                        S.current.mainPage32,
-                        'Trabajador x te envio un men..'),
-                    _notificationsItem(
-                        context,
-                        Ionicons.chatbubble,
-                        colorPrimaryButton,
-                        S.current.mainPage32,
-                        'Trabajador x te envio un men..'),
-                    _notificationsItem(
-                        context,
-                        Ionicons.chatbubble,
-                        colorPrimaryButton,
-                        S.current.mainPage32,
-                        'Trabajador x te envio un men..'),
-                    _notificationsItem(
-                        context,
-                        Ionicons.chatbubble,
-                        colorPrimaryButton,
-                        S.current.mainPage32,
-                        'Trabajador x te envio un men..'),
-                    SizedBox(
-                      height: 96,
-                    )
-                  ]),
-                )
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -124,7 +127,7 @@ class MainPage3 extends StatelessWidget {
       children: [
         Icon(
           Ionicons.checkmark_circle,
-          color: colorText3,
+          color: Theme.of(context).textTheme.bodyText1.color,
           size: 16,
         ),
         SizedBox(
@@ -135,7 +138,7 @@ class MainPage3 extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: GoogleFonts.getFont(fontApp,
                   textStyle: TextStyle(
-                    color: colorText2,
+                    color: Theme.of(context).textTheme.bodyText1.color,
                     fontSize: fontSize,
                   ))),
         )
@@ -206,7 +209,10 @@ class MainPage3 extends StatelessWidget {
                             style: GoogleFonts.getFont(fontApp,
                                 textStyle: TextStyle(
                                     height: 1,
-                                    color: colorTextTitle,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        .color,
                                     fontSize: _cardHeight * 0.08,
                                     fontWeight: FontWeight.w600)),
                           ),
@@ -217,7 +223,10 @@ class MainPage3 extends StatelessWidget {
                                 style: GoogleFonts.getFont(fontApp,
                                     textStyle: TextStyle(
                                         height: 1,
-                                        color: colorTextTitle,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            .color,
                                         fontSize: _cardHeight * 0.08,
                                         fontWeight: FontWeight.w600)),
                               ),
@@ -340,7 +349,7 @@ class MainPage3 extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color: colorBackgroundNotification,
+            color: Theme.of(context).cardTheme.color,
             borderRadius: BorderRadius.circular(16)),
         child: Row(
           children: [
@@ -374,7 +383,7 @@ class MainPage3 extends StatelessWidget {
                     style: GoogleFonts.getFont(fontApp,
                         fontSize: screenWidth(context) * 0.045,
                         fontWeight: FontWeight.w300,
-                        color: colorTextSubTitle),
+                        color: Theme.of(context).textTheme.subtitle1.color),
                   )
                 ],
               ),
@@ -408,6 +417,10 @@ class _ModalBottom extends StatelessWidget {
     return BlocBuilder<WorkerSelectedBloc, WorkerSelectedState>(
         builder: (BuildContext context, state) {
       return Container(
+        decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -427,7 +440,7 @@ class _ModalBottom extends StatelessWidget {
                 title,
                 style: GoogleFonts.getFont(fontApp,
                     textStyle: TextStyle(
-                        color: colorTextTitle,
+                        color: Theme.of(context).textTheme.headline6.color,
                         fontSize: screenWidth(context) * 0.058,
                         fontWeight: FontWeight.w600)),
               ),
@@ -463,7 +476,7 @@ class _ModalBottom extends StatelessWidget {
                   '($rating)',
                   style: GoogleFonts.getFont(fontApp,
                       fontSize: screenWidth(context) * 0.04,
-                      color: colorTextSubTitle,
+                      color: Theme.of(context).textTheme.subtitle1.color,
                       fontWeight: FontWeight.w600),
                 ),
               ],
@@ -497,7 +510,7 @@ class _ModalBottom extends StatelessWidget {
               children: [
                 Icon(
                   Ionicons.logo_usd,
-                  color: colorText2,
+                  color: colorBodyText1,
                   size: 20,
                 ),
                 SizedBox(
@@ -508,7 +521,7 @@ class _ModalBottom extends StatelessWidget {
                   style: GoogleFonts.getFont(
                     fontApp,
                     fontSize: screenWidth(context) * 0.045,
-                    color: colorText2,
+                    color: colorBodyText1,
                   ),
                 )
               ],
@@ -521,7 +534,8 @@ class _ModalBottom extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 4,
-                        backgroundColor: colorText5,
+                        backgroundColor:
+                            Theme.of(context).textTheme.bodyText2.color,
                       ),
                       SizedBox(
                         width: 8,
@@ -531,13 +545,17 @@ class _ModalBottom extends StatelessWidget {
                           text: 'Tipo de trabajo ',
                           style: GoogleFonts.getFont(fontApp,
                               fontWeight: FontWeight.w700,
-                              color: colorText5,
+                              color:
+                                  Theme.of(context).textTheme.bodyText2.color,
                               fontSize: screenWidth(context) * 0.045),
                           children: [
                             TextSpan(
                                 text: ' de la persona',
                                 style: GoogleFonts.getFont(fontApp,
-                                    color: colorText5,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        .color,
                                     fontWeight: FontWeight.w400)),
                           ],
                         ),
@@ -548,7 +566,8 @@ class _ModalBottom extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 4,
-                        backgroundColor: colorText5,
+                        backgroundColor:
+                            Theme.of(context).textTheme.bodyText2.color,
                       ),
                       SizedBox(
                         width: 8,
@@ -558,13 +577,17 @@ class _ModalBottom extends StatelessWidget {
                           text: '112',
                           style: GoogleFonts.getFont(fontApp,
                               fontWeight: FontWeight.w700,
-                              color: colorText5,
+                              color:
+                                  Theme.of(context).textTheme.bodyText2.color,
                               fontSize: screenWidth(context) * 0.045),
                           children: [
                             TextSpan(
                                 text: ' clientes',
                                 style: GoogleFonts.getFont(fontApp,
-                                    color: colorText5,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        .color,
                                     fontWeight: FontWeight.w400)),
                           ],
                         ),
@@ -575,7 +598,8 @@ class _ModalBottom extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 4,
-                        backgroundColor: colorText5,
+                        backgroundColor:
+                            Theme.of(context).textTheme.bodyText2.color,
                       ),
                       SizedBox(
                         width: 8,
@@ -585,13 +609,17 @@ class _ModalBottom extends StatelessWidget {
                           text: 'Se unió hace ',
                           style: GoogleFonts.getFont(fontApp,
                               fontWeight: FontWeight.w400,
-                              color: colorText5,
+                              color:
+                                  Theme.of(context).textTheme.bodyText2.color,
                               fontSize: screenWidth(context) * 0.045),
                           children: [
                             TextSpan(
                                 text: ' 3 meses',
                                 style: GoogleFonts.getFont(fontApp,
-                                    color: colorText5,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        .color,
                                     fontWeight: FontWeight.w700)),
                           ],
                         ),

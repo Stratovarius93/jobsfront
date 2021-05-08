@@ -31,7 +31,7 @@ Stream<ChatSelectedState> _selectChat(String idWorker) async* {
   for (var i = 0, len = _list.length; i < len; ++i) {
     if (_list[i].idWorker == idWorker) {
       _itemElement = ItemChat(idWorker, _list[i].name, _list[i].lastName,
-          'New Contact', _list[i].urlPhoto, 1);
+          'New Contact', _list[i].urlPhoto, 1, []);
       _foundChat = true;
     }
   }
@@ -44,7 +44,8 @@ Stream<ChatSelectedState> _selectChat(String idWorker) async* {
             chatList[i].lastName,
             chatList[i].lastMessage,
             chatList[i].urlPhoto,
-            chatList[i].unReadMessages);
+            chatList[i].unReadMessages,
+            chatList[i].messagesList);
       }
     }
   }
@@ -53,5 +54,6 @@ Stream<ChatSelectedState> _selectChat(String idWorker) async* {
       lastName: _itemElement.lastName,
       lastMessage: _itemElement.lastMessage,
       urlPhoto: _itemElement.urlPhoto,
-      unReadMessages: _itemElement.unReadMessages);
+      unReadMessages: _itemElement.unReadMessages,
+      messagesList: _itemElement.messagesList);
 }

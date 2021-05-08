@@ -1,4 +1,3 @@
-import 'package:AppWork/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class BackClose extends StatelessWidget {
@@ -12,7 +11,7 @@ class BackClose extends StatelessWidget {
       child: new IconButton(
         icon: new Icon(
           Icons.close_outlined,
-          color: colorArrowBack,
+          color: Theme.of(context).appBarTheme.actionsIconTheme.color,
         ),
         iconSize: 30.0,
         onPressed: onPressed,

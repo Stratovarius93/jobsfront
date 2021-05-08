@@ -1,4 +1,3 @@
-import 'package:AppWork/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class GenericLoginCard extends StatelessWidget {
@@ -23,10 +22,10 @@ class GenericLoginCard extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: colorBackgroundCard,
+          color: Theme.of(context).cardTheme.color,
           boxShadow: [
             BoxShadow(
-                color: colorShadowCard,
+                color: Theme.of(context).cardTheme.shadowColor,
                 blurRadius: 16,
                 offset: Offset(0.0, 0.0))
           ]),

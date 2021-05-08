@@ -36,7 +36,7 @@ class _GenericMainInputDropdownState extends State<GenericMainInputDropdown> {
       padding: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
       width: widget.width,
       decoration: BoxDecoration(
-        color: colorFillInput,
+        color: Theme.of(context).inputDecorationTheme.fillColor,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: colorBorderInput, width: 1.5),
       ),
@@ -44,10 +44,14 @@ class _GenericMainInputDropdownState extends State<GenericMainInputDropdown> {
         underline: Container(),
         isExpanded: true,
         value: widget.dropdownValue,
-        icon: Icon(Ionicons.chevron_down_outline),
+        icon: Icon(
+          Ionicons.chevron_down_outline,
+          color: Theme.of(context).inputDecorationTheme.suffixStyle.color,
+        ),
         iconSize: 24,
         elevation: 16,
-        style: utilsLoginInputTextStyle(screenWidth(context) * 0.05),
+        style: utilsLoginInputTextStyle(screenWidth(context) * 0.05,
+            Theme.of(context).inputDecorationTheme.labelStyle.color),
         onChanged: widget.onChanged,
         items: widget.items.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(

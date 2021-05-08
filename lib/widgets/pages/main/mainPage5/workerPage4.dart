@@ -6,6 +6,7 @@ import 'package:AppWork/widgets/generics/mainInput.dart';
 import 'package:AppWork/widgets/generics/mainInputDropdown.dart';
 import 'package:AppWork/widgets/generics/sliverPersistenceTitle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
 
 List<String> _listMonth = ['1', '2', '3', '4'];
@@ -36,208 +37,233 @@ class _WorkerPage4State extends State<WorkerPage4> {
           currentFocus.unfocus();
         }
       },
-      child: Scaffold(
-          backgroundColor: backgroundColor,
-          body: SafeArea(
-            child: CustomScrollView(
-              physics: BouncingScrollPhysics(),
-              slivers: [
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: SliverPersistenceTitle(
-                      title: 'Pago',
-                      enableBackArrow: true,
-                      onTap: () {
-                        Navigator.pop(context);
-                      }),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: GenericLoginCategoryText(
-                            title: 'Card Number',
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: Theme.of(context).brightness,
+            statusBarIconBrightness: Theme.of(context).brightness),
+        child: Scaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
+            body: SafeArea(
+              child: CustomScrollView(
+                physics: BouncingScrollPhysics(),
+                slivers: [
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: SliverPersistenceTitle(
+                        title: 'Pago',
+                        enableBackArrow: true,
+                        onTap: () {
+                          Navigator.pop(context);
+                        }),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: GenericLoginCategoryText(
+                              title: 'Card Number',
+                            ),
                           ),
-                        ),
-                        GenericMainInput(
-                          textInputType: TextInputType.number,
-                          suffixIcon: Icon(Icons.credit_card),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GenericLoginCategoryText(
-                              title: 'Expiration date',
+                          GenericMainInput(
+                            textInputType: TextInputType.number,
+                            suffixIcon: Icon(
+                              Icons.credit_card,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .suffixStyle
+                                  .color,
                             ),
-                            GenericLoginCategoryText(
-                              title: 'Security code',
-                            ),
-                          ],
-                        ),
-                        Row(
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(children: [
-                                GenericMainInputDropdown(
-                                  width: (screenWidth(context) - 80) * 0.33,
-                                  items: _listMonth,
-                                  dropdownValue: _valueMonth,
-                                  onChanged: (String newValue) {
-                                    setState(() {
-                                      _valueMonth = newValue;
-                                    });
-                                  },
-                                ),
+                              GenericLoginCategoryText(
+                                title: 'Expiration date',
+                              ),
+                              GenericLoginCategoryText(
+                                title: 'Security code',
+                              ),
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(children: [
+                                  GenericMainInputDropdown(
+                                    width: (screenWidth(context) - 80) * 0.33,
+                                    items: _listMonth,
+                                    dropdownValue: _valueMonth,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        _valueMonth = newValue;
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  GenericMainInputDropdown(
+                                    width: (screenWidth(context) - 80) * 0.33,
+                                    items: _listYear,
+                                    dropdownValue: _valueYear,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        _valueYear = newValue;
+                                      });
+                                    },
+                                  ),
+                                ]),
                                 SizedBox(
                                   width: 16,
                                 ),
-                                GenericMainInputDropdown(
+                                Container(
                                   width: (screenWidth(context) - 80) * 0.33,
-                                  items: _listYear,
-                                  dropdownValue: _valueYear,
-                                  onChanged: (String newValue) {
-                                    setState(() {
-                                      _valueYear = newValue;
-                                    });
-                                  },
+                                  child: GenericMainInput(
+                                    textInputType: TextInputType.number,
+                                  ),
                                 ),
                               ]),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: GenericLoginCategoryText(
+                              title: 'Nombre que aparece en la tarjeta',
+                            ),
+                          ),
+                          GenericMainInput(
+                            suffixIcon: Icon(
+                              Icons.person,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .suffixStyle
+                                  .color,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: GenericLoginCategoryText(
+                              title: 'Direccion',
+                            ),
+                          ),
+                          GenericMainInput(
+                            textInputType: TextInputType.streetAddress,
+                            suffixIcon: Icon(
+                              Ionicons.location,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .suffixStyle
+                                  .color,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GenericLoginCategoryText(
+                                title: 'Ciudad',
+                              ),
+                              GenericLoginCategoryText(
+                                title: 'Estado',
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: GenericMainInput(),
+                              ),
                               SizedBox(
                                 width: 16,
                               ),
-                              Container(
-                                width: (screenWidth(context) - 80) * 0.33,
+                              GenericMainInputDropdown(
+                                width: (screenWidth(context) * 0.5) - 24,
+                                items: _listState,
+                                dropdownValue: _valueState,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _valueState = newValue;
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GenericLoginCategoryText(
+                                title: 'Zip code',
+                              ),
+                              GenericLoginCategoryText(
+                                title: 'Country',
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
                                 child: GenericMainInput(
                                   textInputType: TextInputType.number,
                                 ),
                               ),
-                            ]),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: GenericLoginCategoryText(
-                            title: 'Nombre que aparece en la tarjeta',
-                          ),
-                        ),
-                        GenericMainInput(
-                          suffixIcon: Icon(Icons.person),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: GenericLoginCategoryText(
-                            title: 'Direccion',
-                          ),
-                        ),
-                        GenericMainInput(
-                          textInputType: TextInputType.streetAddress,
-                          suffixIcon: Icon(Ionicons.location),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GenericLoginCategoryText(
-                              title: 'Ciudad',
-                            ),
-                            GenericLoginCategoryText(
-                              title: 'Estado',
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: GenericMainInput(),
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            GenericMainInputDropdown(
-                              width: (screenWidth(context) * 0.5) - 24,
-                              items: _listState,
-                              dropdownValue: _valueState,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  _valueState = newValue;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GenericLoginCategoryText(
-                              title: 'Zip code',
-                            ),
-                            GenericLoginCategoryText(
-                              title: 'Country',
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: GenericMainInput(
-                                textInputType: TextInputType.number,
+                              SizedBox(
+                                width: 16,
                               ),
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            GenericMainInputDropdown(
-                              width: (screenWidth(context) * 0.5) - 24,
-                              items: _listCountries,
-                              dropdownValue: _valueCountry,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  _valueCountry = newValue;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 32,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16, top: 16),
-                          child: LargeButton(
-                            text: 'Crear trabajo',
-                            onTap: () {},
-                            color: colorPrimaryButtonText,
-                            backgroundColor: colorPrimaryButton,
-                            elevation: 10,
-                            shadow: colorPrimaryButton.withOpacity(0.4),
+                              GenericMainInputDropdown(
+                                width: (screenWidth(context) * 0.5) - 24,
+                                items: _listCountries,
+                                dropdownValue: _valueCountry,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _valueCountry = newValue;
+                                  });
+                                },
+                              )
+                            ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 32,
-                        )
-                      ],
+                          SizedBox(
+                            height: 32,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16, top: 16),
+                            child: LargeButton(
+                              text: 'Crear trabajo',
+                              onTap: () {},
+                              color: colorPrimaryButtonText,
+                              backgroundColor: colorPrimaryButton,
+                              elevation: 10,
+                              shadow: colorPrimaryButton.withOpacity(0.4),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 32,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
-            ),
-          )),
+                  )
+                ],
+              ),
+            )),
+      ),
     );
   }
 }

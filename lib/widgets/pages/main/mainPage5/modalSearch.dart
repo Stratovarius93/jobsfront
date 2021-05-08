@@ -1,3 +1,4 @@
+import 'package:AppWork/bloc/local/chatSelectedBloc/chatSelected_bloc.dart';
 import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:AppWork/constants/sizes.dart';
@@ -6,6 +7,7 @@ import 'package:AppWork/models/mainPage5/itemModel.dart';
 import 'package:AppWork/widgets/pages/main/mainPage5/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //List fooList = ['one', 'two', 'three', 'four', 'five'];
@@ -25,7 +27,9 @@ class _ModalSearchState extends State<ModalSearch> {
 
   void filter(String inputString) {
     filteredList = chatList
-        .where((i) => i.name.toLowerCase().contains(inputString))
+        .where((i) =>
+            i.name.toLowerCase().contains(inputString) ||
+            i.lastName.toLowerCase().contains(inputString))
         .toList();
     print(filteredList);
     setState(() {});
@@ -48,8 +52,14 @@ class _ModalSearchState extends State<ModalSearch> {
     search = search.toLowerCase();
     filter(search);
     return filteredList
-        .map((item) => ItemChat(item.idWorker, item.name, item.lastName,
-            item.lastMessage, item.urlPhoto, item.unReadMessages))
+        .map((item) => ItemChat(
+            item.idWorker,
+            item.name,
+            item.lastName,
+            item.lastMessage,
+            item.urlPhoto,
+            item.unReadMessages,
+            item.messagesList))
         .toList();
   }
 
@@ -60,11 +70,17 @@ class _ModalSearchState extends State<ModalSearch> {
         child: Padding(
           padding: const EdgeInsets.only(right: 16),
           child: SearchBar<ItemChat>(
+            icon: Icon(
+              Icons.search,
+              color: Theme.of(context).textTheme.headline5.color,
+            ),
             minimumChars: -1,
             onSearch: search,
             onItemFound: (ItemChat item, int index) {
               return ListTile(
                 onTap: () {
+                  BlocProvider.of<ChatSelectedBloc>(context)
+                      .add(SelectChat(item.idWorker));
                   Navigator.pop(context);
                   Navigator.pushNamed(context, 'chatPage');
                 },
@@ -75,16 +91,17 @@ class _ModalSearchState extends State<ModalSearch> {
                   ),
                 ),
                 title: Text(
-                  item.name,
+                  '${item.name} ${item.lastName}',
                   style: GoogleFonts.getFont(fontApp,
                       textStyle: TextStyle(
-                          color: colorText5, fontWeight: FontWeight.w500)),
+                          color: Theme.of(context).textTheme.headline5.color,
+                          fontWeight: FontWeight.w500)),
                 ),
                 subtitle: Text(
                   item.lastMessage,
                   style: GoogleFonts.getFont(fontApp,
                       textStyle: TextStyle(
-                          color: colorText1,
+                          color: Theme.of(context).textTheme.subtitle1.color,
                           fontSize: screenWidth(context) * 0.04)),
                 ),
                 trailing: (item.unReadMessages > 0)

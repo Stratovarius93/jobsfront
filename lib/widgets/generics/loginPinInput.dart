@@ -28,18 +28,19 @@ class GenericPinInputState extends State<GenericPinInput> {
       onSubmit: (String pin) => _validate(pin),
       textStyle: GoogleFonts.getFont(fontApp,
           textStyle: TextStyle(
-              color: colorPrimaryButton,
+              color: Theme.of(context).inputDecorationTheme.labelStyle.color,
               fontSize: screenWidth(context) * 0.08,
               fontFamily: fontApp,
               fontWeight: FontWeight.w500)),
       focusNode: _pinPutFocusNode,
       controller: _pinPutController,
       submittedFieldDecoration: _pinPutDecoration.copyWith(
-          borderRadius: BorderRadius.circular(20.0), color: colorFillInput),
+          borderRadius: BorderRadius.circular(20.0),
+          color: Theme.of(context).inputDecorationTheme.fillColor),
       selectedFieldDecoration: _pinPutDecoration,
       followingFieldDecoration: _pinPutDecoration.copyWith(
         borderRadius: BorderRadius.circular(5.0),
-        color: colorFillInput,
+        color: Theme.of(context).inputDecorationTheme.fillColor,
         border: Border.all(
           color: colorBorderInput,
         ),

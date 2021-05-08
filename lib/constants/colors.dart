@@ -17,6 +17,10 @@ Color colorPrimaryButtonText = Colors.white;
 
 Color colorSecondButton = Colors.white;
 Color colorSecondButtonText = Color(0xFF176ced);
+
+//ToggleButtons
+Color colorsToggleButton = Colors.white;
+
 //card
 Color colorBackgroundCard = Colors.white;
 Color colorShadowCard = colorTextSubTitle.withOpacity(0.2);
@@ -35,18 +39,15 @@ Color colorIconsNavBar = colorPrimaryButton.withOpacity(0.4);
 Color colorButtonNavBar = colorPrimaryButton;
 Color colorIconButtonNavBar = Colors.white;
 
-//color notifications Home
-Color colorBackgroundNotification = Colors.white;
-
 //Text
 Color colorTextTitle = Color(0xFF37384d);
 Color colorTextSubTitle = Color(0xFF37384d).withOpacity(0.4);
 Color colorText1 = colorTextTitle.withOpacity(0.6);
-Color colorText2 = Colors.grey;
+Color colorBodyText1 = Colors.grey;
 Color colorText3 = Colors.grey.withOpacity(0.5);
 Color colorText4 = colorPrimaryButton;
-Color colorText5 = colorArrowBack;
-Color colorText6 = Colors.black;
+Color colorBodyText2 = colorArrowBack;
+Color colorHeadline5 = Colors.black;
 
 //info
 Color colorIconRatings = Colors.amber;

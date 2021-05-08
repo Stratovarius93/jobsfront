@@ -402,7 +402,11 @@ class _SearchBarState<T> extends State<SearchBar<T>>
                             hintStyle: widget.hintStyle,
                             suffixIcon: IconButton(
                               onPressed: _searchQueryController.clear,
-                              icon: Icon(Icons.clear),
+                              icon: Icon(
+                                Icons.clear,
+                                color:
+                                    Theme.of(context).textTheme.headline5.color,
+                              ),
                             ),
                           ),
                         ),

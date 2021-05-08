@@ -37,14 +37,15 @@ Widget _countryCodeText(BuildContext context, String text, VoidCallback onTap) {
     child: Container(
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
-          color: colorFillInput,
+          color: Theme.of(context).inputDecorationTheme.fillColor,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: colorBorderInput, width: 1.5)),
       child: Row(children: [
         Text(
           //'+ $_selectedCountryCode' ?? '+1',
           text,
-          style: utilsLoginInputTextStyle(screenWidth(context) * 0.06),
+          style: utilsLoginInputTextStyle(screenWidth(context) * 0.06,
+              Theme.of(context).inputDecorationTheme.labelStyle.color),
         ),
         SizedBox(
           width: 12,
@@ -65,13 +66,20 @@ Widget _textFieldNumber(BuildContext context, Function(String) onChanged) {
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-          border: utilsloginOutlineInputBorder2,
+          border: utilsloginOutlineInputBorder2(
+              Theme.of(context).inputDecorationTheme.border.borderSide.color),
           filled: true,
-          fillColor: colorFillInput,
+          fillColor: Theme.of(context).inputDecorationTheme.fillColor,
           //prefixIcon: _countryCodeText(context),
           hintText: 'Phone Number',
-          hintStyle: TextStyle(color: colorHintTextInput),
-          enabledBorder: utilsloginOutlineInputBorder),
+          hintStyle: TextStyle(
+              color: Theme.of(context).inputDecorationTheme.hintStyle.color),
+          enabledBorder: utilsloginOutlineInputBorder(Theme.of(context)
+              .inputDecorationTheme
+              .enabledBorder
+              .borderSide
+              .color)),
       onChanged: onChanged,
-      style: utilsLoginInputTextStyle(screenWidth(context) * 0.06));
+      style: utilsLoginInputTextStyle(screenWidth(context) * 0.06,
+          Theme.of(context).inputDecorationTheme.labelStyle.color));
 }

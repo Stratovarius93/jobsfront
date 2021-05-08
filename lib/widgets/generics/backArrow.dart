@@ -1,4 +1,3 @@
-import 'package:AppWork/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class BackArrow extends StatelessWidget {
@@ -12,7 +11,7 @@ class BackArrow extends StatelessWidget {
       child: new IconButton(
         icon: new Icon(
           Icons.arrow_back,
-          color: colorArrowBack,
+          color: Theme.of(context).appBarTheme.actionsIconTheme.color,
         ),
         iconSize: 30.0,
         onPressed: onPressed,

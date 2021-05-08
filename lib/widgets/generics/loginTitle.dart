@@ -1,4 +1,3 @@
-import 'package:AppWork/constants/colors.dart';
 import 'package:AppWork/constants/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +13,7 @@ class GenericLoginTitle extends StatelessWidget {
       title,
       style: GoogleFonts.getFont(fontApp,
           textStyle: TextStyle(
-              color: colorTextTitle,
+              color: Theme.of(context).textTheme.headline6.color,
               fontSize: size,
               fontFamily: fontApp,
               fontWeight: FontWeight.w500)),

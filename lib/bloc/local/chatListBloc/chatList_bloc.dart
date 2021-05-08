@@ -41,7 +41,7 @@ Stream<ChatListState> _addChatListEventByID(String idWorker) async* {
   for (var i = 0, len = workerList.length; i < len; ++i) {
     if (workerList[i].idWorker == idWorker) {
       _itemChat = ItemChat(workerList[i].idWorker, workerList[i].name,
-          workerList[i].lastName, 'New Contact', workerList[i].urlPhoto, 0);
+          workerList[i].lastName, 'New Contact', workerList[i].urlPhoto, 0, []);
     }
   }
 
